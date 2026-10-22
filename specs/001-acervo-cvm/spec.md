@@ -10,6 +10,12 @@
 
 Insumos: [research.md](research.md) (D-1 a D-6), [research/decisoes-usuario.md](research/decisoes-usuario.md) (D-U1 a D-U11), [research/inventario.md](research/inventario.md), [research/fontes-cvm.md](research/fontes-cvm.md), [research/pdf-para-md.md](research/pdf-para-md.md) e a constituição v1.0.0.
 
+## Clarifications
+
+### Session 2026-10-22
+
+- Q: Onde roda a coleta periódica exigida por SC-006? → A: GitHub Actions agendado; commits de atualização de dados saem como `github-actions[bot]`, commits de código continuam do mantenedor (D-U12).
+
 ## User Scenarios & Testing *(mandatory)*
 
 Atores: **leitor** (pessoa que consulta uma norma no GitHub ou em clone local), **sistema consumidor** (programa que lê o acervo para busca ou citação) e **mantenedor** (quem roda a coleta e revisa pendências).
@@ -185,7 +191,7 @@ O mantenedor roda a coleta periodicamente; normas novas e alteradas entram em co
 ## Assumptions
 
 - O acervo publica dados e o coletor; busca por API ou servidor MCP fica para outra feature (pendente em D-U1).
-- A coleta roda em ambiente controlado pelo mantenedor (local ou agendada) com Poppler disponível; o mecanismo de agendamento é decisão do plano.
+- A coleta periódica roda em GitHub Actions agendado (D-U12), com Poppler disponível no runner; a coleta também pode ser rodada localmente pelo mantenedor.
 - O portal `conteudo.cvm.gov.br` continua sendo a fonte de verdade do catálogo; os sitemaps servem só para descobrir anexos, pois estão desatualizados desde 09/06/2026.
 - Os endpoints internos de busca do portal podem mudar sem aviso; quebras viram falha registrada, não publicação parcial silenciosa.
 - Vigência por dispositivo não é informada; o consolidado reflete o que a CVM publicava na data da coleta.

@@ -13,3 +13,4 @@ Registro de decisões tomadas em conversa (2026-10-21).
 - **D-U9 — Portarias: só as normativas (2026-10-22).** Entram as que criam regra com efeito externo sobre regulados/mercado (~5) mais as 2 de fronteira após revisão. Administrativas (RH, TI, orçamento, comitês, GT) ficam fora, mesmo que a CVM as chame de "caráter normativo".
 - **D-U10 — Audiências: sem manifestações (2026-10-22).** Publicar edital (com a minuta), relatório de análise e vínculo com a norma resultante. Manifestações só como link para a página oficial; não copiar texto nem nomes de participantes.
 - **D-U11 — Normas contábeis CPC/ICPC/OCPC fora por enquanto (2026-10-22).** A resolução CVM que aprova o pronunciamento entra normalmente; o texto do pronunciamento fica para fase 2.
+- **D-U12 — Coleta periódica no GitHub Actions (2026-10-22).** Execução agendada na nuvem; commits de atualização de dados saem como `github-actions[bot]`. Commits de código e documentação continuam do mantenedor.
