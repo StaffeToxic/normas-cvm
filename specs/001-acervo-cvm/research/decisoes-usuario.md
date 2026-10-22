@@ -10,3 +10,6 @@ Registro de decisões tomadas em conversa (2026-10-21).
 - **D-U6 — Escopo ampliado.** Além das 5 famílias (resoluções, instruções, deliberações, pareceres de orientação, ofícios circulares), entram: notas explicativas, decisões conjuntas e portarias de caráter normativo. Material de interpretação (notas, FAQ, ofícios) recebe `tipo` próprio para não ser citado como regra.
 - **D-U7 — Audiências e consultas públicas entram como minuta.** `tipo: minuta`, com vínculo para a norma resultante quando houver; nunca tratadas como norma vigente.
 - **D-U8 — Fora deste repo:** decisões do Colegiado, processos sancionadores (jurisprudência) e leis/decretos federais.
+- **D-U9 — Portarias: só as normativas (2026-10-22).** Entram as que criam regra com efeito externo sobre regulados/mercado (~5) mais as 2 de fronteira após revisão. Administrativas (RH, TI, orçamento, comitês, GT) ficam fora, mesmo que a CVM as chame de "caráter normativo".
+- **D-U10 — Audiências: sem manifestações (2026-10-22).** Publicar edital (com a minuta), relatório de análise e vínculo com a norma resultante. Manifestações só como link para a página oficial; não copiar texto nem nomes de participantes.
+- **D-U11 — Normas contábeis CPC/ICPC/OCPC fora por enquanto (2026-10-22).** A resolução CVM que aprova o pronunciamento entra normalmente; o texto do pronunciamento fica para fase 2.

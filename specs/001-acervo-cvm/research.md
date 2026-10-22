@@ -26,6 +26,7 @@ Data: 2026-10-21. Fontes públicas: `research/fontes-cvm.md`, `research/reconfer
 - Inventário via GET paginado `index.html?buscado=true&contCategoriasCheck=1&vimDaCategoria=/legislacao/<familia>/&searchPage=N`; incremental via RSS `feed/legislacao.xml` + reconciliação periódica do catálogo + rechecagem de hash (consolidado muda na mesma URL).
 - Respeitar `robots.txt` (exclusões específicas de deliberações); não usar `dados.cvm.gov.br/api/` (Disallow). Fila conservadora com User-Agent identificado e recuo em erro.
 - **Contagens:** reconferidas por nova requisição na rodada 2, sem divergências; ver `research/reconferencia.md`. Cobertura integral e deduplicação continuam **UNVERIFIED**.
+- **Escopo ampliado (rodada 4):** D-U6 a D-U11 somam decisões conjuntas, portarias normativas, notas explicativas, perguntas e respostas, manuais e audiências públicas como minuta; total ≈ 2.990 registros. Ver `research/inventario.md`.
 
 ## D-5 Conversão para Markdown (decidida após benchmark, `research/pdf-para-md.md`)
 - **Decision:** ordem de preferência por norma: (1) **íntegra HTML oficial** → conversor estrutural; (2) **PDF textual** → Poppler `pdftotext -layout` + normalizador próprio; (3) **PDF escaneado** → Tesseract `por`, só quando a página não tiver camada de texto. **Docling não é o caminho padrão.**
