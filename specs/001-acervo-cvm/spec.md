@@ -161,7 +161,7 @@ O mantenedor roda a coleta periodicamente; normas novas e alteradas entram em co
 **Atualização e auditoria**
 
 - **FR-021**: Cada coleta MUST gerar commits com a data real da coleta e mensagem que descreva o lote.
-- **FR-022**: O sistema MUST manter um relatório de cobertura legível por pessoas e por máquina, com, por categoria: total no catálogo, publicados, pendentes com motivo, indisponíveis (410/soft-404) e divergências entre fontes.
+- **FR-022**: O sistema MUST manter um relatório de cobertura legível por pessoas e por máquina, com, por categoria: total no catálogo, publicados, pendentes com motivo (incluindo `soft-404`), indisponíveis (404/410) e divergências entre fontes. Um ato com original aprovado e consolidado pendente conta uma vez como pendente, conservando em `arquivos` apenas as versões aprovadas.
 - **FR-023**: Uma coleta sem mudança na fonte MUST NOT alterar nenhum arquivo publicado.
 - **FR-024**: O sistema MUST permitir rodar a coleta por categoria e por documento, para revisão e correção pontual.
 
@@ -196,4 +196,4 @@ O mantenedor roda a coleta periodicamente; normas novas e alteradas entram em co
 - Os endpoints internos de busca do portal podem mudar sem aviso; quebras viram falha registrada, não publicação parcial silenciosa.
 - Vigência por dispositivo não é informada; o consolidado reflete o que a CVM publicava na data da coleta.
 - A classificação das 2 portarias de fronteira é revisada manualmente pelo mantenedor.
-- A frente de amostragem de PDFs antigos (OCR por década) ainda está em andamento; o volume de OCR será dimensionado no plano.
+- A amostragem de PDFs antigos mediu 78 PDFs e 676 páginas sem página de texto vazio, sem inferência populacional; OCR continua obrigatório quando necessário. Ver D-10 em `research.md`.
