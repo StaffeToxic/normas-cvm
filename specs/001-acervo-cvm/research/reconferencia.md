@@ -4,7 +4,7 @@ Consulta em **21/10/2026, 23:17, America/Sao_Paulo** (22/10/2026, 02:17 UTC). Es
 
 ## Setup e preservação dos arquivos
 
-- Clone real de `https://github.com/StaffeToxic/normas-cvm.git` em `C:\Users\User\Documents\normas-cvm`, a partir de `9e0e045` (`Initial commit`), seguido de `git switch -c 001-acervo-cvm`.
+- Clone real de `https://github.com/StaffeToxic/normas-cvm.git` em clone local, a partir de `9e0e045` (`Initial commit`), seguido de `git switch -c 001-acervo-cvm`.
 - Executado o comando solicitado `specify init --here --force --integration claude`, com Specify **0.12.18**. A primeira execução não concluiu a seleção de script no ambiente sem stdin; foi interrompida e repetida com **`--script ps`**, concluindo com exit 0 e “Project ready”.
 - A constituição gerada por Spec Kit é **template não ratificado**, com placeholders. D-1 a D-6 foram preservadas como decisões da pesquisa; não se declarou uma nova constituição aprovada.
 - A pasta inteira `specs/051-normas-cvm` foi **movida**, não duplicada, para `specs/001-acervo-cvm`. Os seis arquivos tiveram SHA-256 calculado antes e depois; os mapas coincidiram exatamente. O manifesto anterior está em evidência local não versionada (`migration-before.json`).
