@@ -6,7 +6,7 @@ Testes são obrigatórios em toda história. Uma caixa só é marcada após exec
 
 ## Fase 1 — Setup
 
-- [ ] T001 Criar pacote Python 3.12 e modelos comuns em `pyproject.toml`, `src/cvm_archive/__init__.py`, `src/cvm_archive/models.py` e estrutura de testes em `tests/`; teste `tests/unit/test_models.py`; blockedBy=[]; conflictKeys=[package,models]; risco=baixo. Validar hash exato, bytes imutáveis e dataclasses Artifact/CatalogEntry/Conversion; nenhuma funcionalidade fictícia.
+- [x] T001 Criar pacote Python 3.12 e modelos comuns em `pyproject.toml`, `src/cvm_archive/__init__.py`, `src/cvm_archive/models.py` e estrutura de testes em `tests/`; teste `tests/unit/test_models.py`; blockedBy=[]; conflictKeys=[package,models]; risco=baixo. Validar hash exato, bytes imutáveis e dataclasses Artifact/CatalogEntry/Conversion; nenhuma funcionalidade fictícia.
 
 ## Fase 2 — Fundação
 

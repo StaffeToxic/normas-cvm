@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "normas-cvm"
+version = "0.1.0"
+description = "Official CVM document archive collector"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{name = "Anthony Oliveira", email = "staffetoxic@gmail.com"}]
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
