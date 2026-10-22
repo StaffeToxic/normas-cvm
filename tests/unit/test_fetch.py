@@ -1,10 +1,12 @@
 """Polite transport tests with injected openers and clocks; no network access."""
 
 import hashlib
+import io
 import json
 import shutil
 import tempfile
 import unittest
+import urllib.error
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -13,7 +15,7 @@ from cvm_archive.fetch.client import BlockedError, FetchError, PoliteClient
 USER_AGENT = "FetchDriver/1.0 (+https://github.com/StaffeToxic/normas-cvm; unit-tests)"
 T0 = datetime(2026, 10, 22, 0, 0, tzinfo=timezone.utc)
 
-ROBOTS_REPRIMIDO = "User-agent: *\nDisallow: /restrito/\n"
+ROBOTS_RESTRICTED = "User-agent: *\nDisallow: /restrito/\n"
 
 
 class FakeResponse:
@@ -23,6 +25,7 @@ class FakeResponse:
         self.headers = headers
         self.url = url
         self._body = body
+        self.closed = False
 
     def geturl(self):
         return self.url
@@ -30,11 +33,15 @@ class FakeResponse:
     def read(self):
         return self._body
 
+    def close(self):
+        self.closed = True
+
 
 class FakeOpener:
     def __init__(self, routes):
         self.routes = dict(routes)
         self.requests = []
+        self.responses = []
 
     def open(self, request, timeout=None):
         url = request.full_url
@@ -45,7 +52,9 @@ class FakeOpener:
         if route is None:
             raise ConnectionError(f"fake opener has no route for {url}")
         status, headers, body, reason = route
-        return FakeResponse(url, status, headers, body, reason)
+        response = FakeResponse(url, status, headers, body, reason)
+        self.responses.append(response)
+        return response
 
     def sent_urls(self):
         return [item["url"] for item in self.requests]
@@ -55,6 +64,7 @@ class FakeClock:
     def __init__(self):
         self.now = T0
         self.sleeps = []
+        self.elapsed = 0.0
 
     def __call__(self):
         return self.now
@@ -62,6 +72,10 @@ class FakeClock:
     def sleep(self, seconds):
         self.sleeps.append(round(seconds, 3))
         self.now += timedelta(seconds=seconds)
+        self.elapsed += seconds
+
+    def monotonic(self):
+        return self.elapsed
 
 
 class FetchTestCase(unittest.TestCase):
@@ -72,7 +86,8 @@ class FetchTestCase(unittest.TestCase):
     def client(self, routes, **options):
         clock = FakeClock()
         opener = FakeOpener(routes)
-        passed = {"opener": opener, "clock": clock, "sleep": clock.sleep}
+        passed = {"opener": opener, "clock": clock, "sleep": clock.sleep,
+                  "monotonic": clock.monotonic}
         passed.update(options)
         client = PoliteClient(user_agent=USER_AGENT, **passed)
         return client, opener, clock
@@ -82,7 +97,7 @@ class ArtifactTests(FetchTestCase):
     def test_fetch_returns_artifact_with_exact_bytes(self):
         client, opener, _ = self.client(
             {
-                "https://a.test/robots.txt": (200, {"Content-Type": "text/plain"}, ROBOTS_REPRIMIDO, "OK"),
+                "https://a.test/robots.txt": (200, {"Content-Type": "text/plain"}, ROBOTS_RESTRICTED, "OK"),
                 "https://a.test/doc": (200, {"Content-Type": "text/html; charset=utf-8"}, b"<h1>norma</h1>", "OK"),
             }
         )
@@ -138,7 +153,7 @@ class RobotsTests(FetchTestCase):
     def test_robots_disallowed_path_is_never_requested(self):
         client, opener, _ = self.client(
             {
-                "https://a.test/robots.txt": (200, {"Content-Type": "text/plain"}, ROBOTS_REPRIMIDO, "OK"),
+                "https://a.test/robots.txt": (200, {"Content-Type": "text/plain"}, ROBOTS_RESTRICTED, "OK"),
                 "https://a.test/doc": (200, {"Content-Type": "text/plain"}, b"doc", "OK"),
             }
         )
@@ -172,7 +187,7 @@ class RedirectTests(FetchTestCase):
     def test_redirect_chain_reaches_the_final_url(self):
         client, opener, _ = self.client(
             {
-                "https://a.test/robots.txt": (200, {"Content-Type": "text/plain"}, ROBOTS_REPRIMIDO, "OK"),
+                "https://a.test/robots.txt": (200, {"Content-Type": "text/plain"}, ROBOTS_RESTRICTED, "OK"),
                 "https://a.test/moved": (301, {"Location": "https://a.test/doc"}, b"", "Moved Permanently"),
                 "https://a.test/doc": (200, {"Content-Type": "text/html"}, b"<h1>norma</h1>", "OK"),
             }
@@ -207,7 +222,7 @@ class RedirectTests(FetchTestCase):
     def test_redirect_to_robots_disallowed_path_blocks_before_request(self):
         client, opener, _ = self.client(
             {
-                "https://a.test/robots.txt": (200, {"Content-Type": "text/plain"}, ROBOTS_REPRIMIDO, "OK"),
+                "https://a.test/robots.txt": (200, {"Content-Type": "text/plain"}, ROBOTS_RESTRICTED, "OK"),
                 "https://a.test/doc": (302, {"Location": "/restrito/doc"}, b"", "Found"),
             }
         )
@@ -301,6 +316,111 @@ class IntervalTests(FetchTestCase):
             PoliteClient(min_interval=0, opener=FakeOpener({}))
         client = PoliteClient(min_interval=5, opener=FakeOpener({}))
         self.assertEqual(client.min_interval, 5.0)
+
+
+class PolicyRegressionTests(FetchTestCase):
+    def test_encoded_api_paths_are_refused_before_any_request(self):
+        paths = ["/%61pi/items", "/%2561pi/items", "/ignored/../api/items",
+                 "/ignored/%2e%2e/%61pi/items", "//api/items", "/API/items",
+                 "/ignored%5c..%5capi/items"]
+        for path in paths:
+            with self.subTest(path=path):
+                client, opener, _ = self.client({})
+                with self.assertRaises(BlockedError):
+                    client.fetch("https://dados.cvm.gov.br" + path)
+                self.assertEqual(opener.sent_urls(), [])
+
+    def test_robots_redirect_cannot_access_the_api(self):
+        for target in ["https://dados.cvm.gov.br/api/policy",
+                       "https://dados.cvm.gov.br/%61pi/policy"]:
+            with self.subTest(target=target):
+                client, opener, _ = self.client({
+                    "https://a.test/robots.txt": (302, {"Location": target}, b"", "Found"),
+                })
+                with self.assertRaises(BlockedError):
+                    client.fetch("https://a.test/doc")
+                self.assertEqual(opener.sent_urls(), ["https://a.test/robots.txt"])
+
+    def test_cross_origin_robots_redirect_fails_closed(self):
+        client, opener, _ = self.client({
+            "https://a.test/robots.txt":
+                (302, {"Location": "https://b.test/private/policy.txt"}, b"", "Found"),
+        })
+        with self.assertRaisesRegex(BlockedError, "cross-origin"):
+            client.fetch("https://a.test/doc")
+        self.assertEqual(opener.sent_urls(), ["https://a.test/robots.txt"])
+
+    def test_encoded_and_dot_segment_paths_respect_robots(self):
+        for path in ["/%2572estrito/doc", "/other/../restrito/doc"]:
+            with self.subTest(path=path):
+                client, opener, _ = self.client({
+                    "https://a.test/robots.txt": (200, {}, ROBOTS_RESTRICTED, "OK"),
+                })
+                with self.assertRaises(BlockedError):
+                    client.fetch("https://a.test" + path)
+                self.assertEqual(opener.sent_urls(), ["https://a.test/robots.txt"])
+
+    def test_non_finite_intervals_are_rejected(self):
+        for value in [float("nan"), float("inf"), float("-inf")]:
+            with self.subTest(interval=value), self.assertRaises(ValueError):
+                PoliteClient(min_interval=value)
+
+    def test_wall_clock_jumps_do_not_shorten_the_interval(self):
+        client, _, clock = self.client({
+            "https://a.test/robots.txt": (404, {}, b"", "Not Found"),
+            "https://a.test/first": (200, {}, b"first", "OK"),
+            "https://a.test/second": (200, {}, b"second", "OK"),
+            "https://a.test/third": (200, {}, b"third", "OK"),
+        })
+        client.fetch("https://a.test/first")
+        clock.now += timedelta(days=2)
+        client.fetch("https://a.test/second")
+        clock.now -= timedelta(days=4)
+        client.fetch("https://a.test/third")
+        requests = [e for e in client.events if e["event"] == "request"]
+        self.assertEqual([e["monotonic"] for e in requests], [0, 5, 10, 15])
+        self.assertEqual(clock.sleeps, [5, 5, 5])
+
+    def test_origins_share_host_budget_but_not_robots(self):
+        client, opener, clock = self.client({
+            "https://a.test/robots.txt": (404, {}, b"", "Not Found"),
+            "https://a.test.:443/first": (200, {}, b"first", "OK"),
+            "http://a.test/robots.txt": (200, {}, "User-agent: *\nDisallow: /second\n", "OK"),
+        })
+        client.fetch("https://a.test.:443/first")
+        with self.assertRaises(BlockedError):
+            client.fetch("http://a.test/second")
+        self.assertEqual(clock.sleeps, [5, 5])
+        self.assertEqual(len(client.stats), 1)
+        self.assertEqual(opener.sent_urls(), ["https://a.test/robots.txt",
+                         "https://a.test.:443/first", "http://a.test/robots.txt"])
+
+    def test_success_responses_are_closed(self):
+        client, opener, _ = self.client({
+            "https://a.test/robots.txt": (200, {}, b"User-agent: *\n", "OK"),
+            "https://a.test/doc": (200, {}, b"doc", "OK"),
+        })
+        client.fetch("https://a.test/doc")
+        self.assertEqual(len(opener.responses), 2)
+        self.assertTrue(all(response.closed for response in opener.responses))
+
+    def test_http_error_streams_are_closed(self):
+        payload = io.BytesIO(b"not found")
+        error = urllib.error.HTTPError("https://a.test/robots.txt", 404, "Not Found", {}, payload)
+        client, _, _ = self.client({
+            "https://a.test/robots.txt": error,
+            "https://a.test/doc": (200, {}, b"doc", "OK"),
+        })
+        client.fetch("https://a.test/doc")
+        self.assertTrue(payload.closed)
+
+    def test_credentials_and_blank_identity_are_rejected(self):
+        client, opener, _ = self.client({})
+        with self.assertRaises(ValueError):
+            client.fetch("https://user:secret@a.test/doc")
+        self.assertEqual(opener.sent_urls(), [])
+        with self.assertRaises(ValueError):
+            PoliteClient(user_agent=" ")
 
 
 class CacheAndAuditTests(FetchTestCase):
