@@ -100,7 +100,7 @@ A coleta respeita o `robots.txt` de cada host, faz uma requisição por vez, ide
 - **Textos normativos**: atos oficiais não são protegidos por direito autoral (Lei nº 9.610/1998, art. 8º, IV).
 - Anexos e materiais de terceiros eventualmente reproduzidos mantêm a titularidade original.
 
-O arquivo [LICENSE](LICENSE) cobre apenas o código.
+O arquivo [LICENSE](LICENSE) cobre apenas o código. Avisos de código de terceiros estão em [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Contribuindo
 
