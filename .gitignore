@@ -1,0 +1,14 @@
+# Ephemeral work and raw downloads
+.scratch/
+_fonte/
+_indice/
+cache/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Local tool settings
+.claude/settings.local.json
+.omc/

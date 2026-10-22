@@ -1,0 +1,38 @@
+name: Erro de conversão
+description: Texto, estrutura ou metadado do .md diverge da fonte oficial.
+title: "[conversão] "
+labels: ["erro-de-conversao"]
+body:
+  - type: input
+    id: arquivo
+    attributes:
+      label: Arquivo
+      placeholder: "reguladores/cvm/resolucoes/2022/..."
+    validations:
+      required: true
+  - type: dropdown
+    id: categoria
+    attributes:
+      label: Tipo de erro
+      options:
+        - Texto faltando ou trocado
+        - Artigo, parágrafo, inciso ou alínea mal estruturado
+        - Tabela quebrada
+        - Metadado errado (data, número, situação)
+        - Relação altera/revoga errada
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que a fonte oficial diz
+      description: Cole o trecho correto e o link da fonte.
+    validations:
+      required: true
+  - type: textarea
+    id: atual
+    attributes:
+      label: O que está no .md
+    validations:
+      required: true

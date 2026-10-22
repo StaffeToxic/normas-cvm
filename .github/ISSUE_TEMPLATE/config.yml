@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Portal de legislação da CVM
+    url: https://conteudo.cvm.gov.br/legislacao/index.html
+    about: Fonte oficial das normas. Em caso de divergência, ela prevalece.
