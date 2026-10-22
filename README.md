@@ -10,9 +10,9 @@ Resoluções, instruções, deliberações, pareceres de orientação e ofícios
 
 ## Por que este repositório existe
 
-O [`ctresb/leis`](https://github.com/ctresb/leis) reúne a legislação brasileira em Markdown e já inclui uma parte das normas da CVM, coletadas do Diário Oficial da União. O DOU traz o ato **como foi publicado**. Para saber **qual regra vale hoje**, falta o que só o portal da CVM oferece:
+O Diário Oficial da União traz cada ato **como foi publicado**. Para saber **qual regra vale hoje**, é preciso o que só o portal da CVM oferece:
 
-| O que falta | Onde está |
+| Informação | Onde está |
 |---|---|
 | Texto **consolidado**, com as alterações posteriores incorporadas | páginas de cada norma no portal da CVM |
 | **Instruções CVM** anteriores a 2021, muitas ainda citadas | `conteudo.cvm.gov.br/legislacao/instrucoes/` |
@@ -20,7 +20,7 @@ O [`ctresb/leis`](https://github.com/ctresb/leis) reúne a legislação brasilei
 | Relações **"altera" / "revoga"** entre normas | bloco de alterações de cada página |
 | **Anexos** normativos e suplementos | links de download de cada norma |
 
-Este repositório usa o mesmo formato do `ctresb/leis`, aproveita o que ele já coletou e completa essas lacunas a partir da fonte oficial da CVM.
+Este repositório reúne essas informações a partir da fonte oficial da CVM, em um formato legível por pessoas e por máquinas.
 
 ## Cobertura planejada
 
@@ -39,7 +39,7 @@ São contadores da busca oficial, não um censo deduplicado de normas vigentes. 
 
 ## Formato
 
-Estrutura de pastas, compatível com `ctresb/leis`:
+Estrutura de pastas:
 
 ```text
 reguladores/cvm/
@@ -70,7 +70,7 @@ sha256_fonte: "24eb8b5a0808c547b8ca78c80b6c79d95509a8dbef63334715e08a642d3f71ef"
 **Art. 1º** ...
 ```
 
-Diferenças deliberadas em relação ao `ctresb/leis`:
+Princípios do formato:
 
 - **`revogada: null`** quando a situação não foi comprovada. O campo só é `true` ou `false` com evidência na fonte oficial.
 - **Original e consolidado são arquivos distintos**, identificados por `versao_texto`.
@@ -84,7 +84,7 @@ O exemplo acima ilustra o formato. O esquema definitivo será documentado antes 
 - Catálogo de legislação da CVM: <https://conteudo.cvm.gov.br/legislacao/index.html>
 - Página de normas no gov.br: <https://www.gov.br/cvm/pt-br/assuntos/normas>
 - RSS de legislação da CVM: <https://conteudo.cvm.gov.br/feed/legislacao.xml>
-- Base inicial: [`ctresb/leis`](https://github.com/ctresb/leis), `reguladores/cvm/`
+- Diário Oficial da União, para a publicação original: <https://www.in.gov.br/>
 
 A coleta respeita o `robots.txt` de cada host, faz uma requisição por vez, identifica-se no User-Agent e não acessa caminhos excluídos.
 
@@ -101,10 +101,6 @@ A coleta respeita o `robots.txt` de cada host, faz uma requisição por vez, ide
 - Anexos e materiais de terceiros eventualmente reproduzidos mantêm a titularidade original.
 
 O arquivo [LICENSE](LICENSE) cobre apenas o código.
-
-## Agradecimentos
-
-Ao [`ctresb/leis`](https://github.com/ctresb/leis), cujo formato e método serviram de referência para este projeto.
 
 ## Contribuindo
 
