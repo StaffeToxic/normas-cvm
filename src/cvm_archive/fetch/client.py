@@ -366,7 +366,13 @@ class PoliteClient:
                     self._record({"event": "robots-error", "url": candidate, "reason": "invalid-robots-location"})
                     self._robots[origin] = _RobotsBlocked("invalid-robots-location", None)
                     raise FetchError("invalid-robots-location") from error
-                if _origin(target_parts) != origin:
+                # A redirected robots resource bootstraps the INITIAL origin's
+                # policy (RFC 9309, 2.3.1.2). Limit this exception to robots.txt;
+                # content redirects still require the destination's own policy.
+                if (
+                    _origin(target_parts) != origin
+                    and not _policy_path(target_parts.path).endswith("/robots.txt")
+                ):
                     state.failures += 1
                     self._robots[origin] = _RobotsBlocked("cross-origin-robots-redirect", None)
                     self._record({"event": "robots-error", "url": candidate,
@@ -404,7 +410,8 @@ class PoliteClient:
             parser = urllib.robotparser.RobotFileParser()
             parser.parse(_robots_text(response).splitlines())
             self._robots[origin] = parser
-            self._record({"event": "robots-checked", "url": robots_url, "status": response.status})
+            self._record({"event": "robots-checked", "url": robots_url,
+                          "origin": origin, "status": response.status})
             return state
         state.failures += 1
         self._robots[origin] = _RobotsBlocked("too-many-redirects", None)
