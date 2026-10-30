@@ -292,7 +292,7 @@ class DocumentRejectionTests(unittest.TestCase):
 
     def test_unsupported_category_is_rejected(self):
         with self.assertRaises(UnsupportedCategoryError):
-            parse_document_page(_read("document-resol249.html"), DOCUMENT_URL, "deliberacoes")
+            parse_document_page(_read("document-resol249.html"), DOCUMENT_URL, "unknown")
 
 
 if __name__ == "__main__":

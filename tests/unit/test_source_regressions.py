@@ -52,7 +52,7 @@ class SourceRegressionTests(unittest.TestCase):
 
     def test_negated_revocation_is_not_revocation_relation(self):
         result = parse_document_page(page('<p>NÃO REVOGADA pela <a href="resol002.html">Resolução 2</a>.</p>'), URL, "resolucoes")
-        self.assertIs(result["revoked"], False)
+        self.assertIsNone(result["revoked"])
         self.assertEqual(result["relations"]["revoked_by"], [])
 
     def test_conflicting_explicit_status_is_not_silently_overwritten(self):

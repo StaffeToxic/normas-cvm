@@ -1,0 +1,64 @@
+{
+  "fixtures": [
+    {
+      "file": "pare039.html",
+      "source_url": "https://conteudo.cvm.gov.br/legislacao/pareceres-orientacao/pare039.html",
+      "source_sha256": "7939ce3d43f953baeb921e056c8ff344857ec36d0c301792d4fa5da517590b4b",
+      "fetched_at": null,
+      "fixture_sha256": "a35e34ea84c3214cf0d1003b15c88e8e60723193079f294783a04deed41e72e4",
+      "bytes": 2616,
+      "transformation": "central article only; UTF-8 LF; normalized indentation and trailing whitespace",
+      "note": "Previously downloaded official snapshot from the research dated 2026-10-22; exact fetch timestamp UNVERIFIED. Re-read and hashed locally; not fetched again."
+    },
+    {
+      "file": "pare040.html",
+      "source_url": "https://conteudo.cvm.gov.br/legislacao/pareceres-orientacao/pare040.html",
+      "source_sha256": "7d3bfad5d0a2ee1e6881f8b9be3779c913e024c4653b8bc2d4d9a613ce56127b",
+      "fetched_at": null,
+      "fixture_sha256": "07d34a6a962e302adf55290380591fd0871bfda3942ed005691a4758148f83f3",
+      "bytes": 2595,
+      "transformation": "central article only; UTF-8 LF; normalized indentation and trailing whitespace",
+      "note": "Previously downloaded official snapshot from the research dated 2026-10-22; exact fetch timestamp UNVERIFIED. Re-read and hashed locally; not fetched again."
+    },
+    {
+      "file": "resol100.html",
+      "source_url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol100.html",
+      "source_sha256": "e967fa0284ac14455fbeaf47649b3353a09239c1b6e3c0450b1bcb6e68c6569e",
+      "fetched_at": null,
+      "fixture_sha256": "b7aed610e0deed51da50c9e8feeacb40fdf033c8a5eb26a33c1a053d50fc33cf",
+      "bytes": 3255,
+      "transformation": "central article only; UTF-8 LF; normalized indentation and trailing whitespace",
+      "note": "Previously downloaded official snapshot from the research dated 2026-10-22; exact fetch timestamp UNVERIFIED. No auxiliary compilation content reused."
+    },
+    {
+      "file": "resol175.html",
+      "source_url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html",
+      "source_sha256": "551f4059dc6369c239a3668d78bf571fd22beaee6690ef6e0f2b56a8e4f95e29",
+      "fetched_at": "2026-10-30T00:30:29.892162+00:00",
+      "fixture_sha256": "0b24a56d87fa243dc82e54f98399f2d48d85567fb6b2e0df1d44f1438482d6a9",
+      "bytes": 7904,
+      "transformation": "central article only; UTF-8 LF; normalized indentation and trailing whitespace",
+      "note": "Reused verified official HTTP bytes from the earlier reconfirmation."
+    },
+    {
+      "file": "resol059.html",
+      "source_url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol059.html",
+      "source_sha256": "08afb0ef3cd042c1c4cf857e7ea3619a2d20097f4eed15c53dc47e50b69551de",
+      "fetched_at": "2026-10-30T02:04:22.358799+00:00",
+      "fixture_sha256": "7a8ef6756233bb56a057041d16d60a83d73ad39e4d2cd45bd959e89de51bead8",
+      "bytes": 4319,
+      "transformation": "central article only; UTF-8 LF; normalized indentation and trailing whitespace",
+      "note": "Fetched through the committed polite client; complete audit retained locally."
+    },
+    {
+      "file": "resol110.html",
+      "source_url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol110.html",
+      "source_sha256": "baeef95a3cdb7666f971a7344bb1adf19f7a73b177e2d39658604419608294a4",
+      "fetched_at": "2026-10-30T02:04:27.311842+00:00",
+      "fixture_sha256": "e4e3f1ad1810aced8a3f1657ca52d0d3e710da56f6409495b8f963215ff2fc9f",
+      "bytes": 3253,
+      "transformation": "central article only; UTF-8 LF; normalized indentation and trailing whitespace",
+      "note": "Fetched through the committed polite client; complete audit retained locally."
+    }
+  ]
+}

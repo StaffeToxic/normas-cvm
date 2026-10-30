@@ -6,11 +6,12 @@ import copy
 import json
 import re
 from datetime import datetime
+from html import escape
 from pathlib import PurePosixPath
 
 from cvm_archive.gates.metadata import valid_date, valid_hash, valid_url
 from cvm_archive.models import CatalogEntry
-from .markdown import PublicationError
+from .markdown import PublicationError, parse_document
 
 
 STATES = {
@@ -29,6 +30,95 @@ def pending_entry(entry: CatalogEntry) -> dict:
         "id": None, "estado": "pendente", "motivo": "nao-processado", "arquivos": [],
         "fonte_cvm": entry.url, "urls_alternativas": [], "sha256_fontes": {}, "verificado_em": None,
     }
+
+
+def aggregate_aliases(records: dict[str, dict], prepared: dict[str, dict[str, bytes]], read_file, views: dict[str, dict]) -> tuple[list[dict], dict[str, bytes | None], list[dict]]:
+    """Merge only identities already confirmed from official pages, never candidates."""
+    groups = {}
+    for url, record in records.items():
+        key = ("id", record["id"]) if record["id"] is not None else ("url", url)
+        groups.setdefault(key, []).append((url, record))
+    merged, updates, findings = [], {}, []
+    for group in groups.values():
+        if len(group) == 1:
+            merged.append(copy.deepcopy(group[0][1]))
+            continue
+        group.sort(key=lambda item: (item[1]["fonte_cvm"], item[0]))
+        row = copy.deepcopy(group[0][1])
+        pages = sorted({url for _, record in group for url in (record["fonte_cvm"], *record["urls_alternativas"])})
+        row["urls_alternativas"] = [url for url in pages if url != row["fonte_cvm"]]
+        hashes, approved, all_paths, conflicting_sources = {}, {}, set(), set()
+        conflicting, unresolved = [], []
+        for url, record in group:
+            for source, digest in record["sha256_fontes"].items():
+                if source in hashes and hashes[source] != digest:
+                    conflicting.append(f"bytes diferentes (sem inferir alteração normativa) para {source}: {hashes[source]} / {digest}")
+                    conflicting_sources.add(source)
+                hashes[source] = digest
+            for name in record["arquivos"]:
+                all_paths.add(name)
+                data = prepared.get(url, {}).get(name)
+                if data is None:
+                    data = read_file(name)
+                fields, body = parse_document(data)
+                comparable = copy.deepcopy(fields)
+                for annex in comparable["anexos"]:
+                    if annex["url"] == fields["fonte"]:
+                        annex["url"], annex["sha256"] = "embedded", "embedded"
+                for key in ("fonte", "fonte_cvm", "sha256_fonte", "baixado_em"):
+                    comparable.pop(key)
+                version = fields["versao_texto"]
+                if version in approved:
+                    previous = approved[version]
+                    previous_fields = parse_document(previous[3])[0]
+                    if body != previous[2]:
+                        left_words, right_words = body.split(), previous[2].split()
+                        boundary = min(len(left_words), len(right_words))
+                        difference = next((i for i in range(boundary) if left_words[i] != right_words[i]), boundary)
+                        left_excerpt = " ".join(left_words[max(0, difference - 5):difference + 10])
+                        right_excerpt = " ".join(right_words[max(0, difference - 5):difference + 10])
+                        conflicting.append(f'corpos diferentes para {version}: {fields["fonte"]} declara {left_excerpt!r}; {previous_fields["fonte"]} declara {right_excerpt!r}')
+                    if comparable != previous[1]:
+                        disagreements = [key for key in comparable if comparable[key] != previous[1][key]]
+                        explicit = [key for key in disagreements if key in ("revogada", "data", "numero", "tipo", "unidade")
+                                    and comparable[key] is not None and previous[1][key] is not None]
+                        details = [f'{key}: {fields["fonte_cvm"]} declara {json.dumps(fields[key], ensure_ascii=False)}; '
+                                   f'{previous_fields["fonte_cvm"]} declara {json.dumps(previous_fields[key], ensure_ascii=False)}' for key in disagreements]
+                        (conflicting if explicit else unresolved).append("metadados diferentes: " + " / ".join(details))
+                else:
+                    approved[version] = (name, comparable, body, data)
+        observed = [(url, views[url]) for url, _ in group if url in views]
+        for index, (left_url, left) in enumerate(observed):
+            for right_url, right in observed[index + 1:]:
+                for key in ("type", "number", "date", "revoked"):
+                    if left.get(key) is not None and right.get(key) is not None and left[key] != right[key]:
+                        left_claim = left.get("revocation_evidence") if key == "revoked" else None
+                        right_claim = right.get("revocation_evidence") if key == "revoked" else None
+                        conflicting.append(f"{key}: {left_url} declara {left_claim or repr(left[key])}; {right_url} declara {right_claim or repr(right[key])}")
+        row["sha256_fontes"] = {source: digest for source, digest in hashes.items() if source not in conflicting_sources}
+        row["verificado_em"] = max((record["verificado_em"] for _, record in group if record["verificado_em"]), default=None)
+        pending_reasons = sorted({record["motivo"] if record["motivo"] and re.match(r"(?:consolidada:|publicação original:|artefato https?://)", record["motivo"])
+                                  else f'artefato {record["fonte_cvm"]}: {record["motivo"] or record["estado"]}'
+                                  for _, record in group if record["estado"] != "publicado"})
+        if any(record["estado"] == "divergente" for _, record in group):
+            conflicting.append("divergência oficial já registrada")
+        if conflicting:
+            row.update(estado="divergente", motivo="fontes-oficiais-conflitantes", arquivos=[])
+            findings.append({"id": row["id"], "descricao": "; ".join(sorted(set(conflicting))), "evidencias": pages})
+        elif unresolved:
+            row.update(estado="pendente", motivo="reconciliacao-de-metadados: " + "; ".join(sorted(set(unresolved))), arquivos=[])
+            findings.append({"id": row["id"], "descricao": row["motivo"], "evidencias": pages})
+        else:
+            row["arquivos"] = sorted(item[0] for item in approved.values())
+            if pending_reasons:
+                row.update(estado="pendente", motivo="; ".join(pending_reasons))
+            else:
+                row.update(estado="publicado", motivo=None)
+            updates.update({item[0]: item[3] for item in approved.values()})
+        for name in all_paths - set(row["arquivos"]):
+            updates[name] = None
+        merged.append(row)
+    return merged, updates, findings
 
 
 def _record_semantics(record: dict) -> dict:
@@ -190,7 +280,7 @@ def coverage_files(report: dict) -> dict[str, bytes]:
         raise PublicationError(", ".join(errors))
     machine = (json.dumps(report, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     def cell(value):
-        return str(value if value is not None else "não confirmado").replace("|", "\\|").replace("\n", " ").replace("\r", " ")
+        return escape(str(value if value is not None else "não confirmado"), quote=False).replace("|", "\\|").replace("\n", " ").replace("\r", " ")
     lines = ["# Cobertura do acervo", "", f'Gerado em {report["gerado_em"]}. Schema {report["schema_versao"]}.', "",
              "| Tipo | Catálogo | Publicados | Pendentes | Indisponíveis | Divergentes | Fora do escopo |",
              "|---|---:|---:|---:|---:|---:|---:|"]
@@ -199,4 +289,18 @@ def coverage_files(report: dict) -> dict[str, bytes]:
     lines.extend(("", "| Identidade | Estado | Motivo | Página oficial | Arquivos aprovados |", "|---|---|---|---|---|"))
     for record in report["documentos"]:
         lines.append("| " + " | ".join(cell(value) for value in (record["id"], record["estado"], record["motivo"], record["fonte_cvm"], ", ".join(record["arquivos"]))) + " |")
+    collection = report["coleta"]
+    lines.extend(("", "## Coleta registrada", "", f'Modo: {cell(collection["modo"])}. Requisições: {collection["requisicoes"]}. Falhas HTTP: {collection["falhas_http"]}.',
+                  "", "## Divergências", ""))
+    if report["divergencias"]:
+        lines.extend(("| Identidade | Declarações / motivo | Evidências oficiais |", "|---|---|---|"))
+        for finding in report["divergencias"]:
+            lines.append("| " + " | ".join(cell(value) for value in (finding["id"], finding["descricao"], " ; ".join(finding["evidencias"]))) + " |")
+    else:
+        lines.append("Nenhuma divergência registrada neste relatório.")
+    lines.extend(("", "## Proveniência", "", "| Identidade / página | Verificado em | URLs alternativas | Fontes e SHA-256 |", "|---|---|---|---|"))
+    for record in report["documentos"]:
+        lines.append("| " + " | ".join(cell(value) for value in (
+            record["id"] or record["fonte_cvm"], record["verificado_em"] or "não consultado",
+            " ; ".join(record["urls_alternativas"]), " ; ".join(f"{url} : {digest}" for url, digest in sorted(record["sha256_fontes"].items())))) + " |")
     return {"cobertura/cobertura.json": machine, "cobertura/COBERTURA.md": ("\n".join(lines) + "\n").encode("utf-8")}

@@ -95,6 +95,10 @@ Itens já examinados com os hashes consultados inalterados não consomem `--limi
 `--document` reavalia uma pendência; publicado com fontes inalteradas não é reconvertido.
 Ao habilitar um novo conversor, o ticket correspondente deve reavaliar as pendências que
 agora suporta; não se declara essa ativação automática implementada no MVP.
+URLs já confirmadas como aliases de um ato são reavaliadas juntas quando há trabalho nesse
+ato, sem consumir outro documento do limite. Podem ser consultas complementares fora da fatia
+de URLs do lote; não introduzem atos novos fora dela. Candidatos não confirmados continuam
+separados. Cobertura agrega o ato, e o catálogo conserva seu contador bruto de URLs.
 
 Pré-condições e ordem (obrigatórias):
 

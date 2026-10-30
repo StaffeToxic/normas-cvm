@@ -63,8 +63,12 @@ Checkpoint `9997a21`: 201 testes executados; republicação pendente por artefat
 contexto, revogação parcial e declaração conflitante preservadas. T007 permanece aberto para
 aliases, comparação entre páginas e fixtures reais complementares; ver
 [revisão de versões](research/revisao-versoes.md).
+Conclusão do fundamento: `e6537e6`, dados `9dc613b` e relatório `d384904`, 211 testes e
+coleta/repetição reais da 175 sem promover PDF/anexos não aprovados. Aliases confirmados
+agregados, URLs/candidatos preservados e divergências visíveis nos dois relatórios. O aceite
+integral de US2 com dois arquivos reais da 175 depende de T010/T011; não foi certificado.
 
-- [ ] T007 [US2] Ampliar versões/relações/divergências em `src/cvm_archive/sources/document.py`, `publish/coverage.py`, `tests/integration/test_versions.py`; blockedBy=[T006]; conflictKeys=[sources,publish]; risco=alto. FR-009/013/019 e C1/C2/C4/C10/C11: Resolução 175, Deliberação 870 e Pareceres 39/40; republicações 59/100/110 pendentes por artefato, sem novo enum; evidências oficiais conflitantes preservadas e original+consolidado pendente agregados conforme modelo.
+- [x] T007 [US2] Ampliar versões/relações/divergências em `src/cvm_archive/sources/document.py`, `publish/coverage.py`, `tests/integration/test_versions.py`; blockedBy=[T006]; conflictKeys=[sources,publish]; risco=alto. FR-009/013/019 e C1/C2/C4/C10/C11: Resolução 175, Deliberação 870 e Pareceres 39/40; republicações 59/100/110 pendentes por artefato, sem novo enum; evidências oficiais conflitantes preservadas e original+consolidado pendente agregados conforme modelo.
 
 ## Fase 5 — US6 / atualização e auditoria
 
