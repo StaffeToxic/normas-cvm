@@ -1,0 +1,2519 @@
+{
+  "schema_versao": "2.0",
+  "gerado_em": "2026-10-30T01:42:44.283574Z",
+  "coleta": {
+    "modo": "documento",
+    "requisicoes": 10,
+    "falhas_http": 0
+  },
+  "categorias": [
+    {
+      "tipo": "Resolução",
+      "catalogo_total": 249,
+      "catalogo_metodo": "enumeração",
+      "publicados": 1,
+      "pendentes": 248,
+      "indisponiveis": 0,
+      "divergentes": 0,
+      "fora_de_escopo": 0
+    }
+  ],
+  "documentos": [
+    {
+      "id": "cvm-resolucao-249-2026",
+      "estado": "publicado",
+      "motivo": null,
+      "arquivos": [
+        "reguladores/cvm/resolucoes/2026/cvm-resolucao-249-2026.md"
+      ],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol249.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {
+        "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol249.html": "392a3b9c531774bad79cacdff8046b7a34756804f2b49d61b9c390fe7578db41",
+        "https://conteudo.cvm.gov.br/legislacao/resolucoes/anexos/200/resol249.htm": "409fccb29e8c06dccbbafef304d4b06ceca5f7889d827c8db59efcf06964194e"
+      },
+      "verificado_em": "2026-10-30"
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol001.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol002.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol003.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol004.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol005.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol006.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol007.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol008.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol009.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol010.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol011.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol012.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol013.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol014.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol015.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol016.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol017.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol018.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol019.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol020.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol021.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol022.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol023.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol024.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol025.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol026.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol027.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol028.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol029.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol030.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol031.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol032.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol033.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol034.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol035.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol036.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol037.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol038.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol039.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol040.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol041.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol042.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol043.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol044.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol045.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol046.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol047.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol048.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol049.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol050.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol051.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol052.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol053.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol054.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol055.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol056.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol057.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol058.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol059.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol060.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol061.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol062.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol063.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol064.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol065.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol066.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol067.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol068.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol069.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol070.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol071.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol072.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol073.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol074.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol075.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol076.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol077.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol078.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol079.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol080.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol081.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol082.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol083.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol084.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol085.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol086.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol087.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol088.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol089.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol090.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol091.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol092.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol093.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol094.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol095.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol096.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol097.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol098.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol099.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol100.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol101.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol102.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol103.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol104.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol105.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol106.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol107.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol108.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol109.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol110.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol111.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol112.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol113.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol114.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol115.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol116.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol117.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol118.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol119.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol120.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol121.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol122.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol123.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol124.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol125.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol126.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol127.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol128.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol129.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol130.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol131.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol132.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol133.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol134.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol135.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol136.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol137.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol138.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol139.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol140.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol141.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol142.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol143.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol144.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol145.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol146.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol147.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol148.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol149.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol150.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol151.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol152.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol153.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol154.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol155.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol156.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol157.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol158.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol159.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol160.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol161.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol162.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol163.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol164.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol165.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol166.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol167.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol168.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol169.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol170.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol171.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol172.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol173.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol174.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol176.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol177.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol178.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol179.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol180.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol181.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol182.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol183.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol184.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol185.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol186.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol187.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol188.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol189.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol190.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol191.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol192.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol193.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol194.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol195.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol196.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol197.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol198.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol199.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol200.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol201.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol202.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol203.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol204.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol205.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol206.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol207.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol208.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol209.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol210.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol211.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol212.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol213.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol214.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol215.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol216.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol217.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol218.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol219.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol220.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol221.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol222.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol223.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol224.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol225.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol226.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol227.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol228.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol229.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol230.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol231.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol232.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol233.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol234.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol235.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol236.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol237.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol238.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol239.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol240.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol241.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol242.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol243.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol244.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol245.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol246.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol247.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    },
+    {
+      "id": null,
+      "estado": "pendente",
+      "motivo": "nao-processado",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol248.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {},
+      "verificado_em": null
+    }
+  ],
+  "divergencias": []
+}
