@@ -64,6 +64,12 @@ Dois arquivos gerados a cada coleta, versionados na raiz:
 - O relatório agrega por ato, não por versão. Original aprovado e consolidado pendente produzem
   um ato `pendente`, `arquivos` apenas com o original aprovado e `motivo` identificando a versão
   faltante e a causa. O ato conta uma vez em `pendentes`, sem duplicação em `publicados`.
+- Se o artefato pendente for uma republicação cuja versão não foi confirmada, o motivo usa
+  `artefato <URL>: <causa>`; outra versão aprovada pode permanecer em `arquivos`. Não forçar a
+  republicação aos dois valores de `versao_texto` nem bloquear automaticamente o original.
+- Uma divergência conserva as declarações incompatíveis em `descricao` e as páginas oficiais
+  em `evidencias`. Duas declarações contraditórias na mesma página exigem uma URL; entre páginas,
+  registrar ambas. Não duplicar uma URL para aparentar duas fontes independentes.
 - `catalogo_total` inclui todos os atos enumerados da categoria. A soma de `publicados`, `pendentes`,
   `indisponiveis`, `divergentes` e `fora_de_escopo` deve ser esse total, sem duplicações. Para medir
   cobertura no escopo, excluir apenas os classificados `fora-de-escopo` com motivo verificável;
