@@ -13,9 +13,10 @@ reported as pending instead of being published with a silent loss.
 from __future__ import annotations
 
 import re
+from html import escape
 from dataclasses import dataclass, field
 from html.parser import HTMLParser
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin, urlsplit
 
 from cvm_archive.models import Conversion
 from cvm_archive.normalize.text import (
@@ -105,7 +106,7 @@ NAV_ROLES = frozenset(
     {"banner", "contentinfo", "menu", "menubar", "navigation", "search", "toolbar"}
 )
 
-UNSUPPORTED_TAGS = frozenset({"applet", "embed", "iframe", "object"})
+UNSUPPORTED_TAGS = frozenset({"applet", "embed", "iframe", "object", "svg", "math", "canvas"})
 
 BOLD_TAGS = frozenset({"b", "strong"})
 ITALIC_TAGS = frozenset({"cite", "em", "i", "var"})
@@ -246,6 +247,18 @@ def convert_html(html: str, source_url: str) -> Conversion:
     builder = _TreeBuilder()
     builder.feed(html)
     builder.close()
+    for node in _iter_elements(builder.root):
+        if node.tag == "style" and re.search(
+            r"line-through|display\s*:\s*none|visibility\s*:\s*hidden", _own_text(node), re.IGNORECASE
+        ):
+            context.pending("estilo-textual-nao-suportado", "CSS requer verificacao")
+        if node.tag == "link" and "stylesheet" in node.attrs.get("rel", "").lower():
+            context.pending("estilo-textual-nao-suportado", "folha externa nao verificada")
+        if node.tag not in SKIP_TAGS and _own_text(node) and (
+            "hidden" in node.attrs
+            or re.search(r"display\s*:\s*none|visibility\s*:\s*hidden", node.attrs.get("style", ""), re.IGNORECASE)
+        ):
+            context.pending("conteudo-oculto-nao-verificado")
     _prune(builder.root, context)
 
     container, reason = _select_container(builder.root)
@@ -325,7 +338,25 @@ def _select_container(root: _Node) -> tuple[_Node | None, str | None]:
         return None, "selecao-ambigua-corpo-normativo"
     if len(_held_markers(best[0], epigraphs)) > 1:
         return None, "selecao-ambigua-corpo-normativo"
+    if _content_outside(root, best[0]):
+        return None, "conteudo-fora-do-corpo-selecionado"
     return best[0], None
+
+
+def _content_outside(node: _Node, selected: _Node) -> bool:
+    """Refuse to certify a body while leaving other payload unexamined."""
+
+    if node is selected:
+        return False
+    for child in node.children:
+        if isinstance(child, str):
+            if child.strip():
+                return True
+        elif child.tag == "img" or child.tag in UNSUPPORTED_TAGS:
+            return True
+        elif _content_outside(child, selected):
+            return True
+    return False
 
 
 def _iter_elements(node: _Node):
@@ -474,17 +505,24 @@ def _inline_runs(
     bold = bold or node.tag in BOLD_TAGS
     italic = italic or node.tag in ITALIC_TAGS
     strike = strike or node.tag in STRIKE_TAGS
+    strike = strike or bool(re.search(
+        r"text-decoration(?:-line)?\s*:[^;]*line-through",
+        node.attrs.get("style", ""), re.IGNORECASE,
+    ))
     if node.tag == "a":
         target = node.attrs.get("href", "").strip()
         if target:
             href = urljoin(context.source_url, target)
+            if urlsplit(href).scheme.lower() not in {"http", "https", "mailto"}:
+                context.pending("protocolo-link-nao-suportado")
+                href = None
     runs: list[_Run] = []
     for child in node.children:
         if isinstance(child, str):
             runs.extend(_text_runs(child, bold, italic, strike, href))
             continue
         if child.tag == "br":
-            runs.append(_Run(" ", bold, italic, strike, href))
+            runs.append(_Run("\n", bold, italic, strike, href))
             continue
         if child.tag == "img":
             _handle_image(child, context)
@@ -492,7 +530,12 @@ def _inline_runs(
         if child.tag in UNSUPPORTED_TAGS:
             context.pending("conteudo-embutido-nao-suportado", child.tag)
             continue
+        block = _is_block(child)
+        if block and runs and not runs[-1].text.endswith("\n"):
+            runs.append(_Run("\n"))
         runs.extend(_inline_runs(child, context, bold, italic, strike, href))
+        if block:
+            runs.append(_Run("\n"))
     return runs
 
 
@@ -521,12 +564,13 @@ def _render_runs(runs: list[_Run]) -> str:
             continue
         lead = text[: len(text) - len(text.lstrip())]
         trail = text[len(text.rstrip()) :]
-        core = text.strip()
+        core = escape(text.strip(), quote=False)
         if not core:
             parts.append(text)
             continue
         if run.href:
-            core = f"[{core}]({run.href})"
+            target = quote(run.href, safe="/:#?&=%,;+@~.!$*'[]")
+            core = f"[{core}]({target})"
         if run.strike:
             core = f"~~{core}~~"
         if run.bold:
@@ -544,10 +588,13 @@ def _handle_image(node: _Node, context: _Context) -> None:
         node.attrs.get("title", "")
     )
     if not label:
-        context.warn("imagem-sem-texto-descartada")
+        context.pending("imagem-nao-classificada")
         return
     if _IMAGE_TEXTUAL_RE.match(label) or len(label.split()) >= _IMAGE_TEXTUAL_WORDS:
         context.pending("imagem-com-conteudo-textual", label[:120])
+        return
+    if not re.match(r"^(?:logotipo|logo|bras[ãa]o)\b", label, re.IGNORECASE):
+        context.pending("imagem-nao-classificada", label[:120])
         return
     context.warn(f"imagem-decorativa-descartada: {label}")
 
@@ -560,6 +607,9 @@ def _table_blocks(node: _Node, context: _Context) -> list:
     caption: list = []
     for child in node.children:
         if isinstance(child, str):
+            if child.strip():
+                context.pending("tabela-conteudo-nao-suportado", "texto fora de celula")
+                return []
             continue
         if child.tag == "tr":
             row = _parse_row(child, context)
@@ -577,10 +627,16 @@ def _table_blocks(node: _Node, context: _Context) -> list:
             has_header = has_header or section_header
             continue
         if child.tag == "caption":
+            if rows or _contains_tag(child, "table"):
+                context.pending("tabela-conteudo-nao-suportado", "caption fora de ordem")
+                return []
             runs = _inline_runs(child, context)
             if runs:
                 caption.append(_text_block(runs, context))
             continue
+        if child.tag not in {"col", "colgroup"}:
+            context.pending("tabela-conteudo-nao-suportado", child.tag)
+            return []
     if not rows:
         context.warn("tabela-sem-conteudo-descartada")
         return []
@@ -597,9 +653,13 @@ def _parse_section(node: _Node, context: _Context) -> tuple[list[list[_Cell]] | 
     has_header = False
     for child in node.children:
         if isinstance(child, str):
+            if child.strip():
+                context.pending("tabela-conteudo-nao-suportado", "texto fora de linha")
+                return None, False
             continue
         if child.tag != "tr":
-            continue
+            context.pending("tabela-conteudo-nao-suportado", child.tag)
+            return None, False
         row = _parse_row(child, context)
         if row is None:
             return None, False
@@ -615,9 +675,13 @@ def _parse_row(node: _Node, context: _Context) -> list[_Cell] | None:
     cells: list[_Cell] = []
     for child in node.children:
         if isinstance(child, str):
+            if child.strip():
+                context.pending("tabela-conteudo-nao-suportado", "texto fora de celula")
+                return None
             continue
         if child.tag not in ("td", "th"):
-            continue
+            context.pending("tabela-conteudo-nao-suportado", child.tag)
+            return None
         if _contains_tag(child, "table"):
             context.pending("tabela-estrutura-nao-suportada", "tabela aninhada")
             return None
@@ -662,17 +726,23 @@ def _grid_is_consistent(rows: list[list[_Cell]]) -> bool:
         for cell in row:
             while (index, column) in occupied:
                 column += 1
-            for line in range(cell.rowspan):
-                for offset in range(cell.colspan):
-                    occupied.add((index + line, column + offset))
             if index + cell.rowspan > len(rows):
                 return False
+            for line in range(cell.rowspan):
+                for offset in range(cell.colspan):
+                    position = (index + line, column + offset)
+                    if position in occupied:
+                        return False
+                    occupied.add(position)
             column += cell.colspan
     widths = {
         max((column for row, column in occupied if row == index), default=-1) + 1
         for index in range(len(rows))
     }
-    return len(widths) == 1
+    return len(widths) == 1 and all(
+        len([column for row, column in occupied if row == index]) == next(iter(widths))
+        for index in range(len(rows))
+    )
 
 
 def _source_text(blocks: list) -> str:
@@ -710,8 +780,11 @@ def _markdown(blocks: list) -> str:
 def _render_table(table: _Table) -> str:
     """Render a table as Markdown when the grid is simple, as HTML otherwise."""
 
-    simple = table.has_header and not any(
+    simple = bool(table.rows) and all(cell.header for cell in table.rows[0]) and not any(
+        cell.header for row in table.rows[1:] for cell in row
+    ) and not any(
         cell.colspan > 1 or cell.rowspan > 1 or not cell.text
+        or any("\n" in run.text for run in cell.runs)
         for row in table.rows
         for cell in row
     )
@@ -725,7 +798,7 @@ def _render_markdown_table(table: _Table) -> str:
 
     lines: list[str] = []
     for index, row in enumerate(table.rows):
-        cells = [cell.text.replace("|", "\\|") for cell in row]
+        cells = [_render_runs(cell.runs).replace("|", "\\|") for cell in row]
         lines.append("| " + " | ".join(cells) + " |")
         if index == 0:
             lines.append("| " + " | ".join("---" for _ in row) + " |")
@@ -761,12 +834,12 @@ def _render_html_runs(runs: list[_Run]) -> str:
             continue
         lead = text[: len(text) - len(text.lstrip())]
         trail = text[len(text.rstrip()) :]
-        core = text.strip()
+        core = escape(text.strip(), quote=False)
         if not core:
-            parts.append(text)
+            parts.append("<br>" if "\n" in text else text)
             continue
         if run.href:
-            core = f'<a href="{run.href}">{core}</a>'
+            core = f'<a href="{escape(run.href, quote=True)}">{core}</a>'
         if run.strike:
             core = f"<del>{core}</del>"
         if run.bold:

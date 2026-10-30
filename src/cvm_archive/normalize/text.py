@@ -12,6 +12,7 @@ artifact.
 from __future__ import annotations
 
 import re
+import unicodedata
 from enum import Enum
 
 __all__ = [
@@ -121,7 +122,7 @@ _ANNEX_RE = re.compile(r"^ANEXO\s+(?P<label>[IVXLCDM]+|[A-Z]|\d+)\b")
 _LIST_MARKER_RE = re.compile(r"^(?P<marker>\d+[.)]|[*+-])(?=\s)")
 _URL_TOKEN_RE = re.compile(r"(?:[a-z][a-z0-9+.-]*://|www\.)\S+", re.IGNORECASE)
 
-_HEADING_LEVELS = {"TÍTULO": 2, "CAPÍTULO": 3, "SEÇÃO": 4, "SUBSEÇÃO": 5}
+_HEADING_LEVELS = {"TITULO": 2, "CAPITULO": 3, "SECAO": 4, "SUBSECAO": 5}
 
 
 def collapse_whitespace(text: str) -> str:
@@ -165,7 +166,8 @@ def heading_level(text: str) -> int | None:
     match = _HEADING_RE.match(collapsed)
     if match is None:
         return None
-    return _HEADING_LEVELS[match.group("kind").upper()]
+    key = unicodedata.normalize("NFD", match.group("kind").upper())
+    return _HEADING_LEVELS["".join(c for c in key if not unicodedata.combining(c))]
 
 
 def device_marker(text: str) -> str | None:
