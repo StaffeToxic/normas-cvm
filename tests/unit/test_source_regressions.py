@@ -42,6 +42,10 @@ class SourceRegressionTests(unittest.TestCase):
         self.assertIsNone(result["date"])
         self.assertEqual(result["document_metadata"]["data_publication"], "2026-10-14")
 
+    def test_artifact_links_are_not_ementa_when_dou_notice_is_absent(self):
+        result = parse_document_page(page('<p>Ementa oficial.</p><hr><p><a href="resol001.pdf">[PDF]</a></p>'), URL, "resolucoes")
+        self.assertEqual(result["document_metadata"]["ementa"], "Ementa oficial.")
+
     def test_revocation_of_another_act_is_not_status(self):
         result = parse_document_page(page('<p>A norma anterior não foi revogada.</p>'), URL, "resolucoes")
         self.assertIsNone(result["revoked"])

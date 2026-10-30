@@ -24,7 +24,7 @@ def _tokens(text: str) -> tuple[str, ...]:
 class _Reader(HTMLParser):
     """Read all body text, never reuse the converter's body selector."""
 
-    def __init__(self):
+    def __init__(self, *, collapse_data=False):
         super().__init__(convert_charrefs=True)
         self.parts = []
         self.stack = []
@@ -38,6 +38,7 @@ class _Reader(HTMLParser):
         self.links = []
         self.active_link = None
         self.errors = []
+        self.collapse_data = collapse_data
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -118,6 +119,8 @@ class _Reader(HTMLParser):
     def handle_data(self, data):
         if self.stack and self.stack[-1][1]:
             return
+        if self.collapse_data:
+            data = re.sub(r"\s+", " ", data)
         self.parts.append(data)
         if self.strike_depth:
             self.strike_parts.append(data)
@@ -129,11 +132,21 @@ class _Reader(HTMLParser):
         return "\n".join(" ".join(line.split()) for line in "".join(self.parts).splitlines() if line.strip())
 
 
-def _read_html(text: str) -> _Reader:
-    reader = _Reader()
+def _read_html(text: str, *, collapse_data=False) -> _Reader:
+    reader = _Reader(collapse_data=collapse_data)
     reader.feed(text)
     reader.close()
     return reader
+
+
+def _source_reader(source_html: str) -> _Reader:
+    body = re.search(r"<body\b[^>]*>(.*?)</body\s*>", source_html, re.I | re.S)
+    return _read_html(body[1] if body else source_html, collapse_data=True)
+
+
+def read_html_text(source_html: str) -> str:
+    """Inspect the complete source without selecting or converting its body."""
+    return _source_reader(source_html).text
 
 
 def _valid_grid(rows) -> bool:
@@ -218,8 +231,7 @@ def check_fidelity(source_text: str, markdown: str) -> tuple[str, ...]:
 def check_html_structure(source_html: str, markdown: str, source_url: str) -> tuple[str, ...]:
     """Check source independently, including cells, spans, links and strike text."""
     # A complete HTML artifact uses its body, excluding the title's duplicate text.
-    body = re.search(r"<body\b[^>]*>(.*?)</body\s*>", source_html, re.I | re.S)
-    reference = _read_html(body[1] if body else source_html)
+    reference = _source_reader(source_html)
     text, tables, links, strikes, errors = _markdown_parts(markdown)
     failures = list(reference.errors) + errors
     failures.extend(check_fidelity(reference.text, markdown))
