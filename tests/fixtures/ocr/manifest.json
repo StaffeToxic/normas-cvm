@@ -1,0 +1,18 @@
+{
+  "folha-assinatura-esparsa.pdf": {
+    "bytes": 704,
+    "sha256": "f025fe0b201f720bf0e9bb2cf6644e1d42c0548ae84394f518932e3b3f4938b4"
+  },
+  "misto-texto-e-scan.pdf": {
+    "bytes": 31160,
+    "sha256": "6cf53016c70a13764bec9c85b1dc1350077d4603e8998868bf6ce9cd4975efd9"
+  },
+  "pagina-branca.pdf": {
+    "bytes": 570,
+    "sha256": "d2aa9a671379168c63e4ec437e36c2e449c50e79c70c813ab3d66fcad0ceefa5"
+  },
+  "scanned-act.pdf": {
+    "bytes": 30800,
+    "sha256": "8c05348e2c0ae602beba1a3f9044416425986246aa798960a05614462a4d0d50"
+  }
+}
