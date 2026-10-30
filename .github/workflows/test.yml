@@ -30,4 +30,3 @@ jobs:
           python -m pip install -e .
       - name: Test offline
         run: python -m unittest discover -s tests -t .
-

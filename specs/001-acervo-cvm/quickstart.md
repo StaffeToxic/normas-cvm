@@ -10,7 +10,8 @@ Pré-requisitos: **Python 3.12** com biblioteca padrão apenas — nenhuma depen
 
 A CLI do MVP está implementada e foi validada com a Resolução 249; ver
 [resultados executados](research/validacao-mvp.md). Instale a partir da raiz com
-`python -m pip install -e .` antes dos comandos. O workflow permanece futuro, no ticket T009.
+`python -m pip install -e .` antes dos comandos. Os workflows estão implementados: testes
+executados no runner, coleta preparada e ainda não acionada.
 
 ## 1. Enumerar o catálogo (antes de coletar)
 
@@ -117,7 +118,7 @@ Em `2` e `3` nada é gravado: a última cobertura válida permanece (o denominad
 
 ## Sincronização com o repositório
 
-- O workflow agendado previsto (ver `contracts/workflow.md`, ticket T009) deverá rodar a mesma CLI e
+- O workflow agendado implementado (ver `contracts/workflow.md`, ticket T009) usa a mesma CLI e
   commitar dados como `github-actions[bot]`, com push restrito a `HEAD:001-acervo-cvm` — nada sobe para
   `main` automaticamente.
 - Coleta local na máquina do mantenedor obedece às mesmas regras de coleta; a decisão de commit é
@@ -127,7 +128,8 @@ Em `2` e `3` nada é gravado: a última cobertura válida permanece (o denominad
 
 - **Empacotamento:** `pyproject.toml` e a CLI estão disponíveis; a instalação do pacote é
   necessária por causa do layout `src/`.
-- O agendamento de `collect --incremental` depende de T009; o comando já está implementado.
+- O workflow de `collect --incremental` está preparado; ativação e SLA dependem da default branch
+  e de execução/observação reais, ainda UNVERIFIED.
 - Demais categorias (`instrucoes`, `deliberacoes`, ...) entram por família quando o caminho de
   PDF/OCR estiver comprovado contra fixtures.
 - Serviço de API ou MCP para consumo programático fica para outra feature (definição pendente,
