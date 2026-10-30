@@ -22,7 +22,7 @@ sha256_fonte: "b76d0b32a6b5cf7658a12c36f58aba57cb6321cac0d558e6672452ba373b7f63"
 formato_fonte: "html"
 ocr: false
 baixado_em: "2026-10-29"
-anexos: []
+anexos: [{"rotulo": "ANEXO A", "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/anexos/200/resol249.htm", "sha256": "b76d0b32a6b5cf7658a12c36f58aba57cb6321cac0d558e6672452ba373b7f63", "formato": "html"}]
 ---
 # Resolução CVM 249
 

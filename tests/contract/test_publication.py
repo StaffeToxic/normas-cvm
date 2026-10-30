@@ -33,7 +33,9 @@ def metadata(artifact):
         "publicacao": "(Publicada no DOU de 14.10.2026)", "data_publicacao": "2026-10-14",
         "edicao": None, "ementa": None, "fonte": URL, "fonte_cvm": PAGE,
         "sha256_fonte": artifact.sha256, "formato_fonte": "html", "ocr": False,
-        "baixado_em": STAMP[:10], "anexos": [],
+        "baixado_em": STAMP[:10], "anexos": [
+            {"rotulo": "ANEXO A", "url": artifact.url, "sha256": artifact.sha256, "formato": "html"}
+        ],
     }
 
 
@@ -120,7 +122,7 @@ class MetadataAndDocumentTests(unittest.TestCase):
         self.conversion = convert_html(self.html, URL)
 
     def render(self, **kwargs):
-        return render_document(self.metadata, self.artifact, self.conversion, discovered_annex_urls=(), source_html=self.html, **kwargs)
+        return render_document(self.metadata, self.artifact, self.conversion, discovered_annex_urls=(self.artifact.url,), source_html=self.html, **kwargs)
 
     def test_real_document_round_trip_uses_exact_artifact_digest(self):
         self.assertEqual(validate_metadata(self.metadata, self.artifact), ())
@@ -169,12 +171,12 @@ class MetadataAndDocumentTests(unittest.TestCase):
                         self.assertTrue(errors)
 
     def test_annex_absence_is_not_claimed_when_discovery_is_unknown(self):
-        for expected in (None, ("https://conteudo.cvm.gov.br/anexo.pdf",)):
+        for expected in (None, (), ("https://conteudo.cvm.gov.br/anexo.pdf",)):
             with self.subTest(expected=expected), self.assertRaises(PublicationError):
                 render_document(self.metadata, self.artifact, self.conversion, discovered_annex_urls=expected, source_html=self.html)
 
     def test_independent_source_is_derived_from_exact_artifact(self):
-        data = render_document(self.metadata, self.artifact, self.conversion, discovered_annex_urls=())
+        data = render_document(self.metadata, self.artifact, self.conversion, discovered_annex_urls=(self.artifact.url,))
         self.assertEqual(data, self.render())
         with self.assertRaises(PublicationError):
             render_document(self.metadata, self.artifact, self.conversion, discovered_annex_urls=(), source_html="<p>truncated</p>")
@@ -207,6 +209,16 @@ class MetadataAndDocumentTests(unittest.TestCase):
         for broken in (b"\xef\xbb\xbf" + data, data.replace(b"\n", b"\r\n"), data.replace(b'schema_versao: "1.0"', b'schema_versao: "1.0"\nschema_versao: "1.0"'), b"---\ninvalid\n---\n# Title\n\nBody\n"):
             with self.subTest(prefix=broken[:12]), self.assertRaises(PublicationError):
                 parse_document(broken)
+
+    def test_embedded_annex_cannot_disappear_from_metadata(self):
+        self.metadata["anexos"] = []
+        with self.assertRaisesRegex(PublicationError, "embedded-annex"):
+            render_document(self.metadata, self.artifact, self.conversion, discovered_annex_urls=())
+
+    def test_embedded_annex_digest_must_match_exact_source(self):
+        self.metadata["anexos"][0]["sha256"] = "0" * 64
+        with self.assertRaisesRegex(PublicationError, "annex-artifact"):
+            self.render()
 
 
 class CoverageTests(unittest.TestCase):

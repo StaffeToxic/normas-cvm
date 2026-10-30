@@ -55,6 +55,11 @@ termina com uma quebra de linha.
 
 **Anexo**: `{ rotulo: <string>, url: <URL>, sha256: <hex(64)>, formato: <html|pdf|docx|doc|xlsx> }`
 
+Anexo incorporado à íntegra também é registrado: usa seu rótulo literal e a URL, o SHA-256 e o
+formato do mesmo artefato que contém o corpo. Não criar hash de uma seção Markdown. Anexos
+distintos incorporados ao mesmo arquivo podem compartilhar URL/hash; seus rótulos os distinguem.
+Para anexo em arquivo separado, o hash exige os bytes próprios daquele artefato.
+
 ## Tipos
 
 | `classe` | `tipo` (rótulo) / código usado no `id` | Pasta |

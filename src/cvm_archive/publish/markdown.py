@@ -6,7 +6,7 @@ import json
 import re
 from pathlib import PurePosixPath
 
-from cvm_archive.gates.fidelity import check_fidelity, check_html_structure
+from cvm_archive.gates.fidelity import check_fidelity, check_html_structure, read_html_text
 from cvm_archive.gates.metadata import FIELDS, TYPES, slug, validate_metadata
 from cvm_archive.models import Artifact, Conversion
 
@@ -61,6 +61,19 @@ def check_identity(source_text: str, metadata: dict) -> tuple[str, ...]:
     return tuple(errors)
 
 
+def embedded_annexes(source_text: str, source_url: str, source_hash: str, source_format: str) -> list[dict]:
+    """An embedded annex points to the exact integral artifact containing it."""
+    labels = [line.strip() for line in source_text.splitlines()
+              if re.match(r"^ANEXO\s+(?:NORMATIVO\s+)?(?:[A-Z]+|\d+)\b", line.strip())]
+    return [{"rotulo": label, "url": source_url, "sha256": source_hash, "formato": source_format} for label in labels]
+
+
+def check_embedded_annexes(source_text: str, metadata: dict) -> tuple[str, ...]:
+    expected = embedded_annexes(source_text, metadata["fonte"], metadata["sha256_fonte"], metadata["formato_fonte"])
+    declared = [annex for annex in metadata["anexos"] if annex["url"] == metadata["fonte"]]
+    return () if declared == expected else ("embedded-annex-provenance",)
+
+
 def document_path(metadata: dict) -> str:
     """Use the official title slug only when that title includes its date."""
     year = metadata["data"][:4] if metadata["data"] else "sem-data"
@@ -71,7 +84,7 @@ def document_path(metadata: dict) -> str:
     return str(PurePosixPath("reguladores", "cvm", TYPES[metadata["tipo"]][2], year, stem + ".md"))
 
 
-def render_document(metadata: dict, artifact: Artifact, conversion: Conversion, *, discovered_annex_urls: tuple[str, ...] | None, revocation_evidence: str | None = None, source_html: str | None = None) -> bytes:
+def render_document(metadata: dict, artifact: Artifact, conversion: Conversion, *, discovered_annex_urls: tuple[str, ...] | None, revocation_evidence: str | None = None, source_html: str | None = None, annex_artifacts: tuple[Artifact, ...] = ()) -> bytes:
     errors = list(validate_metadata(metadata, artifact, revocation_evidence=revocation_evidence))
     if errors:
         raise PublicationError(", ".join(errors))
@@ -89,6 +102,7 @@ def render_document(metadata: dict, artifact: Artifact, conversion: Conversion, 
         if source_html is not None and exact_source != source_html:
             errors.append("source-text-does-not-match-artifact")
         errors.extend(check_html_structure(exact_source, body, artifact.url))
+        errors.extend(check_embedded_annexes(read_html_text(exact_source), metadata))
     errors.extend(check_identity(conversion.source_text, metadata))
     if discovered_annex_urls is None:
         errors.append("annex-discovery-unverified")
@@ -96,6 +110,11 @@ def render_document(metadata: dict, artifact: Artifact, conversion: Conversion, 
         declared = [annex.get("url") for annex in metadata["anexos"] if isinstance(annex, dict)]
         if sorted(declared) != sorted(discovered_annex_urls):
             errors.append("missing-annex-provenance")
+    artifacts = {item.url: item for item in (artifact, *annex_artifacts)}
+    for annex in metadata["anexos"]:
+        source = artifacts.get(annex["url"])
+        if source is None or annex["sha256"] != source.sha256:
+            errors.append("annex-artifact-provenance")
     if errors:
         raise PublicationError(", ".join(dict.fromkeys(errors)))
     header = ["---"]

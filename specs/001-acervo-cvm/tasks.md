@@ -48,6 +48,9 @@ A repetição após commit retornou `changed: false`, zero processados e Git lim
 requisições nas duas execuções, com intervalo mínimo observado de 5 s por host de conteúdo.
 Ver [validação do MVP](research/validacao-mvp.md). O aceite é desta história mínima, sem
 certificar o acervo completo, SC-002, PDF/OCR, outras famílias ou o agendamento.
+Correção posterior `451cbf2`: o anexo incorporado também passou a constar no front matter,
+com URL/hash da íntegra. Dois testes de omissão/hash incorreto foram demonstrados falhando
+antes da correção; a suíte passou com 191 testes. Corpo e hash de fonte da 249 não mudaram.
 
 - [x] T005 [US1] Implementar gates e escrita de documentos/cobertura em `src/cvm_archive/gates/fidelity.py`, `gates/metadata.py`, `publish/markdown.py`, `publish/coverage.py` e `tests/contract/test_publication.py`; blockedBy=[T001,T004]; conflictKeys=[gates,publish]; risco=alto. FR-007..014/022 e SC-003/004: schema, hash/URL, sequência, dispositivos, anexos, tabela; provar reprovação por deleção, permutação, duplicação, hash incorreto e conteúdo ausente; lista vazia não mascara anexo desconhecido.
 - [x] T006 [US1] Integrar CLI e primeira coleta em `src/cvm_archive/cli.py`, `tests/integration/test_cli.py`, fixtures da Resolução 249 e dados `catalogo/`, `reguladores/`, `cobertura/`; blockedBy=[T002,T003,T004,T005]; conflictKeys=[cli,data]; risco=alto. FR-021..024/SC-005/009: catalog/collect/verify, flags, limite/lote estável, documento único, JSON changed, catálogo completo antes do lote; falha não promove saída parcial. Executar CLI em estado commitado, coleta real educada e repetição sem mudanças.

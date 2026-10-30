@@ -75,3 +75,15 @@ Continuam **UNVERIFIED** ou fora desta entrega:
 - Reprocessamento automático de pendências após ativação de novos conversores: os tickets
   correspondentes devem habilitar essa passagem; o MVP permite revisão pontual por documento.
 - Execução no runner real, agendamento, janela de sete dias e carga inicial completa.
+
+## Correção posterior do registro de anexo incorporado
+
+A leitura do cenário 3 de US1 identificou uma omissão de metadado: o Anexo A já estava inteiro
+no corpo publicado, mas `anexos` estava vazio. O gerador e o gate foram corrigidos para registrar
+o rótulo literal, URL e hash do artefato integral. A 249 foi reparada a partir dos bytes já
+baixados e conferidos, sem novo HTTP e sem mudar corpo, hash da fonte ou data da coleta.
+
+Duas regressões foram primeiro executadas e falharam: omissão do anexo no cabeçalho e hash
+de anexo diferente do artefato. Após a correção, **191 testes passaram**. O verificador offline
+com o cache real voltou a retornar zero violações. A comparação entre as duas coletas acima
+permanece um registro histórico anterior a essa correção de metadado.
