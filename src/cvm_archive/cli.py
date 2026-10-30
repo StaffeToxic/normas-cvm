@@ -20,7 +20,7 @@ from cvm_archive.fetch.client import DEFAULT_USER_AGENT, BlockedError, FetchErro
 from cvm_archive.gates.fidelity import check_html_structure, read_html_text
 from cvm_archive.gates.metadata import TYPES, confirmed_id, valid_date, valid_url, validate_metadata
 from cvm_archive.models import Artifact, CatalogEntry
-from cvm_archive.publish.coverage import build_coverage, coverage_files, pending_entry, validate_coverage
+from cvm_archive.publish.coverage import aggregate_aliases, build_coverage, coverage_files, pending_entry, validate_coverage
 from cvm_archive.publish.markdown import PublicationError, check_embedded_annexes, check_identity, decode_html, decode_html_bytes, document_path, embedded_annexes, parse_document, render_document
 from cvm_archive.publish.transaction import promote, safe_target
 from cvm_archive.sources import DocumentConflictError, DocumentParseError, enumerate_catalog, parse_document_page
@@ -169,6 +169,18 @@ def verify_tree(root: Path, *, cache_dir: Path | None = None, updates: dict[str,
     actual.difference_update(name for name, data in updates.items() if data is None)
     if actual != listed:
         errors.append("published files outside coverage or missing files")
+    try:
+        catalog_path = safe_target(root, CATALOG_PATH)
+        if CATALOG_PATH in updates or catalog_path.is_file():
+            entries = _catalog_entries(_read_json(read(CATALOG_PATH)))
+            for entry in entries:
+                matches = [record for record in report["documentos"] if entry.url in (record["fonte_cvm"], *record["urls_alternativas"])]
+                if not matches:
+                    errors.append("catalog entry absent from coverage and aliases")
+                elif len(matches) > 1 and all(record["id"] is not None for record in matches):
+                    errors.append("catalog URL assigned to multiple confirmed identities")
+    except (OSError, ValueError, TypeError, KeyError) as exc:
+        errors.append(f"catalog coverage: {exc}")
     return {"categorias": report["categorias"], "violacoes": sorted(set(errors)), "UNVERIFIED": sorted(set(unverified))}
 
 
@@ -234,7 +246,7 @@ def _same_publication(old: bytes, new: bytes) -> bool:
     return previous == current and previous_body == current_body
 
 
-def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifact], root: Path, old: dict | None, *, findings: list[dict]) -> tuple[dict, dict[str, bytes]]:
+def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifact], root: Path, old: dict | None, *, findings: list[dict], views: dict[str, dict]) -> tuple[dict, dict[str, bytes]]:
     record = pending_entry(entry)
     record["verificado_em"] = stamp[:10]
     def fetch(url):
@@ -248,7 +260,7 @@ def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifac
     except FetchError as exc:
         if exc.status not in (404, 410):
             raise
-        if old and old["arquivos"]:
+        if old and old["id"] is not None:
             record = copy.deepcopy(old)
             record.update(estado="pendente", motivo="publicação original: pagina-indisponivel", verificado_em=stamp[:10])
         else:
@@ -272,6 +284,7 @@ def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifac
     except DocumentParseError as exc:
         record["motivo"] = "revisao-manual: " + str(exc)
         return record, {}
+    views[entry.url] = page
     try:
         kind = next(label for label, value in TYPES.items() if value[1] == page["type"])
         record["id"] = confirmed_id(kind, page["number"], page["date"])
@@ -359,8 +372,9 @@ def _collect(args, client, stamp: str) -> dict:
         raise PublicationError("published files exist without coverage")
     catalog = previous_catalog if previous_catalog is not None else _enumerated_catalog(client, stamp)
     entries = entries if entries is not None else _catalog_entries(catalog)
-    old_records = {record["fonte_cvm"]: record for record in previous["documentos"]} if previous else {}
-    if set(old_records) - {entry.url for entry in entries}:
+    old_records = {url: record for record in previous["documentos"] for url in (record["fonte_cvm"], *(record["urls_alternativas"] if record["id"] is not None else []))} if previous else {}
+    catalog_urls = {entry.url for entry in entries}
+    if previous and any(not catalog_urls.intersection((record["fonte_cvm"], *record["urls_alternativas"])) for record in previous["documentos"]):
         raise PublicationError("catalog removal or alias needs manual reconciliation; old coverage preserved")
     records = {entry.url: copy.deepcopy(old_records.get(entry.url, pending_entry(entry))) for entry in entries}
     if args.document:
@@ -372,8 +386,12 @@ def _collect(args, client, stamp: str) -> dict:
         if not selected and entries:
             raise ValueError("batch is outside the complete catalog")
     updates, processed = {}, 0
+    prepared, views = {}, {}
+    handled_urls, processed_keys = set(), set()
     findings = copy.deepcopy(previous["divergencias"]) if previous else []
     for entry in selected:
+        if entry.url in handled_urls:
+            continue
         if not args.document and args.limit is not None and processed >= args.limit:
             break
         old = old_records.get(entry.url)
@@ -399,21 +417,42 @@ def _collect(args, client, stamp: str) -> dict:
                     if exc.status not in (404, 410):
                         raise
                     unchanged = False
-        if unchanged and not args.document:
+        needs_reconciliation = old and (old["estado"] == "divergente" or str(old["motivo"]).startswith("reconciliacao-de-metadados"))
+        if unchanged and not args.document and not needs_reconciliation:
+            handled_urls.update(url for url, record in old_records.items() if record is old)
             continue
         # A normal unchanged published document is not reconverted, including document mode.
         if unchanged and old["estado"] == "publicado":
+            handled_urls.update(url for url, record in old_records.items() if record is old)
             continue
         findings = [finding for finding in findings if entry.url not in finding["evidencias"]
                     and not (old and old["id"] is not None and finding["id"] == old["id"])]
-        record, files = _process(entry, client, stamp, fetched, root, old, findings=findings)
-        records[entry.url] = record
-        updates.update(files)
-        for name in old["arquivos"] if old else ():
-            if name not in record["arquivos"]:
-                updates[name] = None
-        processed += 1
-    report = build_coverage(list(records.values()), len(entries), stamp,
+        work = [entry]
+        if old and old["id"] is not None:
+            work.extend(candidate for candidate in entries if candidate.url != entry.url and
+                        old_records.get(candidate.url, {}).get("id") == old["id"])
+        for member in work:
+            member_old = old_records.get(member.url)
+            record, files = _process(member, client, stamp, fetched, root, member_old, findings=findings, views=views)
+            if member_old and member_old["id"] is not None:
+                if record["id"] is None:
+                    record["id"] = member_old["id"]
+                elif record["id"] != member_old["id"]:
+                    raise PublicationError("official identity changed; manual reconciliation required")
+                record["urls_alternativas"] = sorted(set((member.url, member_old["fonte_cvm"], *member_old["urls_alternativas"], *record["urls_alternativas"])) - {record["fonte_cvm"]})
+            records[member.url] = record
+            prepared[member.url] = files
+            updates.update(files)
+            for name in member_old["arquivos"] if member_old else ():
+                if name not in record["arquivos"]:
+                    updates[name] = None
+            handled_urls.add(member.url)
+            processed_keys.add(("id", record["id"]) if record["id"] else ("url", member.url))
+        processed = len(processed_keys)
+    grouped, alias_updates, alias_findings = aggregate_aliases(records, prepared, lambda name: safe_target(root, name).read_bytes(), views)
+    updates.update(alias_updates)
+    findings.extend(finding for finding in alias_findings if finding not in findings)
+    report = build_coverage(grouped, len(grouped), stamp,
                             {"modo": "documento" if args.document else "completa", **_metrics(client)}, existing=previous,
                             divergences=sorted(findings, key=lambda item: (item["id"] or "", item["evidencias"], item["descricao"])))
     reports = coverage_files(report)

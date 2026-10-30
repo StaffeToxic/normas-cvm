@@ -74,6 +74,11 @@ Dois arquivos gerados a cada coleta, versionados na raiz:
   `indisponiveis`, `divergentes` e `fora_de_escopo` deve ser esse total, sem duplicações. Para medir
   cobertura no escopo, excluir apenas os classificados `fora-de-escopo` com motivo verificável;
   classificação desconhecida permanece pendente. O denominador no escopo é `catalogo_total - fora_de_escopo`.
+- O catálogo bruto conta URLs de listagem. A cobertura conta atos com identidade confirmada
+  mais entradas ainda sem identidade. Somente aliases confirmados podem reduzir a contagem de
+  URLs ao agregar o mesmo ato; todas as URLs ficam em `fonte_cvm`/`urls_alternativas`. Entradas
+  não visitadas não são agregadas por número/data candidatos. O verificador exige que toda URL
+  do catálogo continue representada. O contador bruto permanece no arquivo de catálogo.
 
 ## Migração 1.0 → 1.1
 

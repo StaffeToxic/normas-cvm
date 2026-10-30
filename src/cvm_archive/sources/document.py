@@ -10,7 +10,9 @@ from html.parser import HTMLParser
 from pathlib import PurePosixPath
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
-from .catalog import UnsupportedCategoryError, _require_category
+from .catalog import UnsupportedCategoryError
+
+METADATA_CATEGORIES = frozenset({"resolucoes", "instrucoes", "deliberacoes", "pareceres-orientacao"})
 
 VERSION_ORIGINAL = "publicação original"
 VERSION_CONSOLIDATED = "consolidada"
@@ -427,7 +429,8 @@ def _parse_relations(content: _Node) -> tuple[list[dict[str, str]], list[dict[st
 
 def parse_document_page(html: str, url: str, category: str) -> dict[str, object]:
     """Parse one official metadata page without approving any linked integral text."""
-    _require_category(category)
+    if category not in METADATA_CATEGORIES:
+        raise UnsupportedCategoryError(f"unsupported metadata category {category!r}")
     if not isinstance(html, str):
         raise TypeError("document HTML must be text")
     parsed = urlsplit(url)
@@ -481,7 +484,7 @@ def parse_document_page(html: str, url: str, category: str) -> dict[str, object]
     )
     for paragraph in _find_all(content, "p"):
         normalized = _collapse(_normalize(_text(paragraph)))
-        if re.match(r"nao\s+(?:foi\s+)?revogad[ao]\b", normalized):
+        if re.fullmatch(r"nao\s+(?:foi\s+)?revogad[ao][.!]?", normalized):
             negative_evidence = _text(paragraph)
             break
 

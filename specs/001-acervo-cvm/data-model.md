@@ -189,6 +189,7 @@ Segue o contrato atual de cobertura. O relatório é uma fotografia do catálogo
 ### 7.3 Regras de cobertura e falha
 
 - O denominador é `catalogo_total` por categoria. Nunca usar 319, 241 ou 9 como denominador oficial.
+- Aliases só reduzem o número bruto de URLs depois da confirmação oficial da identidade. A cobertura conta o ato uma vez, mantém todas as URLs e conserva separadas as entradas ainda não confirmadas. O contador bruto continua no catálogo; cada URL precisa estar representada na cobertura ou nos aliases.
 - Toda entrada do catálogo no escopo aparece em `documentos` com um estado. Nenhum registro some sem explicação.
 - `pendente` sempre tem `motivo`. `publicado` exige `arquivos`, `fonte_cvm` verificável quando aplicável e `sha256_fontes` com os bytes usados.
 - **Agregação de versões, sem novo campo de schema:** se o original passou e o consolidado descoberto ainda não passou, o ato permanece `pendente`; `arquivos` lista apenas o original aprovado e `motivo` identifica a versão faltante e a causa, por exemplo `consolidada: tabela-nao-reproduzida`. Contar o ato uma vez em `pendentes`, sem somá-lo também em `publicados`. Não apagar o original válido por falha exclusiva do consolidado. Quando todas as versões descobertas no escopo passarem, promover o ato para `publicado`. Indisponibilidade de uma versão com outra aprovada também permanece pendência da versão, não indisponibilidade do ato inteiro.
