@@ -74,3 +74,20 @@ relação positiva. `false` exige uma declaração global explícita, como “N�
 O fundamento de versões e aliases está implementado. O aceite integral de US2 com dois
 Markdowns reais da 175 continua condicionado a PDF/tabelas e aos gates; sua tabela LIG segue
 sem aprovação automática. Nenhuma dessas verificações substitui FR-014 por documento.
+
+## Coleta real da 175
+
+Código `e6537e6`, dados `9dc613b`. A CLI foi executada contra a página oficial da Resolução 175,
+com catálogo completo existente. Resultado: quatro requisições incluindo robots, zero falhas,
+um ato processado e cobertura total inalterada em 249 atos: um publicado e 248 pendentes.
+O registro da 175 agora tem identidade confirmada, hash da página
+`551f4059dc6369c239a3668d78bf571fd22beaee6690ef6e0f2b56a8e4f95e29` e motivo
+`consolidada: anexo-revisao-manual; publicação original: pdf-conversor-pendente`.
+Não foram publicados arquivos da 175 nem declarada sua tabela aprovada.
+
+Após commitar, a mesma coleta foi repetida: `changed: false`, um ato reavaliado, quatro
+requisições, zero falhas, Git limpo. O reprocessamento de uma pendência em modo documento não
+invocou conversor PDF nem alterou datas públicas. O verificador offline, com os caches oficiais
+reutilizados, retornou `violacoes: []`, `UNVERIFIED: []` para os controles implementados.
+Esses resultados encerram a implementação do fundamento T007; o aceite completo de US2 com
+PDF/tabelas continua nos tickets posteriores e não foi certificado.
