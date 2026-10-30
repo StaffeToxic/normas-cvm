@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "descricao": "Fixtures do conversor de PDF textual (T010). sha256 identifica os bytes versionados. Nenhum caminho local e registrado.",
+  "fixtures": [
+    {
+      "arquivo": "pare040-sample.pdf",
+      "origem": "sintetica-pare040",
+      "url": "https://conteudo.cvm.gov.br/legislacao/pareceres-orientacao/pare040.html",
+      "sha256": "1a005b479d2dcb89d72779be48927b2798301d92ad58e0674bf29de95f5569db",
+      "sha256_origem": null,
+      "capturado_em": "2026-10-30",
+      "notas": "Fixture de 2 paginas sintetizada a partir do Parecer de Orientacao 40 para exercitar cabecalhos/rodapes, dispositivos, hifenizacao e URLs quebradas."
+    },
+    {
+      "arquivo": "sem-texto.pdf",
+      "origem": "sintetica",
+      "url": null,
+      "sha256": "1a4253dca5706a894087f77e0bc36e475ba6d86a52490acd10009bd9affaea09",
+      "sha256_origem": null,
+      "capturado_em": "2026-10-30",
+      "notas": "Fixture sem camada de texto para exercitar a deteccao de OCR pendente."
+    },
+    {
+      "arquivo": "tabela-complexa.pdf",
+      "origem": "sintetica",
+      "url": null,
+      "sha256": "585248e4b3eb8599d103bbc771dbeeb9ab2e9c75aa2e9eb80a8d6deb58b52bee",
+      "sha256_origem": null,
+      "capturado_em": "2026-10-30",
+      "notas": "Fixture com matriz tabular complexa para exercitar deteccao de tabela-nao-reproduzida."
+    }
+  ]
+}
