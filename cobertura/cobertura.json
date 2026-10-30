@@ -1,9 +1,9 @@
 {
   "schema_versao": "2.0",
-  "gerado_em": "2026-10-30T01:42:44.283574Z",
+  "gerado_em": "2026-10-30T02:30:53.252115Z",
   "coleta": {
     "modo": "documento",
-    "requisicoes": 10,
+    "requisicoes": 4,
     "falhas_http": 0
   },
   "categorias": [
@@ -19,6 +19,18 @@
     }
   ],
   "documentos": [
+    {
+      "id": "cvm-resolucao-175-2022",
+      "estado": "pendente",
+      "motivo": "consolidada: anexo-revisao-manual; publicação original: pdf-conversor-pendente",
+      "arquivos": [],
+      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html",
+      "urls_alternativas": [],
+      "sha256_fontes": {
+        "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html": "551f4059dc6369c239a3668d78bf571fd22beaee6690ef6e0f2b56a8e4f95e29"
+      },
+      "verificado_em": "2026-10-30"
+    },
     {
       "id": "cvm-resolucao-249-2026",
       "estado": "publicado",
@@ -1770,16 +1782,6 @@
       "motivo": "nao-processado",
       "arquivos": [],
       "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol174.html",
-      "urls_alternativas": [],
-      "sha256_fontes": {},
-      "verificado_em": null
-    },
-    {
-      "id": null,
-      "estado": "pendente",
-      "motivo": "nao-processado",
-      "arquivos": [],
-      "fonte_cvm": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html",
       "urls_alternativas": [],
       "sha256_fontes": {},
       "verificado_em": null

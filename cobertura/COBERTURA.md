@@ -1,6 +1,6 @@
 # Cobertura do acervo
 
-Gerado em 2026-10-30T01:42:44.283574Z. Schema 2.0.
+Gerado em 2026-10-30T02:30:53.252115Z. Schema 2.0.
 
 | Tipo | Catálogo | Publicados | Pendentes | Indisponíveis | Divergentes | Fora do escopo |
 |---|---:|---:|---:|---:|---:|---:|
@@ -8,6 +8,7 @@ Gerado em 2026-10-30T01:42:44.283574Z. Schema 2.0.
 
 | Identidade | Estado | Motivo | Página oficial | Arquivos aprovados |
 |---|---|---|---|---|
+| cvm-resolucao-175-2022 | pendente | consolidada: anexo-revisao-manual; publicação original: pdf-conversor-pendente | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html |  |
 | cvm-resolucao-249-2026 | publicado | não confirmado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol249.html | reguladores/cvm/resolucoes/2026/cvm-resolucao-249-2026.md |
 | não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol001.html |  |
 | não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol002.html |  |
@@ -183,7 +184,6 @@ Gerado em 2026-10-30T01:42:44.283574Z. Schema 2.0.
 | não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol172.html |  |
 | não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol173.html |  |
 | não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol174.html |  |
-| não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html |  |
 | não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol176.html |  |
 | não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol177.html |  |
 | não confirmado | pendente | nao-processado | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol178.html |  |
@@ -260,7 +260,7 @@ Gerado em 2026-10-30T01:42:44.283574Z. Schema 2.0.
 
 ## Coleta registrada
 
-Modo: documento. Requisições: 10. Falhas HTTP: 0.
+Modo: documento. Requisições: 4. Falhas HTTP: 0.
 
 ## Divergências
 
@@ -270,6 +270,7 @@ Nenhuma divergência registrada neste relatório.
 
 | Identidade / página | Verificado em | URLs alternativas | Fontes e SHA-256 |
 |---|---|---|---|
+| cvm-resolucao-175-2022 | 2026-10-30 |  | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html : 551f4059dc6369c239a3668d78bf571fd22beaee6690ef6e0f2b56a8e4f95e29 |
 | cvm-resolucao-249-2026 | 2026-10-30 |  | https://conteudo.cvm.gov.br/legislacao/resolucoes/anexos/200/resol249.htm : 409fccb29e8c06dccbbafef304d4b06ceca5f7889d827c8db59efcf06964194e ; https://conteudo.cvm.gov.br/legislacao/resolucoes/resol249.html : 392a3b9c531774bad79cacdff8046b7a34756804f2b49d61b9c390fe7578db41 |
 | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol001.html | não consultado |  |  |
 | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol002.html | não consultado |  |  |
@@ -445,7 +446,6 @@ Nenhuma divergência registrada neste relatório.
 | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol172.html | não consultado |  |  |
 | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol173.html | não consultado |  |  |
 | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol174.html | não consultado |  |  |
-| https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html | não consultado |  |  |
 | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol176.html | não consultado |  |  |
 | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol177.html | não consultado |  |  |
 | https://conteudo.cvm.gov.br/legislacao/resolucoes/resol178.html | não consultado |  |  |
