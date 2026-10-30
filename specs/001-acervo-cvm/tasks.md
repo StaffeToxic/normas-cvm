@@ -74,7 +74,13 @@ integral de US2 com dois arquivos reais da 175 depende de T010/T011; não foi ce
 
 **Teste independente:** fixtures de RSS/catalogo e duas coletas sem mudança; nova norma gera apenas o delta, bloqueio interrompe sem publicar. Runner/agendamento só são aceitos com execução externa real.
 
-- [ ] T008 [US6] Implementar RSS e rechecagem incremental em `src/cvm_archive/sources/feeds.py`, `cli.py`, `tests/integration/test_incremental.py`; blockedBy=[T006,T007]; conflictKeys=[sources,cli,data]; risco=alto. FR-002/005/021..024: RSS como sinal, reconciliação integral periódica e hashes rotativos; nova URL, removido do catálogo, fonte inalterada e consolidado alterado na mesma URL; sem cache durável obrigatório.
+T008 implementado em `450c448`, com 222 testes e onze cenários novos sem rede. RSS real
+reutilizado de bytes já auditados; catálogo completo, rotação, substituição de consolidado na
+mesma URL e preservação após remoção/bloqueio verificados. Execução incremental ao vivo e SLA
+permanecem UNVERIFIED; novas coletas foram adiadas. Ver
+[validação incremental](research/validacao-incremental.md).
+
+- [x] T008 [US6] Implementar RSS e rechecagem incremental em `src/cvm_archive/sources/feeds.py`, `cli.py`, `tests/integration/test_incremental.py`; blockedBy=[T006,T007]; conflictKeys=[sources,cli,data]; risco=alto. FR-002/005/021..024: RSS como sinal, reconciliação integral periódica e hashes rotativos; nova URL, removido do catálogo, fonte inalterada e consolidado alterado na mesma URL; sem cache durável obrigatório.
 - [ ] T009 [US6] Criar verificação e coleta Actions em `.github/workflows/test.yml`, `.github/workflows/collect.yml` e `tests/contract/test_workflow.py`; blockedBy=[T008]; conflictKeys=[workflows]; risco=alto. D-U12/SC-006/007: inputs ligados à CLI, lote medido, bot só dados, data real, fila sem cancelamento, JSON de mudança e push fixo feature. Validar falha CLI sem mascarar exit, nenhum commit vazio, nenhuma escrita main; executar runner real quando disponível. SC-006 continua UNVERIFIED até ativação/observação.
 
 ## Fase 6 — US3 / demais normas e conversores
