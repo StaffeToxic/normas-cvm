@@ -37,7 +37,12 @@ atualidade de todas as relações, e as versões/divergências continuam no esco
 
 **Teste independente:** catálogo real completo, Resolução 249 e fixture esperada; original aprovado e tudo que não for processável aparece pendente. SC-002 de 50 documentos só será aceito no fechamento, não por esta amostra mínima.
 
-- [ ] T005 [US1] Implementar gates e escrita de documentos/cobertura em `src/cvm_archive/gates/fidelity.py`, `gates/metadata.py`, `publish/markdown.py`, `publish/coverage.py` e `tests/contract/test_publication.py`; blockedBy=[T001,T004]; conflictKeys=[gates,publish]; risco=alto. FR-007..014/022 e SC-003/004: schema, hash/URL, sequência, dispositivos, anexos, tabela; provar reprovação por deleção, permutação, duplicação, hash incorreto e conteúdo ausente; lista vazia não mascara anexo desconhecido.
+T005 foi executado em `6e55980`, com 166 testes no commit limpo, incluindo 41 contratuais novos.
+Os gates rejeitam corrupção de conteúdo, metadados e estrutura; promoção com falha é revertida.
+Escopo e limites em [revisão de publicação](research/revisao-publicacao.md). A coleta real pela
+CLI e os critérios globais continuam em T006 e nos tickets posteriores.
+
+- [x] T005 [US1] Implementar gates e escrita de documentos/cobertura em `src/cvm_archive/gates/fidelity.py`, `gates/metadata.py`, `publish/markdown.py`, `publish/coverage.py` e `tests/contract/test_publication.py`; blockedBy=[T001,T004]; conflictKeys=[gates,publish]; risco=alto. FR-007..014/022 e SC-003/004: schema, hash/URL, sequência, dispositivos, anexos, tabela; provar reprovação por deleção, permutação, duplicação, hash incorreto e conteúdo ausente; lista vazia não mascara anexo desconhecido.
 - [ ] T006 [US1] Integrar CLI e primeira coleta em `src/cvm_archive/cli.py`, `tests/integration/test_cli.py`, fixtures da Resolução 249 e dados `catalogo/`, `reguladores/`, `cobertura/`; blockedBy=[T002,T003,T004,T005]; conflictKeys=[cli,data]; risco=alto. FR-021..024/SC-005/009: catalog/collect/verify, flags, limite/lote estável, documento único, JSON changed, catálogo completo antes do lote; falha não promove saída parcial. Executar CLI em estado commitado, coleta real educada e repetição sem mudanças.
 
 ## Fase 4 — US2 / versões e relações

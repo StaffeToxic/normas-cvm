@@ -158,7 +158,9 @@ python -m cvm_archive.cli verify --root DIR
 
 1. Todo `.md` publicado parseia: YAML front matter válido, campos obrigatórios presentes,
    anulabilidade respeitada (`null` explícito), `schema_versao` conhecido, UTF-8 sem BOM, LF
-   (contrato front-matter).
+   (contrato front-matter). O perfil emitido usa uma chave por linha e valores flow JSON,
+   válidos em YAML 1.2; o leitor sem dependências rejeita edições fora desse perfil em vez de
+   afirmar suporte geral a YAML.
 2. `sha256_fonte` confere com os bytes no cache local quando disponíveis; quando não estão
    disponíveis, informar no stdout que a conferência dos bytes é UNVERIFIED. Não criar campo
    `fontes` nem declarar verificação histórica não demonstrada. Ausência de cache não invalida

@@ -98,13 +98,13 @@ _NON_BREAKING_SPACE = "\u00a0"
 _ARTICLE_MARKER_RE = re.compile(r"^Art\.\s*(?:\d+[º°]?|[IVXLCDM]+)\.?(?=\s|$)")
 _SECTION_MARKER_RE = re.compile(r"^§\s*(?:\d+[º°]?)?\.?(?=\s|$)")
 _UNIQUE_PARAGRAPH_MARKER_RE = re.compile(
-    r"^Par[áa]grafo\s+[úu]nico\.?(?=\s|$)", re.IGNORECASE
+    r"^Par[áa]grafo\s+[úu]nico[.:]?(?=\s|$)", re.IGNORECASE
 )
 _DEVICE_MARKER_RE = re.compile(
     r"^(?:"
     r"Art\.\s*(?:\d+[º°]?|[IVXLCDM]+)\.?"
     r"|§\s*(?:\d+[º°]?)?\.?"
-    r"|Par[áa]grafo\s+[úu]nico\.?"
+    r"|Par[áa]grafo\s+[úu]nico[.:]?"
     r")"
 )
 
