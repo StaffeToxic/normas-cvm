@@ -1,0 +1,33 @@
+name: test
+
+on:
+  push:
+    branches: [001-acervo-cvm, 't/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-por
+          pdftotext -v
+          tesseract --version
+          python -m pip install -e .
+      - name: Test offline
+        run: python -m unittest discover -s tests -t .
+
