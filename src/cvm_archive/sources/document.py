@@ -315,6 +315,8 @@ def _parse_metadata(content: _Node, date_text: str | None) -> dict[str, str | No
         text = _text(paragraph, breaks=True)
         if not text:
             continue
+        if any(re.fullmatch(r"\[(?:HTML|PDF|DOCX?)\]", _text(anchor), re.I) for anchor in _anchors(paragraph)):
+            break
         if date_text is not None and _parse_date(text) == date_text:
             continue
         normalized = _collapse(_normalize(text))

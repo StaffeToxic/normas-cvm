@@ -19,23 +19,46 @@ class PublicationError(ValueError):
 
 
 def decode_html(artifact: Artifact) -> str:
+    return decode_html_bytes(artifact.bytes, artifact.content_type)
+
+
+def decode_html_bytes(data: bytes, content_type: str = "text/html") -> str:
     """Honor a declared charset; never replace undecodable normative bytes."""
-    if artifact.bytes.startswith(b"\xef\xbb\xbf"):
-        return artifact.bytes.decode("utf-8-sig")
-    header = re.search(r"charset\s*=\s*[\"']?([\w.-]+)", artifact.content_type, re.I)
-    declaration = re.search(rb"charset\s*=\s*[\"']?([\w.-]+)", artifact.bytes[:8192], re.I)
+    if data.startswith(b"\xef\xbb\xbf"):
+        return data.decode("utf-8-sig")
+    header = re.search(r"charset\s*=\s*[\"']?([\w.-]+)", content_type, re.I)
+    declaration = re.search(rb"charset\s*=\s*[\"']?([\w.-]+)", data[:8192], re.I)
     declared = header[1] if header else declaration[1].decode("ascii") if declaration else None
     if declared:
         try:
-            return artifact.bytes.decode(declared)
+            return data.decode(declared)
         except (LookupError, UnicodeError) as exc:
             raise PublicationError("source-encoding") from exc
     for encoding in ("utf-8", "cp1252"):
         try:
-            return artifact.bytes.decode(encoding)
+            return data.decode(encoding)
         except UnicodeDecodeError:
             continue
     raise PublicationError("source-encoding")
+
+
+def check_identity(source_text: str, metadata: dict) -> tuple[str, ...]:
+    errors = []
+    pattern = (r"^" + re.escape(metadata["tipo"]) +
+               r"\s+(?:CVM\s+)?(?:N[º°o.]?\s*)?0*(\d+)\b")
+    epigraphs = [match[1] for line in source_text.splitlines()
+                 if (match := re.match(pattern, line, re.I))]
+    if epigraphs != [metadata["numero"]]:
+        errors.append("artifact-identity")
+    months = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
+    for line in source_text.splitlines():
+        if re.match(pattern, line, re.I):
+            act_date = re.search(r"\bDE\s+(\d{1,2})\s+DE\s+(\w+)\s+DE\s+(\d{4})\b", line, re.I)
+            if act_date:
+                month = act_date[2].lower()
+                if month not in months or metadata["data"] != f"{act_date[3]}-{months.index(month) + 1:02d}-{int(act_date[1]):02d}":
+                    errors.append("artifact-act-date")
+    return tuple(errors)
 
 
 def document_path(metadata: dict) -> str:
@@ -66,20 +89,7 @@ def render_document(metadata: dict, artifact: Artifact, conversion: Conversion, 
         if source_html is not None and exact_source != source_html:
             errors.append("source-text-does-not-match-artifact")
         errors.extend(check_html_structure(exact_source, body, artifact.url))
-    pattern = (r"^" + re.escape(metadata["tipo"]) +
-               r"\s+(?:CVM\s+)?(?:N[º°o.]?\s*)?0*(\d+)\b")
-    epigraphs = [match[1] for line in conversion.source_text.splitlines()
-                 if (match := re.match(pattern, line, re.I))]
-    if epigraphs != [metadata["numero"]]:
-        errors.append("artifact-identity")
-    months = ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro")
-    for line in conversion.source_text.splitlines():
-        if re.match(pattern, line, re.I):
-            act_date = re.search(r"\bDE\s+(\d{1,2})\s+DE\s+(\w+)\s+DE\s+(\d{4})\b", line, re.I)
-            if act_date:
-                month = act_date[2].lower()
-                if month not in months or metadata["data"] != f"{act_date[3]}-{months.index(month) + 1:02d}-{int(act_date[1]):02d}":
-                    errors.append("artifact-act-date")
+    errors.extend(check_identity(conversion.source_text, metadata))
     if discovered_annex_urls is None:
         errors.append("annex-discovery-unverified")
     elif isinstance(metadata.get("anexos"), list):

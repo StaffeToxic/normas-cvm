@@ -1,7 +1,8 @@
 # Contrato: CLI do coletor (`python -m cvm_archive.cli`)
 
-Contrato público da interface de linha de comando. Implementação futura (esta etapa define
-comportamento, não código). Regras de idioma: flags, valores de flag, identificadores e mensagens
+Contrato público da interface de linha de comando. O MVP de resoluções está implementado e
+tem [validação executada](../research/validacao-mvp.md); expansões indicadas abaixo permanecem
+futuras. Regras de idioma: flags, valores de flag, identificadores e mensagens
 de log em inglês; documentação e mensagens voltadas a pessoas em português brasileiro.
 
 - **Runtime:** Python 3.12, somente biblioteca padrão (constituição VI). Módulos previstos:
@@ -75,7 +76,7 @@ python -m cvm_archive.cli collect --category resolucoes \
   --output DIR \
   --cache-dir .scratch/cache \
   --min-interval 5 \
-  --user-agent "NormasCVMResearch/0.5 (+https://github.com/<org>/<repo>; collect)"
+  --user-agent "NormasCVMResearch/0.5 (+https://github.com/StaffeToxic/normas-cvm; collect)"
 ```
 
 | Flag | Obrig. | Valor |
@@ -88,6 +89,12 @@ python -m cvm_archive.cli collect --category resolucoes \
 | `--cache-dir` | não | default `.scratch/cache`, nunca versionado |
 | `--min-interval` | não | default `5` segundos, mínimo de 5 definido pelo projeto |
 | `--user-agent` | não | default do projeto com URL do repositório |
+
+Uma substituição de User-Agent deve conservar o link identificador do repositório.
+Itens já examinados com os hashes consultados inalterados não consomem `--limit`.
+`--document` reavalia uma pendência; publicado com fontes inalteradas não é reconvertido.
+Ao habilitar um novo conversor, o ticket correspondente deve reavaliar as pendências que
+agora suporta; não se declara essa ativação automática implementada no MVP.
 
 Pré-condições e ordem (obrigatórias):
 

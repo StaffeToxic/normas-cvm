@@ -42,8 +42,15 @@ Os gates rejeitam corrupção de conteúdo, metadados e estrutura; promoção co
 Escopo e limites em [revisão de publicação](research/revisao-publicacao.md). A coleta real pela
 CLI e os critérios globais continuam em T006 e nos tickets posteriores.
 
+T006 foi validado com código `e779a29`, dados `c21cdb5` e relatório `757ff89`: 189 testes em
+commit limpo; coleta real da 249 com catálogo completo de 249, 1 publicação e 248 pendências.
+A repetição após commit retornou `changed: false`, zero processados e Git limpo. Foram 15
+requisições nas duas execuções, com intervalo mínimo observado de 5 s por host de conteúdo.
+Ver [validação do MVP](research/validacao-mvp.md). O aceite é desta história mínima, sem
+certificar o acervo completo, SC-002, PDF/OCR, outras famílias ou o agendamento.
+
 - [x] T005 [US1] Implementar gates e escrita de documentos/cobertura em `src/cvm_archive/gates/fidelity.py`, `gates/metadata.py`, `publish/markdown.py`, `publish/coverage.py` e `tests/contract/test_publication.py`; blockedBy=[T001,T004]; conflictKeys=[gates,publish]; risco=alto. FR-007..014/022 e SC-003/004: schema, hash/URL, sequência, dispositivos, anexos, tabela; provar reprovação por deleção, permutação, duplicação, hash incorreto e conteúdo ausente; lista vazia não mascara anexo desconhecido.
-- [ ] T006 [US1] Integrar CLI e primeira coleta em `src/cvm_archive/cli.py`, `tests/integration/test_cli.py`, fixtures da Resolução 249 e dados `catalogo/`, `reguladores/`, `cobertura/`; blockedBy=[T002,T003,T004,T005]; conflictKeys=[cli,data]; risco=alto. FR-021..024/SC-005/009: catalog/collect/verify, flags, limite/lote estável, documento único, JSON changed, catálogo completo antes do lote; falha não promove saída parcial. Executar CLI em estado commitado, coleta real educada e repetição sem mudanças.
+- [x] T006 [US1] Integrar CLI e primeira coleta em `src/cvm_archive/cli.py`, `tests/integration/test_cli.py`, fixtures da Resolução 249 e dados `catalogo/`, `reguladores/`, `cobertura/`; blockedBy=[T002,T003,T004,T005]; conflictKeys=[cli,data]; risco=alto. FR-021..024/SC-005/009: catalog/collect/verify, flags, limite/lote estável, documento único, JSON changed, catálogo completo antes do lote; falha não promove saída parcial. Executar CLI em estado commitado, coleta real educada e repetição sem mudanças.
 
 ## Fase 4 — US2 / versões e relações
 
