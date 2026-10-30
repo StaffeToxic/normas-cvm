@@ -319,6 +319,36 @@ class IntervalTests(FetchTestCase):
 
 
 class PolicyRegressionTests(FetchTestCase):
+    def test_published_cvm_robots_chain_applies_to_initial_origin(self):
+        client, opener, clock = self.client({
+            "https://conteudo.cvm.gov.br/robots.txt": (302, {
+                "Location": "http://www.cvm.gov.br/export/sites/cvm/robots.txt"}, b"", "Found"),
+            "http://www.cvm.gov.br/export/sites/cvm/robots.txt": (301, {
+                "Location": "https://conteudo.cvm.gov.br/export/sites/cvm/robots.txt"}, b"", "Moved"),
+            "https://conteudo.cvm.gov.br/export/sites/cvm/robots.txt":
+                (200, {}, b"User-agent: *\nDisallow: /restrito/\n", "OK"),
+            "https://conteudo.cvm.gov.br/document": (200, {}, b"official", "OK"),
+        })
+        artifact = client.fetch("https://conteudo.cvm.gov.br/document")
+        self.assertEqual(artifact.bytes, b"official")
+        with self.assertRaises(BlockedError):
+            client.fetch("https://conteudo.cvm.gov.br/restrito/act")
+        self.assertEqual(len(opener.sent_urls()), 4)
+        self.assertEqual(clock.sleeps, [5, 5])
+
+    def test_redirected_policy_is_not_inherited_by_destination_origin(self):
+        client, opener, _ = self.client({
+            "https://a.test/robots.txt": (302, {"Location": "https://b.test/policy/robots.txt"}, b"", "Found"),
+            "https://b.test/policy/robots.txt": (200, {}, b"User-agent: *\n", "OK"),
+            "https://a.test/doc": (200, {}, b"doc", "OK"),
+            "https://b.test/robots.txt": (200, {}, b"User-agent: *\nDisallow: /doc\n", "OK"),
+        })
+        client.fetch("https://a.test/doc")
+        with self.assertRaises(BlockedError):
+            client.fetch("https://b.test/doc")
+        self.assertIn("https://b.test/robots.txt", opener.sent_urls())
+        self.assertNotIn("https://b.test/doc", opener.sent_urls())
+
     def test_encoded_api_paths_are_refused_before_any_request(self):
         paths = ["/%61pi/items", "/%2561pi/items", "/ignored/../api/items",
                  "/ignored/%2e%2e/%61pi/items", "//api/items", "/API/items",

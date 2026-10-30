@@ -127,3 +127,16 @@ extrapolar cinco famílias para todo o escopo. Todas foram rejeitadas.
 - Motivo completo da diferença histórica de contagem de ofícios e completude das relações da 175.
 - Funcionamento do coletor de produção sem o cache de robots preparado para esta pesquisa.
 - Runner real, agendamento e atendimento ao prazo de atualização de sete dias.
+
+## Correção posterior do transporte
+
+O commit `903c81d` permite a cadeia publicada entre recursos terminados em `/robots.txt`,
+aplicando a política à autoridade inicial. Redirecionamento de conteúdo continua exigindo a
+política própria do destino; API, intervalo por hostname e interrupção em bloqueio continuam
+obrigatórios. Destinos de robots com outro nome permanecem bloqueados conservadoramente.
+Não se declara implementação irrestrita de todas as possibilidades da RFC.
+
+Os dois testes novos falharam antes da correção; depois, a suíte de 39 passou. Uma consulta real
+à página da Resolução 249 percorreu a cadeia oficial e obteve 200, sem injeção manual de cache:
+quatro requisições, nenhuma falha, com log local. Isso resolve a limitação observada de
+inicialização na CVM; coleta completa e execução no Actions continuam UNVERIFIED.
