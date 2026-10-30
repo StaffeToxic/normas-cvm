@@ -75,6 +75,7 @@ Criar somente módulos necessários ao ticket; não criar conversores vazios. Fi
 ## Identidade, versões e atualizações
 
 - Original e consolidado compartilham identidade do ato, com arquivos/hashes separados. Cobertura conta o ato uma vez e descreve versões pendentes; original publicado não transforma consolidado pendente em completo.
+- Cobertura 2.0 (D-13) mantém entradas ainda não visitadas por URL, com `id: null` e sem publicação. Número/data do catálogo continuam candidatos; a identidade só é preenchida após confirmação oficial. A mudança MAJOR de nulabilidade está descrita no contrato e não altera o front matter 1.0.
 - `fonte`/`sha256_fonte` são do mesmo artefato. Relações vazias significam nenhuma encontrada na fonte consultada, não inexistência universal. `revogada: null` é válido.
 - As três republicações externas conhecidas ficam pendentes por artefato; não criar enum por inferência.
 - Sem mudança semântica, preservar bytes de documentos e cobertura, inclusive datas. Logs locais guardam contadores da execução; o relatório público só muda com conteúdo/estado. O contrato permite diferenças de execução, mas não as exige; esta opção mais restrita atende FR-023 e US6.

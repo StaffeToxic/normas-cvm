@@ -164,7 +164,10 @@ python -m cvm_archive.cli verify --root DIR
    `fontes` nem declarar verificação histórica não demonstrada. Ausência de cache não invalida
    sozinha um arquivo cujo schema e vínculo com o índice sejam válidos.
 3. O estado do `cobertura.json` é coerente com os arquivos no disco (nenhum arquivo publicado fora
-   do relatório; `id` únicos; ordenação estável). Ato `pendente` **pode** ter arquivos publicados
+   do relatório; IDs confirmados únicos; ordenação estável). Cobertura 2.0 mantém `id: null`
+   para entradas ainda não confirmadas, identificadas pela URL canônica e sem arquivos; isso
+   preserva o catálogo completo sem transformar candidatos em identidade jurídica (D-13).
+   Ato `pendente` **pode** ter arquivos publicados
    listados em `arquivos` — por exemplo, o original aprovado de um ato cujo consolidado ainda está
    pendente (data-model §7.2/§7.3): nesse caso o `motivo` identifica a versão faltante e a causa
    (ex.: `consolidada: tabela-nao-reproduzida`), o ato conta uma vez em `pendentes` (não soma
