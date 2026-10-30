@@ -11,6 +11,7 @@ artifact.
 
 from __future__ import annotations
 
+import collections
 import re
 import unicodedata
 from enum import Enum
@@ -20,13 +21,17 @@ __all__ = [
     "LEXICAL_HYPHEN_PREFIXES",
     "bold_device_markers",
     "classify_block",
+    "clean_page_zones",
     "collapse_whitespace",
     "device_marker",
     "escape_leading_list_marker",
+    "format_pdf_blocks",
     "heading_level",
     "join_hyphenated_lines",
+    "join_pdf_lines",
     "normalize_heading",
     "normalize_paragraph",
+    "reconstruct_pdf_paragraphs",
 ]
 
 
@@ -261,3 +266,206 @@ def _can_join_hyphen(previous: str, following: str) -> bool:
     if word.lower() in LEXICAL_HYPHEN_PREFIXES:
         return False
     return True
+
+
+_PAGE_NUMBER_RE = re.compile(
+    r"^(?:"
+    r"\d{1,4}"
+    r"|P[áa]gina\s+\d+(?:\s+de\s+\d+)?"
+    r"|fls?\.?\s*\d+"
+    r")$",
+    re.IGNORECASE,
+)
+
+_PDF_BLOCK_START_RE = re.compile(
+    r"^(?:"
+    r"Art\.\s*(?:\d+[º°]?|[IVXLCDM]+)\.?"
+    r"|§\s*(?:\d+[º°]?)?\.?"
+    r"|Par[áa]grafo\s+[úu]nico[.:]?"
+    r"|(?:[IVXLCDM]+)\s*[-–—]\s"
+    r"|[a-z]\)\s"
+    r"|T[ÍI]TULO\b|CAP[ÍI]TULO\b|SE[ÇC][ÃA]O\b|SUBSE[ÇC][ÃA]O\b|LIVRO\b|ANEXO\b"
+    r"|PARECER\s+DE\s+ORIENTA[ÇC][ÃA]O\b|RESOLU[ÇC][ÃA]O\b|INSTRU[ÇC][ÃA]O\b|DELIBERA[ÇC][ÃA]O\b"
+    r"|\d+\.\s+[A-ZÀ-Ú]"
+    r"|\d+\s+[A-ZÀ-Ú“\"][a-zà-ú]"
+    r")",
+    re.IGNORECASE,
+)
+
+_TOPIC_HEADING_RE = re.compile(r"^\d+\.\s+[A-ZÀ-Ú]")
+_ACT_TITLE_RE = re.compile(
+    r"^(?:PARECER\s+DE\s+ORIENTA[ÇC][ÃA]O|RESOLU[ÇC][ÃA]O|INSTRU[ÇC][ÃA]O|DELIBERA[ÇC][ÃA]O)\s+CVM\b",
+    re.IGNORECASE,
+)
+
+
+def clean_page_zones(pages: list[str]) -> list[str]:
+    """Clean repeating headers and footers from extracted PDF pages.
+
+    Header lines repeating in the top zone of more than half of pages are
+    stripped. Solitary page numbers in the bottom zone are removed. Legal
+    devices and body content in the middle are never stripped.
+    """
+    if not pages:
+        return []
+    if len(pages) == 1:
+        lines = pages[0].split("\n")
+        while lines and not lines[-1].strip():
+            lines.pop()
+        if lines and _PAGE_NUMBER_RE.match(lines[-1].strip()):
+            lines.pop()
+        return ["\n".join(lines)]
+
+    top_candidates: list[str] = []
+    bottom_candidates: list[str] = []
+    for p in pages:
+        lines = [collapse_whitespace(ln) for ln in p.split("\n") if ln.strip()]
+        if lines:
+            top_candidates.extend(lines[:8])
+            bottom_candidates.extend(lines[-4:])
+
+    threshold = len(pages) / 2
+    top_counts = collections.Counter(top_candidates)
+    bottom_counts = collections.Counter(bottom_candidates)
+
+    repeated_top = {
+        ln
+        for ln, count in top_counts.items()
+        if count > threshold
+        and not _DEVICE_MARKER_RE.match(ln)
+        and not _ACT_TITLE_RE.match(ln)
+    }
+    repeated_bottom = {
+        ln
+        for ln, count in bottom_counts.items()
+        if count > threshold and not _DEVICE_MARKER_RE.match(ln)
+    }
+
+    cleaned_pages: list[str] = []
+    for p in pages:
+        raw_lines = p.split("\n")
+        start = 0
+        for i, ln in enumerate(raw_lines):
+            collapsed = collapse_whitespace(ln)
+            if not collapsed:
+                continue
+            if collapsed in repeated_top:
+                continue
+            start = i
+            break
+
+        end = len(raw_lines)
+        for i in range(len(raw_lines) - 1, -1, -1):
+            collapsed = collapse_whitespace(raw_lines[i])
+            if not collapsed:
+                continue
+            if collapsed in repeated_bottom or _PAGE_NUMBER_RE.match(collapsed):
+                continue
+            end = i + 1
+            break
+
+        cleaned_pages.append("\n".join(raw_lines[start:end]))
+    return cleaned_pages
+
+
+def join_pdf_lines(lines: list[str]) -> str:
+    """Join physical lines of a paragraph, preserving soft hyphens, lexical hyphens and URLs."""
+    if not lines:
+        return ""
+    result: list[str] = []
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if not result:
+            result.append(stripped)
+            continue
+        prev = result[-1]
+        if (
+            ("http://" in prev or "https://" in prev)
+            and prev.endswith("-")
+            and not stripped.startswith("http")
+            and " " not in stripped.split("/")[0]
+        ):
+            result[-1] = prev + stripped
+        elif prev.endswith("-") and stripped[:1].islower():
+            fragment = prev[:-1]
+            word = fragment.rsplit(" ", 1)[-1]
+            if word.lower() in LEXICAL_HYPHEN_PREFIXES:
+                result[-1] = prev + stripped
+            elif word.isalpha():
+                result[-1] = prev[:-1] + stripped
+            else:
+                result[-1] = prev + " " + stripped
+        else:
+            result[-1] = prev + " " + stripped
+    return result[0] if result else ""
+
+
+def reconstruct_pdf_paragraphs(pages: list[str]) -> list[str]:
+    """Reconstruct legal paragraphs from cleaned PDF pages."""
+    raw_lines: list[str] = []
+    for p in pages:
+        raw_lines.extend(p.split("\n"))
+        raw_lines.append("")
+
+    paragraphs: list[str] = []
+    current_lines: list[str] = []
+
+    for ln in raw_lines:
+        stripped = ln.strip()
+        if not stripped:
+            if current_lines:
+                para = join_pdf_lines(current_lines)
+                if para:
+                    paragraphs.append(para)
+                current_lines = []
+            continue
+
+        if current_lines and _PDF_BLOCK_START_RE.match(stripped):
+            para = join_pdf_lines(current_lines)
+            if para:
+                paragraphs.append(para)
+            current_lines = []
+
+        current_lines.append(stripped)
+
+    if current_lines:
+        para = join_pdf_lines(current_lines)
+        if para:
+            paragraphs.append(para)
+
+    return paragraphs
+
+
+def format_pdf_blocks(paragraphs: list[str]) -> str:
+    """Format reconstructed paragraphs for Markdown."""
+    formatted: list[str] = []
+    first_heading = True
+
+    for para in paragraphs:
+        collapsed = collapse_whitespace(para)
+        if not collapsed:
+            continue
+
+        if _ACT_TITLE_RE.match(collapsed):
+            if first_heading:
+                formatted.append(f"# {collapsed}")
+                first_heading = False
+                continue
+            formatted.append(f"## {collapsed}")
+            continue
+
+        lvl = heading_level(collapsed)
+        if lvl is not None and len(collapsed) < 200:
+            formatted.append(f"{'#' * lvl} {collapsed}")
+            continue
+
+        if _TOPIC_HEADING_RE.match(collapsed) and len(collapsed) < 150:
+            formatted.append(f"## {collapsed}")
+            continue
+
+        formatted.append(normalize_paragraph(collapsed))
+
+    return "\n\n".join(formatted) + "\n"
+
