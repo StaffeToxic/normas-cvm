@@ -10,6 +10,12 @@ Testes são obrigatórios em toda história. Uma caixa só é marcada após exec
 
 ## Fase 2 — Fundação
 
+Revisão de 29/10/2026: T002 tem implementação integrada e 37 testes executados, mas a cadeia
+oficial atual de robots expôs limitação de inicialização ainda pendente. T004 tem 43 testes
+positivos, porém oito contraexemplos executados impedem seu aceite. Ver a
+[reconferência](research/reconferencia-2026-10-29.md) e a [revisão HTML](research/revisao-html.md).
+Esses tickets permanecem abertos até a correção, sem transformar pesquisa em certificação.
+
 - [ ] T002 [P] Implementar transporte educado em `src/cvm_archive/fetch/client.py` e `tests/unit/test_fetch.py`; blockedBy=[T001]; conflictKeys=[fetch]; risco=alto. FR-003..005/SC-007: robots por host, redirecionamento, UA, intervalo >=5s, 401/403/429/5xx, cache bruto e log; testes de relógio falso e sabotagem de acesso proibido, sem rede real.
 - [ ] T003 [P] Implementar catálogo e metadados de resoluções em `src/cvm_archive/sources/catalog.py`, `sources/document.py`, `tests/unit/test_sources.py` e fixtures HTML; blockedBy=[T001]; conflictKeys=[sources]; risco=alto. FR-001/009/019: todas as páginas, contagem incoerente, aliases, epígrafe, data, revogação explícita, relações e anexos; selector não confunde PDF próprio/site com alteradoras.
 - [ ] T004 [P] Implementar conversão estrutural HTML e normalização em `src/cvm_archive/convert/html.py`, `normalize/text.py`, `tests/unit/test_html.py` e fixtures esperadas; blockedBy=[T001]; conflictKeys=[html,normalize]; risco=alto. FR-006/010/011: dispositivos, entidades, anexos e tabelas reais; conteúdo ambíguo/estrutura não suportada gera pendência, não silêncio.

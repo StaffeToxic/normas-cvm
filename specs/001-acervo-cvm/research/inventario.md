@@ -81,6 +81,19 @@ Faixas de anos em negrito foram reconfirmadas por enumeração integral do catá
 - Cobertura de URLs fora do menu, da busca e dos sitemaps.
 - Lista oficial de atos vigentes posterior à Portaria 123/2022.
 - Licença de cada anexo fora da página gov.br que exibe CC BY-ND 3.0.
+
 - Causa da diferença entre 599 e 600 no catálogo de ofícios circulares; o valor 600 é o reconferido.
 - Proporção de PDFs sem camada textual no universo completo das famílias de instruções e deliberações: a amostragem por década mediu 78 arquivos e 676 páginas sem nenhum caso, mas é determinística e não probabilística e cobre 4,5% dos arquivos apontados para essas famílias. Qualidade de OCR não foi medida, porque não foi executada.
 - Enumeração ato a ato das faixas de anos de resoluções, pareceres de orientação, ofícios circulares e perguntas e respostas: os intervalos registrados na tabela da seção 1 não foram reconfirmados para esses grupos.
+
+## 7. Reconferência em 29/10/2026
+
+As cinco famílias principais foram novamente enumeradas por requisições reais: resoluções 249,
+instruções 627, deliberações 907, pareceres 41 e ofícios 600; 2.424 URLs distintas em 50 páginas.
+Isso não substitui o inventário das demais categorias nem constitui um censo de atos vigentes.
+O ofício SMI 4/2026 está presente e é adicional às 599 URLs da enumeração anterior; a divergência
+histórica entre contador e enumeração foi conservada.
+
+A cadeia de robots foi conferida, o título revogado da Instrução 400 e o hash do PDF da 249 foram
+reconfirmados. O HTML da 249 tem hash novo por inclusão de analytics, sem alteração dos demais
+bytes na comparação executada. Ver [reconferencia-2026-10-29.md](reconferencia-2026-10-29.md).
