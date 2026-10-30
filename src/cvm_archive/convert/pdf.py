@@ -32,7 +32,7 @@ from cvm_archive.normalize.text import (
     reconstruct_pdf_paragraphs,
 )
 
-__all__ = ["convert_pdf", "extract_pdf_pages", "find_pdftotext"]
+__all__ = ["convert_pdf", "extract_pdf_pages", "extract_pdf_pages_raw", "find_pdftotext"]
 
 _KNOWN_POPPLER_PATHS: tuple[Path, ...] = (
     Path(r"C:\Users\User\Documents\normas-cvm\.scratch\benchmark\tools\poppler\poppler-26.09.0\Library\bin\pdftotext.exe"),
@@ -58,6 +58,12 @@ def find_pdftotext() -> str | None:
 
 def extract_pdf_pages(data: bytes, *, poppler_bin: str | None = None) -> list[str]:
     """Extract page layout text from raw PDF bytes using pdftotext -layout."""
+    raw_pages = extract_pdf_pages_raw(data, poppler_bin=poppler_bin)
+    return [page for page in raw_pages if page.strip()]
+
+
+def extract_pdf_pages_raw(data: bytes, *, poppler_bin: str | None = None) -> list[str]:
+    """Extract all pages including empty ones to preserve 1-based page indexing."""
     exe = poppler_bin or find_pdftotext()
     if not exe:
         raise FileNotFoundError("pdftotext executable not found")
@@ -74,7 +80,10 @@ def extract_pdf_pages(data: bytes, *, poppler_bin: str | None = None) -> list[st
             timeout=120,
         )
         text = result.stdout.decode("utf-8", errors="replace")
-        return [page for page in text.split("\x0c") if page.strip()]
+        pages = text.split("\x0c")
+        if pages and not pages[-1].strip():
+            pages.pop()
+        return pages
     finally:
         try:
             os.remove(temporary_path)
@@ -107,8 +116,22 @@ def convert_pdf(
     source_url: str,
     *,
     poppler_bin: str | None = None,
+    allow_ocr: bool = False,
+    tesseract_bin: str | None = None,
+    pdftoppm_bin: str | None = None,
 ) -> Conversion:
     """Convert official textual PDF bytes into a Markdown conversion candidate."""
+    if allow_ocr:
+        from cvm_archive.convert.ocr import convert_pdf_ocr
+
+        return convert_pdf_ocr(
+            pdf_bytes,
+            source_url,
+            tesseract_bin=tesseract_bin,
+            poppler_bin=poppler_bin,
+            pdftoppm_bin=pdftoppm_bin,
+        )
+
     if not pdf_bytes or not pdf_bytes.strip():
         return Conversion(source_text="", markdown="", pending_reason="arquivo-vazio")
 
