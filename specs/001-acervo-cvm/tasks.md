@@ -80,8 +80,13 @@ mesma URL e preservação após remoção/bloqueio verificados. Execução incre
 permanecem UNVERIFIED; novas coletas foram adiadas. Ver
 [validação incremental](research/validacao-incremental.md).
 
+T009 implementado em `1048ef8` e documentado em `0228cc0`: 231 testes locais e no
+[runner real](https://github.com/StaffeToxic/normas-cvm/actions/runs/40995070490), sem coleta
+adicional. Guardas, bot, escopo de commit, parâmetros e códigos 2/3 testados. Coleta agendada,
+commit/push real do bot e SC-006 continuam UNVERIFIED; o workflow de coleta não foi acionado.
+
 - [x] T008 [US6] Implementar RSS e rechecagem incremental em `src/cvm_archive/sources/feeds.py`, `cli.py`, `tests/integration/test_incremental.py`; blockedBy=[T006,T007]; conflictKeys=[sources,cli,data]; risco=alto. FR-002/005/021..024: RSS como sinal, reconciliação integral periódica e hashes rotativos; nova URL, removido do catálogo, fonte inalterada e consolidado alterado na mesma URL; sem cache durável obrigatório.
-- [ ] T009 [US6] Criar verificação e coleta Actions em `.github/workflows/test.yml`, `.github/workflows/collect.yml` e `tests/contract/test_workflow.py`; blockedBy=[T008]; conflictKeys=[workflows]; risco=alto. D-U12/SC-006/007: inputs ligados à CLI, lote medido, bot só dados, data real, fila sem cancelamento, JSON de mudança e push fixo feature. Validar falha CLI sem mascarar exit, nenhum commit vazio, nenhuma escrita main; executar runner real quando disponível. SC-006 continua UNVERIFIED até ativação/observação.
+- [x] T009 [US6] Criar verificação e coleta Actions em `.github/workflows/test.yml`, `.github/workflows/collect.yml` e `tests/contract/test_workflow.py`; blockedBy=[T008]; conflictKeys=[workflows]; risco=alto. D-U12/SC-006/007: inputs ligados à CLI, lote medido, bot só dados, data real, fila sem cancelamento, JSON de mudança e push fixo feature. Validar falha CLI sem mascarar exit, nenhum commit vazio, nenhuma escrita main; executar runner real quando disponível. SC-006 continua UNVERIFIED até ativação/observação.
 
 ## Fase 6 — US3 / demais normas e conversores
 
