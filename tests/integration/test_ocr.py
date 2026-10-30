@@ -38,6 +38,13 @@ def get_mock_tesseract_bin() -> str:
     return str(FIXTURES_DIR / "mock_tesseract.sh")
 
 
+def get_mock_noise_bin() -> str:
+    """Get the appropriate mock noise runner for the current OS."""
+    if os.name == "nt":
+        return str(FIXTURES_DIR / "mock_noise.cmd")
+    return str(FIXTURES_DIR / "mock_noise.sh")
+
+
 class OcrIntegrationTests(unittest.TestCase):
     """Integration and fidelity tests for OCR processing."""
 
@@ -141,35 +148,16 @@ class OcrIntegrationTests(unittest.TestCase):
     def test_fidelity_gate_insufficient_ocr_output_fails(self) -> None:
         """OCR output with fewer than 10 alphanumeric characters must fail fidelity gate."""
         fixture = (FIXTURES_DIR / "scanned-act.pdf").read_bytes()
+        noise_bin = get_mock_noise_bin()
 
-        # Temporary script that returns minimal noise
-        with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False) as f:
-            f.write("print('..')\n")
-            noise_script = f.name
+        conv = convert_pdf_ocr(
+            fixture,
+            "https://example.com/doc.pdf",
+            tesseract_bin=noise_bin,
+        )
 
-        try:
-            if os.name == "nt":
-                cmd_path = noise_script + ".cmd"
-                Path(cmd_path).write_text(f'@echo off\npy "{noise_script}"\n', encoding="utf-8")
-                test_bin = cmd_path
-            else:
-                Path(noise_script).chmod(0o755)
-                test_bin = noise_script
-
-            conv = convert_pdf_ocr(
-                fixture,
-                "https://example.com/doc.pdf",
-                tesseract_bin=test_bin,
-            )
-
-            self.assertEqual(conv.pending_reason, "ocr-pendente")
-            self.assertIn("ocr-reconhecimento-insuficiente", conv.warnings)
-        finally:
-            for p in (noise_script, noise_script + ".cmd"):
-                try:
-                    os.remove(p)
-                except OSError:
-                    pass
+        self.assertEqual(conv.pending_reason, "ocr-pendente")
+        self.assertIn("ocr-reconhecimento-insuficiente", conv.warnings)
 
     def test_missing_tesseract_binary_marks_pending(self) -> None:
         """Missing tesseract executable on page requiring OCR results in ocr-pendente."""
