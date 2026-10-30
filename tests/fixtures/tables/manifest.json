@@ -1,0 +1,30 @@
+{
+  "tabela-175-lig-sabotada.docx": {
+    "bytes": 673,
+    "sha256": "edfc113b299f26ddf7cf6ba01f6863b0b8b9cddfea6e2025c62200ce27f2deb4"
+  },
+  "tabela-celulas-vazias.docx": {
+    "bytes": 678,
+    "sha256": "f1200322d1882fb950372357a7a16a5778ab06d2915d5c399bd4e5b22b1d3988"
+  },
+  "tabela-corrompida.docx": {
+    "bytes": 35,
+    "sha256": "0c65d6f7d2a5f8c6c28f150ecd441aa3604d60fd76ddd6f7c29ed36d47dde529"
+  },
+  "tabela-gridspan.docx": {
+    "bytes": 730,
+    "sha256": "12f06e7262b883c73de5b00a9fd2012928ab01fb9a36bba3c00883176e4e84a6"
+  },
+  "tabela-merge-sabotada.docx": {
+    "bytes": 673,
+    "sha256": "71d95b64c8aa43c78962a1627d084a5d9a74d28677fd1392e2f993e62ac69454"
+  },
+  "tabela-simples.docx": {
+    "bytes": 725,
+    "sha256": "e18d8a9eed15dc6cfd3284242317cf7e1d9d6651a7670b38926a993928625fb4"
+  },
+  "tabela-vmerge.docx": {
+    "bytes": 753,
+    "sha256": "b75ff1932d304d48fdca57a48a88bbc25f764ff94b2cead98d31f7287539a0e6"
+  }
+}
