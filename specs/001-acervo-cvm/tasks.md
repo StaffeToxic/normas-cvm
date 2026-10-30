@@ -20,8 +20,17 @@ não os critérios de aceite de coleta completa ou agendamento. T004 foi corrigi
 com 14 regressões adicionais e 57 testes na branch do ticket; a integração executou 88 testes.
 Os oito casos agora preservam o conteúdo ou geram pendência explícita. SC-002 continua aberto.
 
+T003 foi revisado e concluído em `cc58752`: 45 testes na branch do ticket, incluindo enumeração
+das cinco páginas da fixture oficial, 249 URLs distintas e conferência dos 17 arquivos pelo
+manifesto de proveniência. Sete contraexemplos falharam antes das correções e passaram depois:
+contador ausente, data de publicação confundida com data do ato, revogação de outro ato,
+negação de revogação, status conflitante, título sem epígrafe e indicação expressa de vigência.
+A expectativa incorreta `181/22` foi corrigida para `181/23`, conforme a fixture oficial.
+A integração executou 125 testes. Não houve HTTP novo para T003; fixtures não certificam a
+atualidade de todas as relações, e as versões/divergências continuam no escopo de T007.
+
 - [x] T002 [P] Implementar transporte educado em `src/cvm_archive/fetch/client.py` e `tests/unit/test_fetch.py`; blockedBy=[T001]; conflictKeys=[fetch]; risco=alto. FR-003..005/SC-007: robots por host, redirecionamento, UA, intervalo >=5s, 401/403/429/5xx, cache bruto e log; testes de relógio falso e sabotagem de acesso proibido, mais consulta real controlada da cadeia oficial.
-- [ ] T003 [P] Implementar catálogo e metadados de resoluções em `src/cvm_archive/sources/catalog.py`, `sources/document.py`, `tests/unit/test_sources.py` e fixtures HTML; blockedBy=[T001]; conflictKeys=[sources]; risco=alto. FR-001/009/019: todas as páginas, contagem incoerente, aliases, epígrafe, data, revogação explícita, relações e anexos; selector não confunde PDF próprio/site com alteradoras.
+- [x] T003 [P] Implementar catálogo e metadados de resoluções em `src/cvm_archive/sources/catalog.py`, `sources/document.py`, `tests/unit/test_sources.py` e fixtures HTML; blockedBy=[T001]; conflictKeys=[sources]; risco=alto. FR-001/009/019: todas as páginas, contagem incoerente, aliases, epígrafe, data, revogação explícita, relações e anexos; selector não confunde PDF próprio/site com alteradoras.
 - [x] T004 [P] Implementar conversão estrutural HTML e normalização em `src/cvm_archive/convert/html.py`, `normalize/text.py`, `tests/unit/test_html.py` e fixtures esperadas; blockedBy=[T001]; conflictKeys=[html,normalize]; risco=alto. FR-006/010/011: dispositivos, entidades, anexos e tabelas reais; conteúdo ambíguo/estrutura não suportada gera pendência, não silêncio.
 
 ## Fase 3 — US1 / MVP de resoluções
