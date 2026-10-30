@@ -1,0 +1,200 @@
+"""Coverage 2.0 retains unconfirmed entries without inventing legal identities."""
+
+from __future__ import annotations
+
+import copy
+import json
+import re
+from datetime import datetime
+from pathlib import PurePosixPath
+
+from cvm_archive.gates.metadata import valid_date, valid_hash, valid_url
+from cvm_archive.models import CatalogEntry
+from .markdown import PublicationError
+
+
+STATES = {
+    "publicado": "publicados", "pendente": "pendentes", "indisponivel": "indisponiveis",
+    "divergente": "divergentes", "fora-de-escopo": "fora_de_escopo",
+}
+RECORD_FIELDS = {"id", "estado", "motivo", "arquivos", "fonte_cvm", "urls_alternativas", "sha256_fontes", "verificado_em"}
+
+
+def record_key(record: dict) -> tuple:
+    return record["id"] is None, record["id"] or "", record["fonte_cvm"]
+
+
+def pending_entry(entry: CatalogEntry) -> dict:
+    return {
+        "id": None, "estado": "pendente", "motivo": "nao-processado", "arquivos": [],
+        "fonte_cvm": entry.url, "urls_alternativas": [], "sha256_fontes": {}, "verificado_em": None,
+    }
+
+
+def _record_semantics(record: dict) -> dict:
+    return {key: value for key, value in record.items() if key != "verificado_em"}
+
+
+def _semantics(report: dict) -> dict:
+    result = copy.deepcopy(report)
+    result.pop("gerado_em", None)
+    result.pop("coleta", None)
+    result["documentos"] = [_record_semantics(record) for record in result["documentos"]]
+    return result
+
+
+def validate_coverage(report: dict) -> tuple[str, ...]:
+    errors = []
+    required = {"schema_versao", "gerado_em", "coleta", "categorias", "documentos", "divergencias"}
+    if not isinstance(report, dict) or set(report) != required:
+        return ("coverage-schema",)
+    if report["schema_versao"] != "2.0":
+        errors.append("coverage-version")
+    try:
+        stamp = report["gerado_em"]
+        if not isinstance(stamp, str) or not stamp.endswith("Z"):
+            raise ValueError
+        datetime.fromisoformat(stamp.replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        errors.append("coverage-timestamp")
+    collection = report["coleta"]
+    if (not isinstance(collection, dict) or set(collection) != {"modo", "requisicoes", "falhas_http"} or
+            collection["modo"] not in ("completa", "incremental", "documento") or
+            any(type(collection[key]) is not int or collection[key] < 0 for key in ("requisicoes", "falhas_http"))):
+        errors.append("collection-schema")
+    documents, categories = report["documentos"], report["categorias"]
+    if not isinstance(documents, list) or not isinstance(categories, list):
+        return tuple(errors + ["coverage-arrays"])
+    ids, urls, paths = set(), set(), set()
+    counts = {counter: 0 for counter in STATES.values()}
+    valid_records = True
+    for record in documents:
+        if not isinstance(record, dict) or set(record) != RECORD_FIELDS:
+            errors.append("record-schema")
+            valid_records = False
+            continue
+        identifier = record["id"]
+        if identifier is not None:
+            if not isinstance(identifier, str) or re.fullmatch(r"cvm-[a-z0-9]+(?:-[a-z0-9]+)*", identifier) is None:
+                errors.append("record-identity")
+                valid_records = False
+            elif identifier in ids:
+                errors.append("duplicate-identity")
+            else:
+                ids.add(identifier)
+        url = record["fonte_cvm"]
+        if not valid_url(url):
+            errors.append("record-url")
+            valid_records = False
+        elif url in urls:
+            errors.append("duplicate-url")
+        else:
+            urls.add(url)
+        state = record["estado"]
+        if not isinstance(state, str) or state not in STATES:
+            errors.append("record-state")
+        else:
+            counts[STATES[state]] += 1
+        reason = record["motivo"]
+        if state in ("pendente", "divergente", "fora-de-escopo") and (not isinstance(reason, str) or not reason.strip()):
+            errors.append("record-reason")
+        elif reason is not None and not isinstance(reason, str):
+            errors.append("record-reason")
+        files = record["arquivos"]
+        if not isinstance(files, list) or any(not isinstance(path, str) for path in files):
+            errors.append("record-files")
+        else:
+            if len(files) != len(set(files)) or paths.intersection(files):
+                errors.append("duplicate-path")
+            paths.update(files)
+            for path in files:
+                parts = PurePosixPath(path)
+                if (not path.startswith("reguladores/cvm/") or parts.is_absolute() or
+                        ".." in parts.parts or "\\" in path or ":" in path or not path.endswith(".md")):
+                    errors.append("record-path")
+            if identifier is None and files or state == "publicado" and not files:
+                errors.append("unconfirmed-publication")
+            if state in ("indisponivel", "divergente", "fora-de-escopo") and files:
+                errors.append("forbidden-publication")
+            if state == "pendente" and files and (not isinstance(reason, str) or not any(version + ":" in reason for version in ("consolidada", "publicação original"))):
+                errors.append("missing-version-reason")
+        if state == "publicado" and identifier is None:
+            errors.append("unconfirmed-publication")
+        if record["verificado_em"] is not None and not valid_date(record["verificado_em"]):
+            errors.append("record-date")
+        if state == "publicado" and record["verificado_em"] is None:
+            errors.append("unverified-publication")
+        hashes = record["sha256_fontes"]
+        if not isinstance(hashes, dict) or any(not valid_url(url) or not valid_hash(digest) for url, digest in hashes.items()):
+            errors.append("record-hashes")
+        elif state == "publicado" and not hashes:
+            errors.append("unverified-publication")
+        alternatives = record["urls_alternativas"]
+        if (not isinstance(alternatives, list) or any(not valid_url(url) for url in alternatives) or
+                len(alternatives) != len(set(alternatives))):
+            errors.append("record-aliases")
+    if valid_records and documents != sorted(documents, key=record_key):
+        errors.append("record-order")
+    # The MVP has one category. A later multi-family writer must map each act explicitly.
+    if len(categories) != 1:
+        errors.append("unsupported-multicategory")
+    for category in categories:
+        if (not isinstance(category, dict) or set(category) != {"tipo", "catalogo_total", "catalogo_metodo", *STATES.values()} or
+                not isinstance(category["tipo"], str) or category["catalogo_metodo"] not in ("contador da busca", "enumeração") or
+                any(type(category[key]) is not int or category[key] < 0 for key in ("catalogo_total", *STATES.values()))):
+            errors.append("category-schema")
+            continue
+        if category["catalogo_total"] != len(documents) or any(category[key] != value for key, value in counts.items()):
+            errors.append("category-counts")
+    if not isinstance(report["divergencias"], list):
+        errors.append("divergences-schema")
+    else:
+        for divergence in report["divergencias"]:
+            if (not isinstance(divergence, dict) or set(divergence) != {"id", "descricao", "evidencias"} or
+                    not isinstance(divergence["descricao"], str) or not divergence["descricao"].strip() or
+                    not isinstance(divergence["evidencias"], list) or len(divergence["evidencias"]) < 2 or
+                    any(not valid_url(url) for url in divergence["evidencias"])):
+                errors.append("divergence-values")
+    return tuple(dict.fromkeys(errors))
+
+
+def build_coverage(documents: list[dict], catalog_total: int, timestamp: str, collection: dict, *, existing: dict | None = None, divergences: list | None = None, kind: str = "Resolução") -> dict:
+    records = copy.deepcopy(documents)
+    if existing is not None:
+        errors = validate_coverage(existing)
+        if errors:
+            raise PublicationError(", ".join(errors))
+        old_records = {record["fonte_cvm"]: record for record in existing["documentos"]}
+        for index, record in enumerate(records):
+            old = old_records.get(record["fonte_cvm"])
+            if old is not None and _record_semantics(record) == _record_semantics(old):
+                records[index] = copy.deepcopy(old)
+    records.sort(key=record_key)
+    counts = {counter: sum(record["estado"] == state for record in records) for state, counter in STATES.items()}
+    report = {
+        "schema_versao": "2.0", "gerado_em": timestamp, "coleta": collection,
+        "categorias": [{"tipo": kind, "catalogo_total": catalog_total, "catalogo_metodo": "enumeração", **counts}],
+        "documentos": records, "divergencias": copy.deepcopy(divergences or []),
+    }
+    errors = validate_coverage(report)
+    if errors:
+        raise PublicationError(", ".join(errors))
+    return copy.deepcopy(existing) if existing is not None and _semantics(existing) == _semantics(report) else report
+
+
+def coverage_files(report: dict) -> dict[str, bytes]:
+    errors = validate_coverage(report)
+    if errors:
+        raise PublicationError(", ".join(errors))
+    machine = (json.dumps(report, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    def cell(value):
+        return str(value if value is not None else "não confirmado").replace("|", "\\|").replace("\n", " ").replace("\r", " ")
+    lines = ["# Cobertura do acervo", "", f'Gerado em {report["gerado_em"]}. Schema {report["schema_versao"]}.', "",
+             "| Tipo | Catálogo | Publicados | Pendentes | Indisponíveis | Divergentes | Fora do escopo |",
+             "|---|---:|---:|---:|---:|---:|---:|"]
+    for category in report["categorias"]:
+        lines.append("| " + " | ".join(cell(category[key]) for key in ("tipo", "catalogo_total", *STATES.values())) + " |")
+    lines.extend(("", "| Identidade | Estado | Motivo | Página oficial | Arquivos aprovados |", "|---|---|---|---|---|"))
+    for record in report["documentos"]:
+        lines.append("| " + " | ".join(cell(value) for value in (record["id"], record["estado"], record["motivo"], record["fonte_cvm"], ", ".join(record["arquivos"]))) + " |")
+    return {"cobertura/cobertura.json": machine, "cobertura/COBERTURA.md": ("\n".join(lines) + "\n").encode("utf-8")}
