@@ -4,7 +4,7 @@
 
 Resoluções, instruções, deliberações, pareceres de orientação e ofícios circulares da CVM, um arquivo `.md` por documento, com metadados em YAML, texto original e texto consolidado separados, e histórico de alterações rastreável pelo Git.
 
-> **Status: em construção.** Este repositório está na fase de pesquisa e desenho do coletor. Ainda não há normas publicadas aqui. Acompanhe pelos commits e pelas issues.
+> **Status: MVP em andamento.** Coletor auditável, suíte de verificação automatizada com 231 testes e primeira norma publicada ([Resolução CVM nº 249/2026](reguladores/cvm/resolucoes/2026/cvm-resolucao-249-2026.md)). O catálogo oficial de 249 resoluções está estruturado em [`catalogo/resolucoes.json`](catalogo/resolucoes.json) e o relatório de cobertura em [`cobertura/COBERTURA.md`](cobertura/COBERTURA.md).
 
 ---
 
@@ -22,20 +22,22 @@ O Diário Oficial da União traz cada ato **como foi publicado**. Para saber **q
 
 Este repositório reúne essas informações a partir da fonte oficial da CVM, em um formato legível por pessoas e por máquinas.
 
-## Cobertura planejada
+## Cobertura: planejado vs. atual
 
-Contagens do catálogo oficial da CVM consultado em 21/10/2026:
+Contagens do catálogo oficial da CVM consultado em 21/10/2026 comparadas ao acervo atual coletado:
 
-| Família | Registros no catálogo |
-|---|---:|
-| Resoluções | 249 |
-| Instruções | 627 |
-| Deliberações | 907 |
-| Pareceres de Orientação | 41 |
-| Ofícios Circulares | 600 |
-| **Total** | **2.424** |
+| Família | Planejado (Catálogo CVM) | Catalogados | Publicados | Pendentes | Status |
+|---|---:|---:|---:|---:|---|
+| **Resoluções** | 249 | 249 | 1 | 248 | MVP implementado (1 publicada, 248 catalogadas/pendentes) |
+| **Instruções** | 627 | 0 | 0 | 0 | Planejado (próxima fase) |
+| **Deliberações** | 907 | 0 | 0 | 0 | Planejado (próxima fase) |
+| **Pareceres de Orientação** | 41 | 0 | 0 | 0 | Planejado (próxima fase) |
+| **Ofícios Circulares** | 600 | 0 | 0 | 0 | Planejado (próxima fase) |
+| **Total** | **2.424** | **249** | **1** | **248** | **Fase 1 (Resoluções MVP) em andamento** |
 
-São contadores da busca oficial, não um censo deduplicado de normas vigentes. A cobertura efetivamente publicada será informada em um relatório próprio, a cada coleta.
+São contadores da busca oficial, não um censo deduplicado de normas vigentes.
+
+O detalhamento completo por norma, motivos de pendência (ex.: tabelas complexas, PDF/OCR, anexos) e integridade de fontes é atualizado a cada coleta em [cobertura/COBERTURA.md](cobertura/COBERTURA.md) e [cobertura/cobertura.json](cobertura/cobertura.json).
 
 ## Formato
 

@@ -1,7 +1,8 @@
 # Contrato: CLI do coletor (`python -m cvm_archive.cli`)
 
-Contrato público da interface de linha de comando. Implementação futura (esta etapa define
-comportamento, não código). Regras de idioma: flags, valores de flag, identificadores e mensagens
+Contrato público da interface de linha de comando. O MVP de resoluções está implementado e
+tem [validação executada](../research/validacao-mvp.md); expansões indicadas abaixo permanecem
+futuras. Regras de idioma: flags, valores de flag, identificadores e mensagens
 de log em inglês; documentação e mensagens voltadas a pessoas em português brasileiro.
 
 - **Runtime:** Python 3.12, somente biblioteca padrão (constituição VI). Módulos previstos:
@@ -75,7 +76,7 @@ python -m cvm_archive.cli collect --category resolucoes \
   --output DIR \
   --cache-dir .scratch/cache \
   --min-interval 5 \
-  --user-agent "NormasCVMResearch/0.5 (+https://github.com/<org>/<repo>; collect)"
+  --user-agent "NormasCVMResearch/0.5 (+https://github.com/StaffeToxic/normas-cvm; collect)"
 ```
 
 | Flag | Obrig. | Valor |
@@ -84,10 +85,21 @@ python -m cvm_archive.cli collect --category resolucoes \
 | `--document` | não | URL da página de uma norma: modo documento único (FR-024), para revisão pontual; ignora `--batch`/`--limit` |
 | `--limit` | não | `N` > 0: dentro da fatia do lote, processa no máximo `N` documentos **com trabalho pendente**, na ordem estável do catálogo; o restante da fatia não é tocado nesta passada |
 | `--batch` | não | default `0`, ignorado com `--document`; `N` ≥ 0: **particiona o catálogo completo estável** (ordem por `url`), não o conjunto mutável de pendentes — fatia fixa `[N×S, (N+1)×S)` com tamanho `S=50`. Documentos sem trabalho pendente são rechecados por hash sem sair do denominador |
+| `--incremental` | não | reconcilia catálogo completo e usa RSS, primeira página e hashes rotativos; incompatível com `--document`; ignora `--batch` e respeita `--limit` |
 | `--output` | sim | raiz dos dados |
 | `--cache-dir` | não | default `.scratch/cache`, nunca versionado |
 | `--min-interval` | não | default `5` segundos, mínimo de 5 definido pelo projeto |
 | `--user-agent` | não | default do projeto com URL do repositório |
+
+Uma substituição de User-Agent deve conservar o link identificador do repositório.
+Itens já examinados com os hashes consultados inalterados não consomem `--limit`.
+`--document` reavalia uma pendência; publicado com fontes inalteradas não é reconvertido.
+Ao habilitar um novo conversor, o ticket correspondente deve reavaliar as pendências que
+agora suporta; não se declara essa ativação automática implementada no MVP.
+URLs já confirmadas como aliases de um ato são reavaliadas juntas quando há trabalho nesse
+ato, sem consumir outro documento do limite. Podem ser consultas complementares fora da fatia
+de URLs do lote; não introduzem atos novos fora dela. Candidatos não confirmados continuam
+separados. Cobertura agrega o ato, e o catálogo conserva seu contador bruto de URLs.
 
 Pré-condições e ordem (obrigatórias):
 
@@ -141,11 +153,18 @@ Comportamento por documento (FR-006 para o MVP):
   arquivo versionado é reescrito**, inclusive cobertura e datas). O workflow usa esse
   campo para decidir o commit (ver `contracts/workflow.md`).
 
-Expansão futura (**FORA do MVP**, escrita aqui para direção, sem implementação):
+### Atualização incremental (T008)
 
-- `collect --incremental`: RSS de legislação + RSS de audiências como sinal de novidade,
-  reconciliado com o catálogo completo e com **hashes rotativos** (checar periodicamente hash de
-  documentos publicados), conforme FR-002 e política de `sha256_fontes` em coverage-report.
+- `collect --incremental` lê RSS de legislação e audiências como sinais, reconcilia o catálogo
+  completo a cada execução e prioriza URLs novas, sinais na categoria e a primeira página.
+  Soma uma fatia de 50 URLs rotativa por semana UTC iniciada na segunda-feira. O índice é
+  derivado da semana e do catálogo, sem cursor persistente. `sha256_fontes` continua sendo o
+  índice de conteúdo; cache não é pré-condição. `--limit` limita trabalho novo; rechecagem de
+  item inalterado não consome esse limite.
+- Remoção de URL sem alias confirmado exige revisão: evento local, exit 2, sem substituir
+  catálogo/cobertura/arquivos anteriores. Sinais de outro escopo não são publicados como norma.
+- Implementação verificada sem rede: [validação incremental](../research/validacao-incremental.md).
+  Execução incremental real e SLA permanecem UNVERIFIED.
 
 ### `verify` — conferir repositório de dados
 
@@ -158,13 +177,18 @@ python -m cvm_archive.cli verify --root DIR
 
 1. Todo `.md` publicado parseia: YAML front matter válido, campos obrigatórios presentes,
    anulabilidade respeitada (`null` explícito), `schema_versao` conhecido, UTF-8 sem BOM, LF
-   (contrato front-matter).
+   (contrato front-matter). O perfil emitido usa uma chave por linha e valores flow JSON,
+   válidos em YAML 1.2; o leitor sem dependências rejeita edições fora desse perfil em vez de
+   afirmar suporte geral a YAML.
 2. `sha256_fonte` confere com os bytes no cache local quando disponíveis; quando não estão
    disponíveis, informar no stdout que a conferência dos bytes é UNVERIFIED. Não criar campo
    `fontes` nem declarar verificação histórica não demonstrada. Ausência de cache não invalida
    sozinha um arquivo cujo schema e vínculo com o índice sejam válidos.
 3. O estado do `cobertura.json` é coerente com os arquivos no disco (nenhum arquivo publicado fora
-   do relatório; `id` únicos; ordenação estável). Ato `pendente` **pode** ter arquivos publicados
+   do relatório; IDs confirmados únicos; ordenação estável). Cobertura 2.0 mantém `id: null`
+   para entradas ainda não confirmadas, identificadas pela URL canônica e sem arquivos; isso
+   preserva o catálogo completo sem transformar candidatos em identidade jurídica (D-13).
+   Ato `pendente` **pode** ter arquivos publicados
    listados em `arquivos` — por exemplo, o original aprovado de um ato cujo consolidado ainda está
    pendente (data-model §7.2/§7.3): nesse caso o `motivo` identifica a versão faltante e a causa
    (ex.: `consolidada: tabela-nao-reproduzida`), o ato conta uma vez em `pendentes` (não soma

@@ -1,9 +1,28 @@
 # Contrato: workflow de coleta agendada (GitHub Actions)
 
-Contrato do workflow que implementa a coleta periódica (SC-006, D-U12). **Esta etapa não cria o
-arquivo**: o esqueleto abaixo será materializado, quando a implementação for autorizada, em
-`.github/workflows/collect.yml`. Os fatos oficiais citados aqui vêm da documentação oficial listada
-na seção "Fontes oficiais".
+Implementado em `.github/workflows/test.yml`, `.github/workflows/collect.yml` e
+`.github/scripts/collect.py`. A orquestração usa Python, lista de argumentos e parse de JSON;
+preserva os códigos 2/3 da CLI sem pipe de shell. O esqueleto abaixo fica como registro da
+pesquisa anterior; os arquivos executáveis são a implementação vigente.
+
+## Validação executada e limites atuais
+
+[Execução de testes de 30/10/2026](https://github.com/StaffeToxic/normas-cvm/actions/runs/40995070490):
+**231 testes passaram**, Python 3.12.15, Ubuntu 24.04.5, imagem `20261025.353.1`, Poppler
+24.02.0 e Tesseract 5.3.4. O job durou 23 s pelos timestamps da API; `Install tools`, incluindo
+apt, versões e pip, durou 14 s. Isso não mede isoladamente apt nem duração de coleta.
+
+O workflow de testes roda em push/PR com permissão de leitura. O de coleta só aceita dispatch
+e schedule: **não foi acionado**. Schedule usa `--incremental`; os inputs manuais usam lote ou
+documento e mantêm limite zero como ilimitado. Guardas recusam branch diferente da feature,
+inclusive HEAD destacado, antes de coletar e commitar. Somente árvores de dados existentes
+são adicionadas; código no índice impede commit; índice vazio não gera commit. Nove testes
+novos verificaram esses comportamentos e os códigos de falha sem requisições da CVM.
+
+Commits de dados usam a identidade do bot como autor e committer e push literal para
+`HEAD:001-acervo-cvm`, sem force. Coleta no runner, commit real do bot, ativação do agendamento
+e SLA de sete dias permanecem **UNVERIFIED**. Os tempos locais anteriores são históricos;
+nenhuma nova coleta de normas foi necessária para testar a automação.
 
 Idioma: identificadores, comentários e nomes de passos em inglês conforme regra de código.
 
@@ -72,8 +91,8 @@ integra o run; bloqueio (exit 3) também falha o job — a retentativa é decis�
 - Guarda no passo de commit: se o branch atual tiver nome e não for `001-acervo-cvm`, o passo
   falha **antes** do commit/push. O checkout usa `ref: 001-acervo-cvm` explícito para o run
   agendado, pois o gatilho `schedule` sempre parte do conteúdo do workflow na default branch.
-  Quando a integração à default branch for autorizada, o ajuste é retirar o `ref` e o sufixo do
-  push.
+  Integrar o arquivo na default branch não altera esse alvo. Qualquer mudança de destino
+  exige decisão específica do mantenedor.
 - **Autoria:** commits de dados como
   `github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>` (única exceção
   autorizada, D-U12; identidade verificada na API oficial do GitHub — usuário `github-actions[bot]`,
@@ -85,7 +104,7 @@ integra o run; bloqueio (exit 3) também falha o job — a retentativa é decis�
   diretórios locais de pesquisa.
 - Push com `GITHUB_TOKEN` **não** dispara outros workflows (doc do token) — sem recorrência.
 
-## Esqueleto (proposta, não criado nesta etapa)
+## Esqueleto da pesquisa (histórico; não é a implementação vigente)
 
 ```yaml
 name: collect
@@ -233,7 +252,8 @@ Observações do esqueleto (contrato, não implementação):
 
 ## UNVERIFIED (herdados da R2 + desta etapa)
 
-1. Durações e banda no **runner real** (não executado); os 143,48/94,74 s são locais.
+1. Duração/banda da **coleta** no runner real. O workflow de testes foi executado conforme a
+   seção inicial; os 143,48/94,74 s continuam medições locais históricas.
 2. **SLA de 7 dias** com 2 crons/semana (atrasos/drops/desativação/default branch); exige
    monitoramento futuro.
 3. Se commits do `github-actions[bot]` contam como atividade contra os 60 dias de desativação.

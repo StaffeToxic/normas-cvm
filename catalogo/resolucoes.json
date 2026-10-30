@@ -1,0 +1,1752 @@
+{
+  "schema_versao": "1.0",
+  "gerado_em": "2026-10-30T01:42:44.283574Z",
+  "metodo": "enumeracao",
+  "contador_divulgado": 249,
+  "total": 249,
+  "registros": [
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol001.html",
+      "title": "Resolução CVM 1",
+      "category": "resolucoes",
+      "number": "1",
+      "date": "2020-08-06"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol002.html",
+      "title": "Resolução CVM 2",
+      "category": "resolucoes",
+      "number": "2",
+      "date": "2020-08-06"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol003.html",
+      "title": "Resolução CVM 3 (Revogada)",
+      "category": "resolucoes",
+      "number": "3",
+      "date": "2020-08-11"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol004.html",
+      "title": "Resolução CVM 4 (Revogada)",
+      "category": "resolucoes",
+      "number": "4",
+      "date": "2020-08-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol005.html",
+      "title": "Resolução CVM 5 (Revogada)",
+      "category": "resolucoes",
+      "number": "5",
+      "date": "2020-08-27"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol006.html",
+      "title": "Resolução CVM 6",
+      "category": "resolucoes",
+      "number": "6",
+      "date": "2020-09-14"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol007.html",
+      "title": "Resolução CVM 7",
+      "category": "resolucoes",
+      "number": "7",
+      "date": "2020-09-30"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol008.html",
+      "title": "Resolução CVM 8",
+      "category": "resolucoes",
+      "number": "8",
+      "date": "2020-10-14"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol009.html",
+      "title": "Resolução CVM 9",
+      "category": "resolucoes",
+      "number": "9",
+      "date": "2020-10-27"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol010.html",
+      "title": "Resolução CVM 10",
+      "category": "resolucoes",
+      "number": "10",
+      "date": "2020-11-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol011.html",
+      "title": "Resolução CVM 11",
+      "category": "resolucoes",
+      "number": "11",
+      "date": "2020-11-18"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol012.html",
+      "title": "Resolução CVM 12",
+      "category": "resolucoes",
+      "number": "12",
+      "date": "2020-11-18"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol013.html",
+      "title": "Resolução CVM 13",
+      "category": "resolucoes",
+      "number": "13",
+      "date": "2020-11-18"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol014.html",
+      "title": "Resolução CVM 14",
+      "category": "resolucoes",
+      "number": "14",
+      "date": "2020-12-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol015.html",
+      "title": "Resolução CVM 15",
+      "category": "resolucoes",
+      "number": "15",
+      "date": "2021-01-19"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol016.html",
+      "title": "Resolução CVM 16 (Revogada)",
+      "category": "resolucoes",
+      "number": "16",
+      "date": "2021-02-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol017.html",
+      "title": "Resolução CVM 17",
+      "category": "resolucoes",
+      "number": "17",
+      "date": "2021-02-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol018.html",
+      "title": "Resolução CVM 18 (Revogada)",
+      "category": "resolucoes",
+      "number": "18",
+      "date": "2021-02-11"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol019.html",
+      "title": "Resolução CVM 19",
+      "category": "resolucoes",
+      "number": "19",
+      "date": "2021-02-25"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol020.html",
+      "title": "Resolução CVM 20",
+      "category": "resolucoes",
+      "number": "20",
+      "date": "2021-02-25"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol021.html",
+      "title": "Resolução CVM 21",
+      "category": "resolucoes",
+      "number": "21",
+      "date": "2021-02-25"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol022.html",
+      "title": "Resolução CVM 22",
+      "category": "resolucoes",
+      "number": "22",
+      "date": "2021-02-25"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol023.html",
+      "title": "Resolução CVM 23",
+      "category": "resolucoes",
+      "number": "23",
+      "date": "2021-02-25"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol024.html",
+      "title": "Resolução CVM 24",
+      "category": "resolucoes",
+      "number": "24",
+      "date": "2021-03-05"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol025.html",
+      "title": "Resolução CVM 25",
+      "category": "resolucoes",
+      "number": "25",
+      "date": "2021-03-30"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol026.html",
+      "title": "Resolução CVM 26",
+      "category": "resolucoes",
+      "number": "26",
+      "date": "2021-03-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol027.html",
+      "title": "Resolução CVM 27",
+      "category": "resolucoes",
+      "number": "27",
+      "date": "2021-04-08"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol028.html",
+      "title": "Resolução CVM 28",
+      "category": "resolucoes",
+      "number": "28",
+      "date": "2021-04-16"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol029.html",
+      "title": "Resolução CVM 29",
+      "category": "resolucoes",
+      "number": "29",
+      "date": "2021-05-11"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol030.html",
+      "title": "Resolução CVM 30",
+      "category": "resolucoes",
+      "number": "30",
+      "date": "2021-05-11"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol031.html",
+      "title": "Resolução CVM 31",
+      "category": "resolucoes",
+      "number": "31",
+      "date": "2021-05-19"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol032.html",
+      "title": "Resolução CVM 32",
+      "category": "resolucoes",
+      "number": "32",
+      "date": "2021-05-19"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol033.html",
+      "title": "Resolução CVM 33",
+      "category": "resolucoes",
+      "number": "33",
+      "date": "2021-05-19"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol034.html",
+      "title": "Resolução CVM 34",
+      "category": "resolucoes",
+      "number": "34",
+      "date": "2021-05-19"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol035.html",
+      "title": "Resolução CVM 35",
+      "category": "resolucoes",
+      "number": "35",
+      "date": "2021-05-26"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol036.html",
+      "title": "Resolução CVM 36",
+      "category": "resolucoes",
+      "number": "36",
+      "date": "2021-05-26"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol037.html",
+      "title": "Resolução CVM 37",
+      "category": "resolucoes",
+      "number": "37",
+      "date": "2021-05-26"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol038.html",
+      "title": "Resolução CVM 38 (Revogada)",
+      "category": "resolucoes",
+      "number": "38",
+      "date": "2021-06-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol039.html",
+      "title": "Resolução CVM 39 (Revogada)",
+      "category": "resolucoes",
+      "number": "39",
+      "date": "2021-07-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol040.html",
+      "title": "Resolução CVM 40",
+      "category": "resolucoes",
+      "number": "40",
+      "date": "2021-07-21"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol041.html",
+      "title": "Resolução CVM 41 (Revogada)",
+      "category": "resolucoes",
+      "number": "41",
+      "date": "2021-07-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol042.html",
+      "title": "Resolução CVM 42",
+      "category": "resolucoes",
+      "number": "42",
+      "date": "2021-07-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol043.html",
+      "title": "Resolução CVM 43",
+      "category": "resolucoes",
+      "number": "43",
+      "date": "2021-08-17"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol044.html",
+      "title": "Resolução CVM 44",
+      "category": "resolucoes",
+      "number": "44",
+      "date": "2021-08-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol045.html",
+      "title": "Resolução CVM 45",
+      "category": "resolucoes",
+      "number": "45",
+      "date": "2021-08-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol046.html",
+      "title": "Resolução CVM 46",
+      "category": "resolucoes",
+      "number": "46",
+      "date": "2021-08-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol047.html",
+      "title": "Resolução CVM 47",
+      "category": "resolucoes",
+      "number": "47",
+      "date": "2021-08-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol048.html",
+      "title": "Resolução CVM 48",
+      "category": "resolucoes",
+      "number": "48",
+      "date": "2021-08-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol049.html",
+      "title": "Resolução CVM 49",
+      "category": "resolucoes",
+      "number": "49",
+      "date": "2021-08-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol050.html",
+      "title": "Resolução CVM 50",
+      "category": "resolucoes",
+      "number": "50",
+      "date": "2021-08-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol051.html",
+      "title": "Resolução CVM 51 (Revogada)",
+      "category": "resolucoes",
+      "number": "51",
+      "date": "2021-08-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol052.html",
+      "title": "Resolução CVM 52",
+      "category": "resolucoes",
+      "number": "52",
+      "date": "2021-08-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol053.html",
+      "title": "Resolução CVM 53",
+      "category": "resolucoes",
+      "number": "53",
+      "date": "2021-10-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol054.html",
+      "title": "Resolução CVM 54",
+      "category": "resolucoes",
+      "number": "54",
+      "date": "2021-10-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol055.html",
+      "title": "Resolução CVM 55",
+      "category": "resolucoes",
+      "number": "55",
+      "date": "2021-10-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol056.html",
+      "title": "Resolução CVM 56",
+      "category": "resolucoes",
+      "number": "56",
+      "date": "2021-10-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol057.html",
+      "title": "Resolução CVM 57",
+      "category": "resolucoes",
+      "number": "57",
+      "date": "2021-10-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol058.html",
+      "title": "Resolução CVM 58 (Revogada)",
+      "category": "resolucoes",
+      "number": "58",
+      "date": "2021-10-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol059.html",
+      "title": "Resolução CVM 59",
+      "category": "resolucoes",
+      "number": "59",
+      "date": "2021-12-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol060.html",
+      "title": "Resolução CVM 60",
+      "category": "resolucoes",
+      "number": "60",
+      "date": "2021-12-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol061.html",
+      "title": "Resolução CVM 61",
+      "category": "resolucoes",
+      "number": "61",
+      "date": "2021-12-27"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol062.html",
+      "title": "Resolução CVM 62",
+      "category": "resolucoes",
+      "number": "62",
+      "date": "2022-01-19"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol063.html",
+      "title": "Resolução CVM 63",
+      "category": "resolucoes",
+      "number": "63",
+      "date": "2022-01-19"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol064.html",
+      "title": "Resolução CVM 64",
+      "category": "resolucoes",
+      "number": "64",
+      "date": "2022-02-07"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol065.html",
+      "title": "Resolução CVM 65",
+      "category": "resolucoes",
+      "number": "65",
+      "date": "2022-02-10"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol066.html",
+      "title": "Resolução CVM 66",
+      "category": "resolucoes",
+      "number": "66",
+      "date": "2022-03-04"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol067.html",
+      "title": "Resolução CVM 67",
+      "category": "resolucoes",
+      "number": "67",
+      "date": "2022-03-10"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol068.html",
+      "title": "Resolução CVM 68",
+      "category": "resolucoes",
+      "number": "68",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol069.html",
+      "title": "Resolução CVM 69",
+      "category": "resolucoes",
+      "number": "69",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol070.html",
+      "title": "Resolução CVM 70",
+      "category": "resolucoes",
+      "number": "70",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol071.html",
+      "title": "Resolução CVM 71",
+      "category": "resolucoes",
+      "number": "71",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol072.html",
+      "title": "Resolução CVM 72",
+      "category": "resolucoes",
+      "number": "72",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol073.html",
+      "title": "Resolução CVM 73",
+      "category": "resolucoes",
+      "number": "73",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol074.html",
+      "title": "Resolução CVM 74",
+      "category": "resolucoes",
+      "number": "74",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol075.html",
+      "title": "Resolução CVM 75",
+      "category": "resolucoes",
+      "number": "75",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol076.html",
+      "title": "Resolução CVM 76",
+      "category": "resolucoes",
+      "number": "76",
+      "date": "2022-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol077.html",
+      "title": "Resolução CVM 77",
+      "category": "resolucoes",
+      "number": "77",
+      "date": "2022-03-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol078.html",
+      "title": "Resolução CVM 78",
+      "category": "resolucoes",
+      "number": "78",
+      "date": "2022-03-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol079.html",
+      "title": "Resolução CVM 79",
+      "category": "resolucoes",
+      "number": "79",
+      "date": "2022-03-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol080.html",
+      "title": "Resolução CVM 80",
+      "category": "resolucoes",
+      "number": "80",
+      "date": "2022-03-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol081.html",
+      "title": "Resolução CVM 81",
+      "category": "resolucoes",
+      "number": "81",
+      "date": "2022-03-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol082.html",
+      "title": "Resolução CVM 82",
+      "category": "resolucoes",
+      "number": "82",
+      "date": "2022-03-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol083.html",
+      "title": "Resolução CVM 83",
+      "category": "resolucoes",
+      "number": "83",
+      "date": "2022-03-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol084.html",
+      "title": "Resolução CVM 84",
+      "category": "resolucoes",
+      "number": "84",
+      "date": "2022-03-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol085.html",
+      "title": "Resolução CVM 85 (Revogada)",
+      "category": "resolucoes",
+      "number": "85",
+      "date": "2022-03-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol086.html",
+      "title": "Resolução CVM 86",
+      "category": "resolucoes",
+      "number": "86",
+      "date": "2022-03-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol087.html",
+      "title": "Resolução CVM 87",
+      "category": "resolucoes",
+      "number": "87",
+      "date": "2022-03-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol088.html",
+      "title": "Resolução CVM 88",
+      "category": "resolucoes",
+      "number": "88",
+      "date": "2022-04-27"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol089.html",
+      "title": "Resolução CVM 89",
+      "category": "resolucoes",
+      "number": "89",
+      "date": "2022-05-06"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol090.html",
+      "title": "Resolução CVM 90",
+      "category": "resolucoes",
+      "number": "90",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol091.html",
+      "title": "Resolução CVM 91",
+      "category": "resolucoes",
+      "number": "91",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol092.html",
+      "title": "Resolução CVM 92",
+      "category": "resolucoes",
+      "number": "92",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol093.html",
+      "title": "Resolução CVM 93",
+      "category": "resolucoes",
+      "number": "93",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol094.html",
+      "title": "Resolução CVM 94",
+      "category": "resolucoes",
+      "number": "94",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol095.html",
+      "title": "Resolução CVM 95",
+      "category": "resolucoes",
+      "number": "95",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol096.html",
+      "title": "Resolução CVM 96",
+      "category": "resolucoes",
+      "number": "96",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol097.html",
+      "title": "Resolução CVM 97",
+      "category": "resolucoes",
+      "number": "97",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol098.html",
+      "title": "Resolução CVM 98 (Revogada)",
+      "category": "resolucoes",
+      "number": "98",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol099.html",
+      "title": "Resolução CVM 99",
+      "category": "resolucoes",
+      "number": "99",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol100.html",
+      "title": "Resolução CVM 100",
+      "category": "resolucoes",
+      "number": "100",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol101.html",
+      "title": "Resolução CVM 101",
+      "category": "resolucoes",
+      "number": "101",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol102.html",
+      "title": "Resolução CVM 102",
+      "category": "resolucoes",
+      "number": "102",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol103.html",
+      "title": "Resolução CVM 103",
+      "category": "resolucoes",
+      "number": "103",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol104.html",
+      "title": "Resolução CVM 104",
+      "category": "resolucoes",
+      "number": "104",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol105.html",
+      "title": "Resolução CVM 105",
+      "category": "resolucoes",
+      "number": "105",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol106.html",
+      "title": "Resolução CVM 106",
+      "category": "resolucoes",
+      "number": "106",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol107.html",
+      "title": "Resolução CVM 107",
+      "category": "resolucoes",
+      "number": "107",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol108.html",
+      "title": "Resolução CVM 108",
+      "category": "resolucoes",
+      "number": "108",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol109.html",
+      "title": "Resolução CVM 109",
+      "category": "resolucoes",
+      "number": "109",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol110.html",
+      "title": "Resolução CVM 110",
+      "category": "resolucoes",
+      "number": "110",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol111.html",
+      "title": "Resolução CVM 111",
+      "category": "resolucoes",
+      "number": "111",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol112.html",
+      "title": "Resolução CVM 112",
+      "category": "resolucoes",
+      "number": "112",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol113.html",
+      "title": "Resolução CVM 113",
+      "category": "resolucoes",
+      "number": "113",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol114.html",
+      "title": "Resolução CVM 114",
+      "category": "resolucoes",
+      "number": "114",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol115.html",
+      "title": "Resolução CVM 115",
+      "category": "resolucoes",
+      "number": "115",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol116.html",
+      "title": "Resolução CVM 116",
+      "category": "resolucoes",
+      "number": "116",
+      "date": "2022-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol117.html",
+      "title": "Resolução CVM 117 (Revogada)",
+      "category": "resolucoes",
+      "number": "117",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol118.html",
+      "title": "Resolução CVM 118 (Revogada)",
+      "category": "resolucoes",
+      "number": "118",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol119.html",
+      "title": "Resolução CVM 119",
+      "category": "resolucoes",
+      "number": "119",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol120.html",
+      "title": "Resolução CVM 120",
+      "category": "resolucoes",
+      "number": "120",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol121.html",
+      "title": "Resolução CVM 121",
+      "category": "resolucoes",
+      "number": "121",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol122.html",
+      "title": "Resolução CVM 122",
+      "category": "resolucoes",
+      "number": "122",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol123.html",
+      "title": "Resolução CVM 123",
+      "category": "resolucoes",
+      "number": "123",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol124.html",
+      "title": "Resolução CVM 124 (Revogada)",
+      "category": "resolucoes",
+      "number": "124",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol125.html",
+      "title": "Resolução CVM 125",
+      "category": "resolucoes",
+      "number": "125",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol126.html",
+      "title": "Resolução CVM 126",
+      "category": "resolucoes",
+      "number": "126",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol127.html",
+      "title": "Resolução CVM 127",
+      "category": "resolucoes",
+      "number": "127",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol128.html",
+      "title": "Resolução CVM 128",
+      "category": "resolucoes",
+      "number": "128",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol129.html",
+      "title": "Resolução CVM 129",
+      "category": "resolucoes",
+      "number": "129",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol130.html",
+      "title": "Resolução CVM 130",
+      "category": "resolucoes",
+      "number": "130",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol131.html",
+      "title": "Resolução CVM 131",
+      "category": "resolucoes",
+      "number": "131",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol132.html",
+      "title": "Resolução CVM 132",
+      "category": "resolucoes",
+      "number": "132",
+      "date": "2022-06-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol133.html",
+      "title": "Resolução CVM 133",
+      "category": "resolucoes",
+      "number": "133",
+      "date": "2022-06-10"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol134.html",
+      "title": "Resolução CVM 134",
+      "category": "resolucoes",
+      "number": "134",
+      "date": "2022-06-10"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol135.html",
+      "title": "Resolução CVM 135",
+      "category": "resolucoes",
+      "number": "135",
+      "date": "2022-06-10"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol136.html",
+      "title": "Resolução CVM 136",
+      "category": "resolucoes",
+      "number": "136",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol137.html",
+      "title": "Resolução CVM 137 (Revogada)",
+      "category": "resolucoes",
+      "number": "137",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol138.html",
+      "title": "Resolução CVM 138 (Revogada)",
+      "category": "resolucoes",
+      "number": "138",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol139.html",
+      "title": "Resolução CVM 139",
+      "category": "resolucoes",
+      "number": "139",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol140.html",
+      "title": "Resolução CVM 140",
+      "category": "resolucoes",
+      "number": "140",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol141.html",
+      "title": "Resolução CVM 141",
+      "category": "resolucoes",
+      "number": "141",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol142.html",
+      "title": "Resolução CVM 142",
+      "category": "resolucoes",
+      "number": "142",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol143.html",
+      "title": "Resolução CVM 143",
+      "category": "resolucoes",
+      "number": "143",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol144.html",
+      "title": "Resolução CVM 144",
+      "category": "resolucoes",
+      "number": "144",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol145.html",
+      "title": "Resolução CVM 145",
+      "category": "resolucoes",
+      "number": "145",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol146.html",
+      "title": "Resolução CVM 146",
+      "category": "resolucoes",
+      "number": "146",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol147.html",
+      "title": "Resolução CVM 147",
+      "category": "resolucoes",
+      "number": "147",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol148.html",
+      "title": "Resolução CVM 148",
+      "category": "resolucoes",
+      "number": "148",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol149.html",
+      "title": "Resolução CVM 149",
+      "category": "resolucoes",
+      "number": "149",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol150.html",
+      "title": "Resolução CVM 150",
+      "category": "resolucoes",
+      "number": "150",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol151.html",
+      "title": "Resolução CVM 151",
+      "category": "resolucoes",
+      "number": "151",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol152.html",
+      "title": "Resolução CVM 152 (Revogada)",
+      "category": "resolucoes",
+      "number": "152",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol153.html",
+      "title": "Resolução CVM 153",
+      "category": "resolucoes",
+      "number": "153",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol154.html",
+      "title": "Resolução CVM 154",
+      "category": "resolucoes",
+      "number": "154",
+      "date": "2022-06-15"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol155.html",
+      "title": "Resolução CVM 155",
+      "category": "resolucoes",
+      "number": "155",
+      "date": "2022-06-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol156.html",
+      "title": "Resolução CVM 156",
+      "category": "resolucoes",
+      "number": "156",
+      "date": "2022-06-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol157.html",
+      "title": "Resolução CVM 157",
+      "category": "resolucoes",
+      "number": "157",
+      "date": "2022-06-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol158.html",
+      "title": "Resolução CVM 158",
+      "category": "resolucoes",
+      "number": "158",
+      "date": "2022-06-28"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol159.html",
+      "title": "Resolução CVM 159",
+      "category": "resolucoes",
+      "number": "159",
+      "date": "2022-07-08"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol160.html",
+      "title": "Resolução CVM 160",
+      "category": "resolucoes",
+      "number": "160",
+      "date": "2022-07-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol161.html",
+      "title": "Resolução CVM 161",
+      "category": "resolucoes",
+      "number": "161",
+      "date": "2022-07-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol162.html",
+      "title": "Resolução CVM 162",
+      "category": "resolucoes",
+      "number": "162",
+      "date": "2022-07-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol163.html",
+      "title": "Resolução CVM 163",
+      "category": "resolucoes",
+      "number": "163",
+      "date": "2022-07-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol164.html",
+      "title": "Resolução CVM 164",
+      "category": "resolucoes",
+      "number": "164",
+      "date": "2022-08-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol165.html",
+      "title": "Resolução CVM 165",
+      "category": "resolucoes",
+      "number": "165",
+      "date": "2022-08-18"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol166.html",
+      "title": "Resolução CVM 166",
+      "category": "resolucoes",
+      "number": "166",
+      "date": "2022-09-01"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol167.html",
+      "title": "Resolução CVM 167",
+      "category": "resolucoes",
+      "number": "167",
+      "date": "2022-09-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol168.html",
+      "title": "Resolução CVM 168",
+      "category": "resolucoes",
+      "number": "168",
+      "date": "2022-09-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol169.html",
+      "title": "Resolução CVM 169",
+      "category": "resolucoes",
+      "number": "169",
+      "date": "2022-09-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol170.html",
+      "title": "Resolução CVM 170",
+      "category": "resolucoes",
+      "number": "170",
+      "date": "2022-10-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol171.html",
+      "title": "Resolução CVM 171",
+      "category": "resolucoes",
+      "number": "171",
+      "date": "2022-10-27"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol172.html",
+      "title": "Resolução CVM 172",
+      "category": "resolucoes",
+      "number": "172",
+      "date": "2022-11-01"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol173.html",
+      "title": "Resolução CVM 173",
+      "category": "resolucoes",
+      "number": "173",
+      "date": "2022-11-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol174.html",
+      "title": "Resolução CVM 174",
+      "category": "resolucoes",
+      "number": "174",
+      "date": "2022-12-05"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html",
+      "title": "Resolução CVM 175",
+      "category": "resolucoes",
+      "number": "175",
+      "date": "2022-12-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol176.html",
+      "title": "Resolução CVM 176",
+      "category": "resolucoes",
+      "number": "176",
+      "date": "2022-12-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol177.html",
+      "title": "Resolução CVM 177",
+      "category": "resolucoes",
+      "number": "177",
+      "date": "2023-01-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol178.html",
+      "title": "Resolução CVM 178",
+      "category": "resolucoes",
+      "number": "178",
+      "date": "2023-02-14"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol179.html",
+      "title": "Resolução CVM 179",
+      "category": "resolucoes",
+      "number": "179",
+      "date": "2023-02-14"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol180.html",
+      "title": "Resolução CVM 180",
+      "category": "resolucoes",
+      "number": "180",
+      "date": "2023-03-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol181.html",
+      "title": "Resolução CVM 181",
+      "category": "resolucoes",
+      "number": "181",
+      "date": "2023-03-28"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol182.html",
+      "title": "Resolução CVM 182",
+      "category": "resolucoes",
+      "number": "182",
+      "date": "2023-05-11"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol183.html",
+      "title": "Resolução CVM 183",
+      "category": "resolucoes",
+      "number": "183",
+      "date": "2023-05-11"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol184.html",
+      "title": "Resolução CVM 184",
+      "category": "resolucoes",
+      "number": "184",
+      "date": "2023-05-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol185.html",
+      "title": "Resolução CVM 185",
+      "category": "resolucoes",
+      "number": "185",
+      "date": "2023-07-12"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol186.html",
+      "title": "Resolução CVM 186",
+      "category": "resolucoes",
+      "number": "186",
+      "date": "2023-07-14"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol187.html",
+      "title": "Resolução CVM 187",
+      "category": "resolucoes",
+      "number": "187",
+      "date": "2023-09-27"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol188.html",
+      "title": "Resolução CVM 188",
+      "category": "resolucoes",
+      "number": "188",
+      "date": "2023-10-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol189.html",
+      "title": "Resolução CVM 189",
+      "category": "resolucoes",
+      "number": "189",
+      "date": "2023-10-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol190.html",
+      "title": "Resolução CVM 190",
+      "category": "resolucoes",
+      "number": "190",
+      "date": "2023-10-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol191.html",
+      "title": "Resolução CVM 191",
+      "category": "resolucoes",
+      "number": "191",
+      "date": "2023-10-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol192.html",
+      "title": "Resolução CVM 192",
+      "category": "resolucoes",
+      "number": "192",
+      "date": "2023-10-18"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol193.html",
+      "title": "Resolução CVM 193",
+      "category": "resolucoes",
+      "number": "193",
+      "date": "2023-10-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol194.html",
+      "title": "Resolução CVM 194",
+      "category": "resolucoes",
+      "number": "194",
+      "date": "2023-11-17"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol195.html",
+      "title": "Resolução CVM 195",
+      "category": "resolucoes",
+      "number": "195",
+      "date": "2023-11-30"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol196.html",
+      "title": "Resolução CVM 196",
+      "category": "resolucoes",
+      "number": "196",
+      "date": "2023-12-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol197.html",
+      "title": "Resolução CVM 197",
+      "category": "resolucoes",
+      "number": "197",
+      "date": "2023-12-26"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol198.html",
+      "title": "Resolução CVM 198",
+      "category": "resolucoes",
+      "number": "198",
+      "date": "2024-01-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol199.html",
+      "title": "Resolução CVM 199",
+      "category": "resolucoes",
+      "number": "199",
+      "date": "2024-02-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol200.html",
+      "title": "Resolução CVM 200",
+      "category": "resolucoes",
+      "number": "200",
+      "date": "2024-03-12"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol201.html",
+      "title": "Resolução CVM 201",
+      "category": "resolucoes",
+      "number": "201",
+      "date": "2024-03-27"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol202.html",
+      "title": "Resolução CVM 202",
+      "category": "resolucoes",
+      "number": "202",
+      "date": "2024-05-10"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol203.html",
+      "title": "Resolução CVM 203",
+      "category": "resolucoes",
+      "number": "203",
+      "date": "2024-05-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol204.html",
+      "title": "Resolução CVM 204",
+      "category": "resolucoes",
+      "number": "204",
+      "date": "2024-06-04"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol205.html",
+      "title": "Resolução CVM 205",
+      "category": "resolucoes",
+      "number": "205",
+      "date": "2024-06-05"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol206.html",
+      "title": "Resolução CVM 206",
+      "category": "resolucoes",
+      "number": "206",
+      "date": "2024-07-04"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol207.html",
+      "title": "Resolução CVM 207",
+      "category": "resolucoes",
+      "number": "207",
+      "date": "2024-08-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol208.html",
+      "title": "Resolução CVM 208",
+      "category": "resolucoes",
+      "number": "208",
+      "date": "2024-08-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol209.html",
+      "title": "Resolução CVM 209",
+      "category": "resolucoes",
+      "number": "209",
+      "date": "2024-08-26"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol210.html",
+      "title": "Resolução CVM 210",
+      "category": "resolucoes",
+      "number": "210",
+      "date": "2024-08-26"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol211.html",
+      "title": "Resolução CVM 211",
+      "category": "resolucoes",
+      "number": "211",
+      "date": "2024-09-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol212.html",
+      "title": "Resolução CVM 212",
+      "category": "resolucoes",
+      "number": "212",
+      "date": "2024-09-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol213.html",
+      "title": "Resolução CVM 213",
+      "category": "resolucoes",
+      "number": "213",
+      "date": "2024-09-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol214.html",
+      "title": "Resolução CVM 214",
+      "category": "resolucoes",
+      "number": "214",
+      "date": "2024-09-30"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol215.html",
+      "title": "Resolução CVM 215",
+      "category": "resolucoes",
+      "number": "215",
+      "date": "2024-10-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol216.html",
+      "title": "Resolução CVM 216",
+      "category": "resolucoes",
+      "number": "216",
+      "date": "2024-10-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol217.html",
+      "title": "Resolução CVM 217",
+      "category": "resolucoes",
+      "number": "217",
+      "date": "2024-10-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol218.html",
+      "title": "Resolução CVM 218",
+      "category": "resolucoes",
+      "number": "218",
+      "date": "2024-10-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol219.html",
+      "title": "Resolução CVM 219",
+      "category": "resolucoes",
+      "number": "219",
+      "date": "2024-10-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol220.html",
+      "title": "Resolução CVM 220",
+      "category": "resolucoes",
+      "number": "220",
+      "date": "2024-11-11"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol221.html",
+      "title": "Resolução CVM 221",
+      "category": "resolucoes",
+      "number": "221",
+      "date": "2024-12-10"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol222.html",
+      "title": "Resolução CVM 222",
+      "category": "resolucoes",
+      "number": "222",
+      "date": "2024-12-10"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol223.html",
+      "title": "Resolução CVM 223",
+      "category": "resolucoes",
+      "number": "223",
+      "date": "2024-12-16"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol224.html",
+      "title": "Resolução CVM 224",
+      "category": "resolucoes",
+      "number": "224",
+      "date": "2024-12-17"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol225.html",
+      "title": "Resolução CVM 225",
+      "category": "resolucoes",
+      "number": "225",
+      "date": "2024-12-27"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol226.html",
+      "title": "Resolução CVM 226",
+      "category": "resolucoes",
+      "number": "226",
+      "date": "2025-03-06"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol227.html",
+      "title": "Resolução CVM 227",
+      "category": "resolucoes",
+      "number": "227",
+      "date": "2025-03-31"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol228.html",
+      "title": "Resolução CVM 228",
+      "category": "resolucoes",
+      "number": "228",
+      "date": "2025-04-16"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol229.html",
+      "title": "Resolução CVM 229",
+      "category": "resolucoes",
+      "number": "229",
+      "date": "2025-05-22"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol230.html",
+      "title": "Resolução CVM 230",
+      "category": "resolucoes",
+      "number": "230",
+      "date": "2025-06-18"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol231.html",
+      "title": "Resolução CVM 231",
+      "category": "resolucoes",
+      "number": "231",
+      "date": "2025-07-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol232.html",
+      "title": "Resolução CVM 232",
+      "category": "resolucoes",
+      "number": "232",
+      "date": "2025-07-03"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol233.html",
+      "title": "Resolução CVM 233",
+      "category": "resolucoes",
+      "number": "233",
+      "date": "2025-07-14"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol234.html",
+      "title": "Resolução CVM 234",
+      "category": "resolucoes",
+      "number": "234",
+      "date": "2025-08-04"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol235.html",
+      "title": "Resolução CVM 235",
+      "category": "resolucoes",
+      "number": "235",
+      "date": "2025-11-21"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol236.html",
+      "title": "Resolução CVM 236",
+      "category": "resolucoes",
+      "number": "236",
+      "date": "2025-12-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol237.html",
+      "title": "Resolução CVM 237",
+      "category": "resolucoes",
+      "number": "237",
+      "date": "2025-12-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol238.html",
+      "title": "Resolução CVM 238",
+      "category": "resolucoes",
+      "number": "238",
+      "date": "2025-12-23"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol239.html",
+      "title": "Resolução CVM 239",
+      "category": "resolucoes",
+      "number": "239",
+      "date": "2026-01-09"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol240.html",
+      "title": "Resolução CVM 240",
+      "category": "resolucoes",
+      "number": "240",
+      "date": "2026-03-05"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol241.html",
+      "title": "Resolução CVM 241",
+      "category": "resolucoes",
+      "number": "241",
+      "date": "2026-03-05"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol242.html",
+      "title": "Resolução CVM 242",
+      "category": "resolucoes",
+      "number": "242",
+      "date": "2026-04-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol243.html",
+      "title": "Resolução CVM 243",
+      "category": "resolucoes",
+      "number": "243",
+      "date": "2026-05-20"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol244.html",
+      "title": "Resolução CVM 244",
+      "category": "resolucoes",
+      "number": "244",
+      "date": "2026-05-29"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol245.html",
+      "title": "Resolução CVM 245",
+      "category": "resolucoes",
+      "number": "245",
+      "date": "2026-07-01"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol246.html",
+      "title": "Resolução CVM 246",
+      "category": "resolucoes",
+      "number": "246",
+      "date": "2026-07-30"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol247.html",
+      "title": "Resolução CVM 247",
+      "category": "resolucoes",
+      "number": "247",
+      "date": "2026-10-02"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol248.html",
+      "title": "Resolução CVM 248",
+      "category": "resolucoes",
+      "number": "248",
+      "date": "2026-10-13"
+    },
+    {
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol249.html",
+      "title": "Resolução CVM 249",
+      "category": "resolucoes",
+      "number": "249",
+      "date": "2026-10-13"
+    }
+  ]
+}

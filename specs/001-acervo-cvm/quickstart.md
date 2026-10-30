@@ -8,8 +8,10 @@ HTML oficial** (PDF entra no fluxo como pendência até o conversor ser testado 
 Pré-requisitos: **Python 3.12** com biblioteca padrão apenas — nenhuma dependência de runtime
 (constituição VI). Poppler/Tesseract só serão necessários quando o caminho de PDF for ativado.
 
-Este é o roteiro de validação da implementação prevista; não declara CLI ou workflow já entregues.
-Após a criação do pacote, instalar a partir da raiz com `python -m pip install -e .` antes dos comandos.
+A CLI do MVP está implementada e foi validada com a Resolução 249; ver
+[resultados executados](research/validacao-mvp.md). Instale a partir da raiz com
+`python -m pip install -e .` antes dos comandos. Os workflows estão implementados: testes
+executados no runner, coleta preparada e ainda não acionada.
 
 ## 1. Enumerar o catálogo (antes de coletar)
 
@@ -37,14 +39,14 @@ python -m cvm_archive.cli collect \
   --output . \
   --cache-dir .scratch/cache \
   --min-interval 5 \
-  --user-agent "NormasCVMResearch/0.5 (+https://github.com/<org>/<repo>; local run)"
+  --user-agent "NormasCVMResearch/0.5 (+https://github.com/StaffeToxic/normas-cvm; local run)"
 ```
 
 O que acontece:
 
 - O lote `0` cobre a **primeira fatia do catálogo completo, em ordem estável**; o lote 1 a fatia
-  seguinte, e assim por diante. O tamanho da fatia é fixo (default 50) e fica registrado no
-  relatório. Como a partição é sobre o catálogo todo (não sobre pendências), documentos da fatia
+  seguinte, e assim por diante. O tamanho da fatia é fixo em 50 no coletor.
+  Como a partição é sobre o catálogo todo (não sobre pendências), documentos da fatia
   já resolvidos por lotes anteriores são conferidos por hash e pulados rapidamente — o lote 1
   nunca pula documentos que o lote 0 acabou de resolver.
 - Cada documento com trabalho pendente na fatia é baixado para `.scratch/cache` (bytes originais +
@@ -68,16 +70,16 @@ Variações úteis:
 ```bash
 # lote seguinte (retomada da carga inicial)
 python -m cvm_archive.cli collect --category resolucoes --batch 1 --output . \
-  --cache-dir .scratch/cache --min-interval 5 --user-agent "NormasCVMResearch/0.5"
+  --cache-dir .scratch/cache --min-interval 5
 
 # teste contido: no máximo 10 documentos pendentes deste lote
 python -m cvm_archive.cli collect --category resolucoes --batch 0 --limit 10 --output . \
-  --cache-dir .scratch/cache --min-interval 5 --user-agent "NormasCVMResearch/0.5"
+  --cache-dir .scratch/cache --min-interval 5
 
 # revisão pontual de um documento
 python -m cvm_archive.cli collect --category resolucoes --output . \
   --document "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html" \
-  --cache-dir .scratch/cache --min-interval 5 --user-agent "NormasCVMResearch/0.5"
+  --cache-dir .scratch/cache --min-interval 5
 ```
 
 ## 3. Conferir o acervo
@@ -93,6 +95,17 @@ consolidado com o original aprovado é válido (o relatório conta o ato uma vez
 Imprime contadores por categoria e lista de violações. Sem violações, sai com **0**; com
 violações, **2** (nada é modificado por `verify`).
 
+## Atualização incremental
+
+```bash
+python -m cvm_archive.cli collect --category resolucoes --incremental --limit 10 --output .
+```
+
+Reconcilia o catálogo completo, usa os dois feeds como sinais e reconsulta a primeira página e
+uma fatia semanal de hashes. Não combina com `--document`. Remoção sem alias confirmado exige
+revisão, preservando os dados anteriores; não significa revogação. A implementação foi testada
+com fixtures, sem novas coletas; execução incremental real permanece UNVERIFIED.
+
 ## Códigos de saída
 
 | Código | Significado | O que fazer |
@@ -105,7 +118,7 @@ Em `2` e `3` nada é gravado: a última cobertura válida permanece (o denominad
 
 ## Sincronização com o repositório
 
-- O workflow agendado previsto (ver `contracts/workflow.md`, ticket T009) deverá rodar a mesma CLI e
+- O workflow agendado implementado (ver `contracts/workflow.md`, ticket T009) usa a mesma CLI e
   commitar dados como `github-actions[bot]`, com push restrito a `HEAD:001-acervo-cvm` — nada sobe para
   `main` automaticamente.
 - Coleta local na máquina do mantenedor obedece às mesmas regras de coleta; a decisão de commit é
@@ -113,10 +126,10 @@ Em `2` e `3` nada é gravado: a última cobertura válida permanece (o denominad
 
 ## Futuro indicado nesta versão
 
-- **Empacotamento:** T001 cria `pyproject.toml`; a CLI só estará executável depois da integração
-  do ticket T006 e instalação do pacote (layout `src/`).
-- `collect --incremental`: RSS de legislação + RSS de audiências + hashes rotativos (FR-002),
-  fora do MVP.
+- **Empacotamento:** `pyproject.toml` e a CLI estão disponíveis; a instalação do pacote é
+  necessária por causa do layout `src/`.
+- O workflow de `collect --incremental` está preparado; ativação e SLA dependem da default branch
+  e de execução/observação reais, ainda UNVERIFIED.
 - Demais categorias (`instrucoes`, `deliberacoes`, ...) entram por família quando o caminho de
   PDF/OCR estiver comprovado contra fixtures.
 - Serviço de API ou MCP para consumo programático fica para outra feature (definição pendente,

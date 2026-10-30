@@ -10,29 +10,83 @@ Testes são obrigatórios em toda história. Uma caixa só é marcada após exec
 
 ## Fase 2 — Fundação
 
-- [ ] T002 [P] Implementar transporte educado em `src/cvm_archive/fetch/client.py` e `tests/unit/test_fetch.py`; blockedBy=[T001]; conflictKeys=[fetch]; risco=alto. FR-003..005/SC-007: robots por host, redirecionamento, UA, intervalo >=5s, 401/403/429/5xx, cache bruto e log; testes de relógio falso e sabotagem de acesso proibido, sem rede real.
-- [ ] T003 [P] Implementar catálogo e metadados de resoluções em `src/cvm_archive/sources/catalog.py`, `sources/document.py`, `tests/unit/test_sources.py` e fixtures HTML; blockedBy=[T001]; conflictKeys=[sources]; risco=alto. FR-001/009/019: todas as páginas, contagem incoerente, aliases, epígrafe, data, revogação explícita, relações e anexos; selector não confunde PDF próprio/site com alteradoras.
-- [ ] T004 [P] Implementar conversão estrutural HTML e normalização em `src/cvm_archive/convert/html.py`, `normalize/text.py`, `tests/unit/test_html.py` e fixtures esperadas; blockedBy=[T001]; conflictKeys=[html,normalize]; risco=alto. FR-006/010/011: dispositivos, entidades, anexos e tabelas reais; conteúdo ambíguo/estrutura não suportada gera pendência, não silêncio.
+Revisão de 29/10/2026: T002 tem implementação integrada e 37 testes executados, mas a cadeia
+oficial atual de robots expôs limitação de inicialização ainda pendente. T004 tem 43 testes
+positivos, porém oito contraexemplos executados impedem seu aceite. Ver a
+[reconferência](research/reconferencia-2026-10-29.md) e a [revisão HTML](research/revisao-html.md).
+Naquele checkpoint ambos estavam abertos. T002 foi corrigido em `903c81d`, com 39 testes e
+consulta HTTP real pela cadeia oficial, sem cache preparado. Isso encerra o ticket de transporte,
+não os critérios de aceite de coleta completa ou agendamento. T004 foi corrigido em `8bbc7aa`,
+com 14 regressões adicionais e 57 testes na branch do ticket; a integração executou 88 testes.
+Os oito casos agora preservam o conteúdo ou geram pendência explícita. SC-002 continua aberto.
+
+T003 foi revisado e concluído em `cc58752`: 45 testes na branch do ticket, incluindo enumeração
+das cinco páginas da fixture oficial, 249 URLs distintas e conferência dos 17 arquivos pelo
+manifesto de proveniência. Sete contraexemplos falharam antes das correções e passaram depois:
+contador ausente, data de publicação confundida com data do ato, revogação de outro ato,
+negação de revogação, status conflitante, título sem epígrafe e indicação expressa de vigência.
+A expectativa incorreta `181/22` foi corrigida para `181/23`, conforme a fixture oficial.
+A integração executou 125 testes. Não houve HTTP novo para T003; fixtures não certificam a
+atualidade de todas as relações, e as versões/divergências continuam no escopo de T007.
+
+- [x] T002 [P] Implementar transporte educado em `src/cvm_archive/fetch/client.py` e `tests/unit/test_fetch.py`; blockedBy=[T001]; conflictKeys=[fetch]; risco=alto. FR-003..005/SC-007: robots por host, redirecionamento, UA, intervalo >=5s, 401/403/429/5xx, cache bruto e log; testes de relógio falso e sabotagem de acesso proibido, mais consulta real controlada da cadeia oficial.
+- [x] T003 [P] Implementar catálogo e metadados de resoluções em `src/cvm_archive/sources/catalog.py`, `sources/document.py`, `tests/unit/test_sources.py` e fixtures HTML; blockedBy=[T001]; conflictKeys=[sources]; risco=alto. FR-001/009/019: todas as páginas, contagem incoerente, aliases, epígrafe, data, revogação explícita, relações e anexos; selector não confunde PDF próprio/site com alteradoras.
+- [x] T004 [P] Implementar conversão estrutural HTML e normalização em `src/cvm_archive/convert/html.py`, `normalize/text.py`, `tests/unit/test_html.py` e fixtures esperadas; blockedBy=[T001]; conflictKeys=[html,normalize]; risco=alto. FR-006/010/011: dispositivos, entidades, anexos e tabelas reais; conteúdo ambíguo/estrutura não suportada gera pendência, não silêncio.
 
 ## Fase 3 — US1 / MVP de resoluções
 
 **Teste independente:** catálogo real completo, Resolução 249 e fixture esperada; original aprovado e tudo que não for processável aparece pendente. SC-002 de 50 documentos só será aceito no fechamento, não por esta amostra mínima.
 
-- [ ] T005 [US1] Implementar gates e escrita de documentos/cobertura em `src/cvm_archive/gates/fidelity.py`, `gates/metadata.py`, `publish/markdown.py`, `publish/coverage.py` e `tests/contract/test_publication.py`; blockedBy=[T001,T004]; conflictKeys=[gates,publish]; risco=alto. FR-007..014/022 e SC-003/004: schema, hash/URL, sequência, dispositivos, anexos, tabela; provar reprovação por deleção, permutação, duplicação, hash incorreto e conteúdo ausente; lista vazia não mascara anexo desconhecido.
-- [ ] T006 [US1] Integrar CLI e primeira coleta em `src/cvm_archive/cli.py`, `tests/integration/test_cli.py`, fixtures da Resolução 249 e dados `catalogo/`, `reguladores/`, `cobertura/`; blockedBy=[T002,T003,T004,T005]; conflictKeys=[cli,data]; risco=alto. FR-021..024/SC-005/009: catalog/collect/verify, flags, limite/lote estável, documento único, JSON changed, catálogo completo antes do lote; falha não promove saída parcial. Executar CLI em estado commitado, coleta real educada e repetição sem mudanças.
+T005 foi executado em `6e55980`, com 166 testes no commit limpo, incluindo 41 contratuais novos.
+Os gates rejeitam corrupção de conteúdo, metadados e estrutura; promoção com falha é revertida.
+Escopo e limites em [revisão de publicação](research/revisao-publicacao.md). A coleta real pela
+CLI e os critérios globais continuam em T006 e nos tickets posteriores.
+
+T006 foi validado com código `e779a29`, dados `c21cdb5` e relatório `757ff89`: 189 testes em
+commit limpo; coleta real da 249 com catálogo completo de 249, 1 publicação e 248 pendências.
+A repetição após commit retornou `changed: false`, zero processados e Git limpo. Foram 15
+requisições nas duas execuções, com intervalo mínimo observado de 5 s por host de conteúdo.
+Ver [validação do MVP](research/validacao-mvp.md). O aceite é desta história mínima, sem
+certificar o acervo completo, SC-002, PDF/OCR, outras famílias ou o agendamento.
+Correção posterior `451cbf2`: o anexo incorporado também passou a constar no front matter,
+com URL/hash da íntegra. Dois testes de omissão/hash incorreto foram demonstrados falhando
+antes da correção; a suíte passou com 191 testes. Corpo e hash de fonte da 249 não mudaram.
+
+- [x] T005 [US1] Implementar gates e escrita de documentos/cobertura em `src/cvm_archive/gates/fidelity.py`, `gates/metadata.py`, `publish/markdown.py`, `publish/coverage.py` e `tests/contract/test_publication.py`; blockedBy=[T001,T004]; conflictKeys=[gates,publish]; risco=alto. FR-007..014/022 e SC-003/004: schema, hash/URL, sequência, dispositivos, anexos, tabela; provar reprovação por deleção, permutação, duplicação, hash incorreto e conteúdo ausente; lista vazia não mascara anexo desconhecido.
+- [x] T006 [US1] Integrar CLI e primeira coleta em `src/cvm_archive/cli.py`, `tests/integration/test_cli.py`, fixtures da Resolução 249 e dados `catalogo/`, `reguladores/`, `cobertura/`; blockedBy=[T002,T003,T004,T005]; conflictKeys=[cli,data]; risco=alto. FR-021..024/SC-005/009: catalog/collect/verify, flags, limite/lote estável, documento único, JSON changed, catálogo completo antes do lote; falha não promove saída parcial. Executar CLI em estado commitado, coleta real educada e repetição sem mudanças.
 
 ## Fase 4 — US2 / versões e relações
 
 **Teste independente:** original/consolidado com fontes e hashes separados; um consolidado pendente não elimina original aprovado nem conta o ato duas vezes.
 
-- [ ] T007 [US2] Ampliar versões/relações/divergências em `src/cvm_archive/sources/document.py`, `publish/coverage.py`, `tests/integration/test_versions.py`; blockedBy=[T006]; conflictKeys=[sources,publish]; risco=alto. FR-009/013/019 e C1/C2/C4/C10/C11: Resolução 175, Deliberação 870 e Pareceres 39/40; republicações 59/100/110 pendentes por artefato, sem novo enum; evidências oficiais conflitantes preservadas e original+consolidado pendente agregados conforme modelo.
+Checkpoint `9997a21`: 201 testes executados; republicação pendente por artefato, relação por
+contexto, revogação parcial e declaração conflitante preservadas. T007 permanece aberto para
+aliases, comparação entre páginas e fixtures reais complementares; ver
+[revisão de versões](research/revisao-versoes.md).
+Conclusão do fundamento: `e6537e6`, dados `9dc613b` e relatório `d384904`, 211 testes e
+coleta/repetição reais da 175 sem promover PDF/anexos não aprovados. Aliases confirmados
+agregados, URLs/candidatos preservados e divergências visíveis nos dois relatórios. O aceite
+integral de US2 com dois arquivos reais da 175 depende de T010/T011; não foi certificado.
+
+- [x] T007 [US2] Ampliar versões/relações/divergências em `src/cvm_archive/sources/document.py`, `publish/coverage.py`, `tests/integration/test_versions.py`; blockedBy=[T006]; conflictKeys=[sources,publish]; risco=alto. FR-009/013/019 e C1/C2/C4/C10/C11: Resolução 175, Deliberação 870 e Pareceres 39/40; republicações 59/100/110 pendentes por artefato, sem novo enum; evidências oficiais conflitantes preservadas e original+consolidado pendente agregados conforme modelo.
 
 ## Fase 5 — US6 / atualização e auditoria
 
 **Teste independente:** fixtures de RSS/catalogo e duas coletas sem mudança; nova norma gera apenas o delta, bloqueio interrompe sem publicar. Runner/agendamento só são aceitos com execução externa real.
 
-- [ ] T008 [US6] Implementar RSS e rechecagem incremental em `src/cvm_archive/sources/feeds.py`, `cli.py`, `tests/integration/test_incremental.py`; blockedBy=[T006,T007]; conflictKeys=[sources,cli,data]; risco=alto. FR-002/005/021..024: RSS como sinal, reconciliação integral periódica e hashes rotativos; nova URL, removido do catálogo, fonte inalterada e consolidado alterado na mesma URL; sem cache durável obrigatório.
-- [ ] T009 [US6] Criar verificação e coleta Actions em `.github/workflows/test.yml`, `.github/workflows/collect.yml` e `tests/contract/test_workflow.py`; blockedBy=[T008]; conflictKeys=[workflows]; risco=alto. D-U12/SC-006/007: inputs ligados à CLI, lote medido, bot só dados, data real, fila sem cancelamento, JSON de mudança e push fixo feature. Validar falha CLI sem mascarar exit, nenhum commit vazio, nenhuma escrita main; executar runner real quando disponível. SC-006 continua UNVERIFIED até ativação/observação.
+T008 implementado em `450c448`, com 222 testes e onze cenários novos sem rede. RSS real
+reutilizado de bytes já auditados; catálogo completo, rotação, substituição de consolidado na
+mesma URL e preservação após remoção/bloqueio verificados. Execução incremental ao vivo e SLA
+permanecem UNVERIFIED; novas coletas foram adiadas. Ver
+[validação incremental](research/validacao-incremental.md).
+
+T009 implementado em `1048ef8` e documentado em `0228cc0`: 231 testes locais e no
+[runner real](https://github.com/StaffeToxic/normas-cvm/actions/runs/40995070490), sem coleta
+adicional. Guardas, bot, escopo de commit, parâmetros e códigos 2/3 testados. Coleta agendada,
+commit/push real do bot e SC-006 continuam UNVERIFIED; o workflow de coleta não foi acionado.
+
+- [x] T008 [US6] Implementar RSS e rechecagem incremental em `src/cvm_archive/sources/feeds.py`, `cli.py`, `tests/integration/test_incremental.py`; blockedBy=[T006,T007]; conflictKeys=[sources,cli,data]; risco=alto. FR-002/005/021..024: RSS como sinal, reconciliação integral periódica e hashes rotativos; nova URL, removido do catálogo, fonte inalterada e consolidado alterado na mesma URL; sem cache durável obrigatório.
+- [x] T009 [US6] Criar verificação e coleta Actions em `.github/workflows/test.yml`, `.github/workflows/collect.yml` e `tests/contract/test_workflow.py`; blockedBy=[T008]; conflictKeys=[workflows]; risco=alto. D-U12/SC-006/007: inputs ligados à CLI, lote medido, bot só dados, data real, fila sem cancelamento, JSON de mudança e push fixo feature. Validar falha CLI sem mascarar exit, nenhum commit vazio, nenhuma escrita main; executar runner real quando disponível. SC-006 continua UNVERIFIED até ativação/observação.
 
 ## Fase 6 — US3 / demais normas e conversores
 

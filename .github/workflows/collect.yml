@@ -1,0 +1,66 @@
+name: collect
+
+# Dispatch and schedule registration depend on the default branch containing this file.
+# Collection is never triggered by a push or pull request.
+on:
+  schedule:
+    - cron: '27 6 * * 2,5'
+  workflow_dispatch:
+    inputs:
+      categoria:
+        description: Catalog category
+        type: choice
+        options: [resolucoes]
+        default: resolucoes
+      documento:
+        description: Optional official document page
+        type: string
+        default: ''
+      lote:
+        description: Stable batch index
+        type: number
+        default: 0
+      limite:
+        description: Maximum new work items, zero for unlimited
+        type: number
+        default: 10
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-cvm
+  cancel-in-progress: false
+
+env:
+  CVM_COLLECT_CATEGORY: ${{ inputs.categoria || 'resolucoes' }}
+  CVM_COLLECT_DOCUMENT: ${{ inputs.documento || '' }}
+  CVM_COLLECT_BATCH: ${{ inputs.lote || 0 }}
+  CVM_COLLECT_LIMIT: ${{ github.event_name == 'schedule' && '10' || inputs.limite }}
+  CVM_COLLECT_MODE: ${{ github.event_name == 'schedule' && 'incremental' || 'batch' }}
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: 001-acervo-cvm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-por
+          pdftotext -v
+          tesseract --version
+          python -m pip install -e .
+      - name: Collect
+        id: collect
+        run: python .github/scripts/collect.py run
+      - name: Commit collected data
+        if: steps.collect.outputs.changed == 'true'
+        run: python .github/scripts/collect.py commit
