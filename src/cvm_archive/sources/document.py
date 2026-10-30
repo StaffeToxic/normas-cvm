@@ -75,6 +75,14 @@ class DocumentParseError(ValueError):
     """The official document page does not expose a trustworthy central act."""
 
 
+class DocumentConflictError(DocumentParseError):
+    """Contradictory official statements remain available for coverage evidence."""
+
+    def __init__(self, message, *, source_url, claims, identity):
+        super().__init__(message)
+        self.source_url, self.claims, self.identity = source_url, claims, identity
+
+
 class _Node:
     __slots__ = ("tag", "attrs", "children", "parent")
 
@@ -276,7 +284,7 @@ def _is_html_artifact(url: str, label: str) -> bool:
     if suffix != ".html":
         return True
     normalized = _normalize(label)
-    return "[html]" in normalized or "integral" in normalized or "consolid" in normalized
+    return "[html]" in normalized or "integral" in normalized or "consolid" in normalized or "republic" in normalized
 
 
 def _matches_own_number(url: str, number: str | None) -> bool:
@@ -300,10 +308,19 @@ def _inside_relation(anchor: _Node, content: _Node) -> bool:
     return False
 
 
-def _artifact_version(url: str, label: str) -> str:
+def _artifact_version(url: str, label: str, publication: str | None = None) -> str | None:
     haystack = _normalize(f"{url} {label}")
-    if "consolid" in haystack or "sem marcas" in haystack:
+    normalized_label = _normalize(label)
+    if "republic" in haystack:
+        return None
+    if "original" in normalized_label and "consolid" in haystack:
+        return None
+    if "consolid" in haystack:
         return VERSION_CONSOLIDATED
+    if "sem marcas" in haystack or "semmarcas" in haystack:
+        return None
+    if publication and "republic" in _normalize(publication) and "original" not in normalized_label:
+        return None
     return VERSION_ORIGINAL
 
 
@@ -342,6 +359,30 @@ def _parse_metadata(content: _Node, date_text: str | None) -> dict[str, str | No
     }
 
 
+_NOTICE_RE = re.compile(
+    r"(?:(?P<qualifier>nao|parcialmente)\s+)?(?P<kind>alterad[oa]s?|revogad[oa]s?)"
+    r"(?:,?\s+em\s+parte,?)?\s+(?:pel[oa]s?|por)\s+"
+)
+
+
+def _relation_prefix(paragraph: _Node, target: _Node) -> str:
+    parts = []
+    def walk(node):
+        if node is target:
+            return True
+        if isinstance(node, str):
+            parts.append(node)
+        elif node.tag not in _SKIP_TEXT_TAGS:
+            if node.tag in _BLOCK_TAGS:
+                parts.append(" ")
+            for child in node.children:
+                if walk(child):
+                    return True
+        return False
+    walk(paragraph)
+    return _collapse(_normalize("".join(parts))) + " "
+
+
 def _parse_relations(content: _Node) -> tuple[list[dict[str, str]], list[dict[str, str]], str | None]:
     altered_by: list[dict[str, str]] = []
     revoked_by: list[dict[str, str]] = []
@@ -354,15 +395,20 @@ def _parse_relations(content: _Node) -> tuple[list[dict[str, str]], list[dict[st
         if not context:
             continue
         normalized = _collapse(_normalize(context))
-        is_altered = re.search(r"\balterad[oa]s?\b", normalized) is not None
-        is_revoked = re.match(r"revogad[oa]\s+(?:pela|pelo|por)\b", normalized) is not None
-        if not is_altered and not is_revoked:
+        if _NOTICE_RE.match(normalized + " ") is None:
             continue
         for anchor in _anchors(paragraph):
             raw_href = _href(anchor)
             if not raw_href or raw_href.startswith(("#", "javascript:", "mailto:", "tel:")):
                 continue
+            notices = list(_NOTICE_RE.finditer(_relation_prefix(paragraph, anchor)))
+            if not notices or notices[-1]["qualifier"] == "nao":
+                continue
+            notice = notices[-1]
+            is_revoked = notice["kind"].startswith("revogad")
             url = urljoin(content.attrs.get("_base", ""), raw_href)
+            if urlsplit(url).scheme not in {"http", "https"}:
+                continue
             title = _anchor_label(anchor)
             target = revoked_by if is_revoked else altered_by
             seen = revoked_seen if is_revoked else altered_seen
@@ -371,8 +417,10 @@ def _parse_relations(content: _Node) -> tuple[list[dict[str, str]], list[dict[st
                 continue
             seen.add(key)
             target.append({"title": title, "url": url, "context": context})
-        if is_revoked and revocation_evidence is None:
-            revocation_evidence = context
+        for notice in _NOTICE_RE.finditer(normalized + " "):
+            if (notice["kind"].startswith("revogad") and notice["qualifier"] is None
+                    and "em parte" not in notice[0] and revocation_evidence is None):
+                revocation_evidence = context
 
     return altered_by, revoked_by, revocation_evidence
 
@@ -424,7 +472,7 @@ def parse_document_page(html: str, url: str, category: str) -> dict[str, object]
     altered_by, revoked_by, explicit_evidence = _parse_relations(content)
 
     epigraph_status = bool(re.search(r"\((?:revogad[ao])\)", _normalize(epigraph_text)))
-    if epigraph_status or explicit_evidence is not None or revoked_by:
+    if epigraph_status or explicit_evidence is not None:
         revoked = True
         revocation_evidence = explicit_evidence or epigraph_text
 
@@ -439,11 +487,15 @@ def parse_document_page(html: str, url: str, category: str) -> dict[str, object]
 
     if negative_evidence is not None:
         if revoked is True:
-            raise DocumentParseError("conflicting explicit revocation evidence on official page")
+            raise DocumentConflictError(
+                "conflicting explicit revocation evidence on official page", source_url=url,
+                claims=(revocation_evidence, negative_evidence),
+                identity={"type": doc_type, "number": number, "date": date_text},
+            )
         revoked = False
         revocation_evidence = negative_evidence
 
-    artifacts: list[dict[str, str]] = []
+    artifacts: list[dict[str, object]] = []
     artifact_seen: set[str] = set()
     for anchor in _anchors(content):
         raw_href = _href(anchor)
@@ -467,14 +519,20 @@ def parse_document_page(html: str, url: str, category: str) -> dict[str, object]
         if absolute in artifact_seen:
             continue
         artifact_seen.add(absolute)
-        artifacts.append(
-            {
+        version = _artifact_version(absolute, label, metadata["publication"])
+        item = {
                 "url": absolute,
                 "format": artifact_format,
-                "version": _artifact_version(absolute, label),
+                "version": version,
                 "label": label,
             }
-        )
+        if version is None:
+            item["pending_reason"] = (
+                "republicacao-parcial" if "em parte" in _normalize(label)
+                else "republicacao-revisao-manual" if "republic" in _normalize(label + absolute + (metadata["publication"] or ""))
+                else "versao-ambigua"
+            )
+        artifacts.append(item)
 
     return {
         "title": title,

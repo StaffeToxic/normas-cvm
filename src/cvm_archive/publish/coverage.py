@@ -116,7 +116,9 @@ def validate_coverage(report: dict) -> tuple[str, ...]:
                 errors.append("unconfirmed-publication")
             if state in ("indisponivel", "divergente", "fora-de-escopo") and files:
                 errors.append("forbidden-publication")
-            if state == "pendente" and files and (not isinstance(reason, str) or not any(version + ":" in reason for version in ("consolidada", "publicação original"))):
+            if state == "pendente" and files and (not isinstance(reason, str) or not (
+                    any(version + ":" in reason for version in ("consolidada", "publicação original")) or
+                    re.search(r"artefato https?://\S+: ", reason))):
                 errors.append("missing-version-reason")
         if state == "publicado" and identifier is None:
             errors.append("unconfirmed-publication")
@@ -152,7 +154,7 @@ def validate_coverage(report: dict) -> tuple[str, ...]:
         for divergence in report["divergencias"]:
             if (not isinstance(divergence, dict) or set(divergence) != {"id", "descricao", "evidencias"} or
                     not isinstance(divergence["descricao"], str) or not divergence["descricao"].strip() or
-                    not isinstance(divergence["evidencias"], list) or len(divergence["evidencias"]) < 2 or
+                    not isinstance(divergence["evidencias"], list) or not divergence["evidencias"] or
                     any(not valid_url(url) for url in divergence["evidencias"])):
                 errors.append("divergence-values")
     return tuple(dict.fromkeys(errors))

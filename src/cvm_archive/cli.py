@@ -23,7 +23,7 @@ from cvm_archive.models import Artifact, CatalogEntry
 from cvm_archive.publish.coverage import build_coverage, coverage_files, pending_entry, validate_coverage
 from cvm_archive.publish.markdown import PublicationError, check_embedded_annexes, check_identity, decode_html, decode_html_bytes, document_path, embedded_annexes, parse_document, render_document
 from cvm_archive.publish.transaction import promote, safe_target
-from cvm_archive.sources import DocumentParseError, enumerate_catalog, parse_document_page
+from cvm_archive.sources import DocumentConflictError, DocumentParseError, enumerate_catalog, parse_document_page
 
 
 BATCH_SIZE = 50
@@ -234,7 +234,7 @@ def _same_publication(old: bytes, new: bytes) -> bool:
     return previous == current and previous_body == current_body
 
 
-def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifact], root: Path, old: dict | None) -> tuple[dict, dict[str, bytes]]:
+def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifact], root: Path, old: dict | None, *, findings: list[dict]) -> tuple[dict, dict[str, bytes]]:
     record = pending_entry(entry)
     record["verificado_em"] = stamp[:10]
     def fetch(url):
@@ -258,6 +258,17 @@ def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifac
         record["urls_alternativas"] = [page_artifact.url]
     try:
         page = parse_document_page(decode_html(page_artifact), page_artifact.url, entry.category)
+    except DocumentConflictError as exc:
+        identity = exc.identity
+        try:
+            kind = next(label for label, value in TYPES.items() if value[1] == identity["type"])
+            record["id"] = confirmed_id(kind, identity["number"], identity["date"])
+        except (StopIteration, ValueError):
+            pass
+        record.update(estado="divergente", motivo="revogacao-conflitante")
+        findings.append({"id": record["id"], "descricao": "Declarações oficiais incompatíveis na mesma página: " + " / ".join(exc.claims),
+                         "evidencias": [exc.source_url]})
+        return record, {}
     except DocumentParseError as exc:
         record["motivo"] = "revisao-manual: " + str(exc)
         return record, {}
@@ -270,15 +281,14 @@ def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifac
     if page["type"] != "resolucao":
         record["motivo"] = "familia-fora-do-mvp"
         return record, {}
-    if page["document_metadata"]["publication"] and re.search(r"republicad", page["document_metadata"]["publication"], re.I):
-        record["motivo"] = "republicacao-revisao-manual"
-        return record, {}
     artifacts = page["artifacts"]
     if not artifacts:
         record["motivo"] = "integra-nao-encontrada"
         return record, {}
-    files, pending = {}, []
-    versions = sorted({artifact["version"] for artifact in artifacts})
+    uncertain = [item for item in artifacts if item["version"] is None]
+    files = {}
+    pending = [("artefato " + item["url"], item["pending_reason"]) for item in uncertain]
+    versions = sorted({artifact["version"] for artifact in artifacts if artifact["version"] is not None})
     for version in versions:
         variants = [item for item in artifacts if item["version"] == version]
         if any(_annex_candidate(item) for item in variants):
@@ -327,7 +337,7 @@ def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifac
         files[name] = data
     record["arquivos"] = sorted(files)
     if pending:
-        record["motivo"] = "; ".join(version + ": " + reason for version, reason in pending) if files or len(versions) > 1 else pending[0][1]
+        record["motivo"] = "; ".join(version + ": " + reason for version, reason in pending) if files or len(versions) > 1 or uncertain else pending[0][1]
     elif files:
         record.update(estado="publicado", motivo=None)
     return record, files
@@ -362,6 +372,7 @@ def _collect(args, client, stamp: str) -> dict:
         if not selected and entries:
             raise ValueError("batch is outside the complete catalog")
     updates, processed = {}, 0
+    findings = copy.deepcopy(previous["divergencias"]) if previous else []
     for entry in selected:
         if not args.document and args.limit is not None and processed >= args.limit:
             break
@@ -393,7 +404,9 @@ def _collect(args, client, stamp: str) -> dict:
         # A normal unchanged published document is not reconverted, including document mode.
         if unchanged and old["estado"] == "publicado":
             continue
-        record, files = _process(entry, client, stamp, fetched, root, old)
+        findings = [finding for finding in findings if entry.url not in finding["evidencias"]
+                    and not (old and old["id"] is not None and finding["id"] == old["id"])]
+        record, files = _process(entry, client, stamp, fetched, root, old, findings=findings)
         records[entry.url] = record
         updates.update(files)
         for name in old["arquivos"] if old else ():
@@ -401,7 +414,8 @@ def _collect(args, client, stamp: str) -> dict:
                 updates[name] = None
         processed += 1
     report = build_coverage(list(records.values()), len(entries), stamp,
-                            {"modo": "documento" if args.document else "completa", **_metrics(client)}, existing=previous)
+                            {"modo": "documento" if args.document else "completa", **_metrics(client)}, existing=previous,
+                            divergences=sorted(findings, key=lambda item: (item["id"] or "", item["evidencias"], item["descricao"])))
     reports = coverage_files(report)
     if previous is not None and report == previous:
         reports = {name: safe_target(root, name).read_bytes() for name in reports}

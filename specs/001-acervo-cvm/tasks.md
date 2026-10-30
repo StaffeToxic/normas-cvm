@@ -59,6 +59,11 @@ antes da correção; a suíte passou com 191 testes. Corpo e hash de fonte da 24
 
 **Teste independente:** original/consolidado com fontes e hashes separados; um consolidado pendente não elimina original aprovado nem conta o ato duas vezes.
 
+Checkpoint `9997a21`: 201 testes executados; republicação pendente por artefato, relação por
+contexto, revogação parcial e declaração conflitante preservadas. T007 permanece aberto para
+aliases, comparação entre páginas e fixtures reais complementares; ver
+[revisão de versões](research/revisao-versoes.md).
+
 - [ ] T007 [US2] Ampliar versões/relações/divergências em `src/cvm_archive/sources/document.py`, `publish/coverage.py`, `tests/integration/test_versions.py`; blockedBy=[T006]; conflictKeys=[sources,publish]; risco=alto. FR-009/013/019 e C1/C2/C4/C10/C11: Resolução 175, Deliberação 870 e Pareceres 39/40; republicações 59/100/110 pendentes por artefato, sem novo enum; evidências oficiais conflitantes preservadas e original+consolidado pendente agregados conforme modelo.
 
 ## Fase 5 — US6 / atualização e auditoria
