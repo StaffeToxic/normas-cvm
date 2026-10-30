@@ -85,6 +85,7 @@ python -m cvm_archive.cli collect --category resolucoes \
 | `--document` | não | URL da página de uma norma: modo documento único (FR-024), para revisão pontual; ignora `--batch`/`--limit` |
 | `--limit` | não | `N` > 0: dentro da fatia do lote, processa no máximo `N` documentos **com trabalho pendente**, na ordem estável do catálogo; o restante da fatia não é tocado nesta passada |
 | `--batch` | não | default `0`, ignorado com `--document`; `N` ≥ 0: **particiona o catálogo completo estável** (ordem por `url`), não o conjunto mutável de pendentes — fatia fixa `[N×S, (N+1)×S)` com tamanho `S=50`. Documentos sem trabalho pendente são rechecados por hash sem sair do denominador |
+| `--incremental` | não | reconcilia catálogo completo e usa RSS, primeira página e hashes rotativos; incompatível com `--document`; ignora `--batch` e respeita `--limit` |
 | `--output` | sim | raiz dos dados |
 | `--cache-dir` | não | default `.scratch/cache`, nunca versionado |
 | `--min-interval` | não | default `5` segundos, mínimo de 5 definido pelo projeto |
@@ -152,11 +153,18 @@ Comportamento por documento (FR-006 para o MVP):
   arquivo versionado é reescrito**, inclusive cobertura e datas). O workflow usa esse
   campo para decidir o commit (ver `contracts/workflow.md`).
 
-Expansão futura (**FORA do MVP**, escrita aqui para direção, sem implementação):
+### Atualização incremental (T008)
 
-- `collect --incremental`: RSS de legislação + RSS de audiências como sinal de novidade,
-  reconciliado com o catálogo completo e com **hashes rotativos** (checar periodicamente hash de
-  documentos publicados), conforme FR-002 e política de `sha256_fontes` em coverage-report.
+- `collect --incremental` lê RSS de legislação e audiências como sinais, reconcilia o catálogo
+  completo a cada execução e prioriza URLs novas, sinais na categoria e a primeira página.
+  Soma uma fatia de 50 URLs rotativa por semana UTC iniciada na segunda-feira. O índice é
+  derivado da semana e do catálogo, sem cursor persistente. `sha256_fontes` continua sendo o
+  índice de conteúdo; cache não é pré-condição. `--limit` limita trabalho novo; rechecagem de
+  item inalterado não consome esse limite.
+- Remoção de URL sem alias confirmado exige revisão: evento local, exit 2, sem substituir
+  catálogo/cobertura/arquivos anteriores. Sinais de outro escopo não são publicados como norma.
+- Implementação verificada sem rede: [validação incremental](../research/validacao-incremental.md).
+  Execução incremental real e SLA permanecem UNVERIFIED.
 
 ### `verify` — conferir repositório de dados
 

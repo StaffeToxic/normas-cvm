@@ -94,6 +94,17 @@ consolidado com o original aprovado é válido (o relatório conta o ato uma vez
 Imprime contadores por categoria e lista de violações. Sem violações, sai com **0**; com
 violações, **2** (nada é modificado por `verify`).
 
+## Atualização incremental
+
+```bash
+python -m cvm_archive.cli collect --category resolucoes --incremental --limit 10 --output .
+```
+
+Reconcilia o catálogo completo, usa os dois feeds como sinais e reconsulta a primeira página e
+uma fatia semanal de hashes. Não combina com `--document`. Remoção sem alias confirmado exige
+revisão, preservando os dados anteriores; não significa revogação. A implementação foi testada
+com fixtures, sem novas coletas; execução incremental real permanece UNVERIFIED.
+
 ## Códigos de saída
 
 | Código | Significado | O que fazer |
@@ -116,8 +127,7 @@ Em `2` e `3` nada é gravado: a última cobertura válida permanece (o denominad
 
 - **Empacotamento:** `pyproject.toml` e a CLI estão disponíveis; a instalação do pacote é
   necessária por causa do layout `src/`.
-- `collect --incremental`: RSS de legislação + RSS de audiências + hashes rotativos (FR-002),
-  fora do MVP.
+- O agendamento de `collect --incremental` depende de T009; o comando já está implementado.
 - Demais categorias (`instrucoes`, `deliberacoes`, ...) entram por família quando o caminho de
   PDF/OCR estiver comprovado contra fixtures.
 - Serviço de API ou MCP para consumo programático fica para outra feature (definição pendente,

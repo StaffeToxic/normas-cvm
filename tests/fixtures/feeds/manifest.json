@@ -1,0 +1,7 @@
+{
+  "file": "legislacao.xml",
+  "source_url": "https://conteudo.cvm.gov.br/feed/legislacao.xml",
+  "source_sha256": "236cc79e3a8da3ac5dc1648d6d2d7956c11f73b59f9f0ae591d7995040d4835c",
+  "fixture_sha256": "5f5f1d25ac7dc623cc8e870f45f97a3d9207ec740c1f4c3283ede4c71f4ffdbf",
+  "transformation": "LF, indentation and trailing whitespace; reused previously audited HTTP bytes; no new request"
+}

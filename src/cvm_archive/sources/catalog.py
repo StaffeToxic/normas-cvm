@@ -185,7 +185,7 @@ def _decode(data: bytes) -> str:
     return data.decode("utf-8", errors="replace")
 
 
-def enumerate_catalog(client: object, category: str) -> list[CatalogEntry]:
+def enumerate_catalog(client: object, category: str, *, first_page: list[CatalogEntry] | None = None) -> list[CatalogEntry]:
     """Fetch every result page and return stable, de-duplicated entries."""
     _require_category(category)
     entries: list[CatalogEntry] = []
@@ -197,6 +197,8 @@ def enumerate_catalog(client: object, category: str) -> list[CatalogEntry]:
         url = catalog_url(category, page)
         data = _fetch_bytes(client, url)
         page_entries, page_counter = parse_catalog(_decode(data), url, category)
+        if page == 1 and first_page is not None:
+            first_page.extend(page_entries)
 
         if page_counter is None and declared is None:
             raise CatalogCountError("catalogue has no declared counter; completeness is unknown")

@@ -24,6 +24,7 @@ from cvm_archive.publish.coverage import aggregate_aliases, build_coverage, cove
 from cvm_archive.publish.markdown import PublicationError, check_embedded_annexes, check_identity, decode_html, decode_html_bytes, document_path, embedded_annexes, parse_document, render_document
 from cvm_archive.publish.transaction import promote, safe_target
 from cvm_archive.sources import DocumentConflictError, DocumentParseError, enumerate_catalog, parse_document_page
+from cvm_archive.sources.feeds import FEED_URLS, incremental_urls, match_catalog, parse_feed
 
 
 BATCH_SIZE = 50
@@ -76,8 +77,11 @@ def _catalog_entries(catalog: dict) -> list[CatalogEntry]:
     return entries
 
 
-def _enumerated_catalog(client, stamp: str) -> dict:
-    entries = sorted(enumerate_catalog(client, "resolucoes"), key=lambda entry: entry.url)
+def _enumerated_catalog(client, stamp: str, first_page_urls: list[str] | None = None) -> dict:
+    first = [] if first_page_urls is not None else None
+    entries = sorted(enumerate_catalog(client, "resolucoes", first_page=first), key=lambda entry: entry.url)
+    if first_page_urls is not None:
+        first_page_urls.extend(entry.url for entry in first)
     catalog = {"schema_versao": "1.0", "gerado_em": stamp, "metodo": "enumeracao",
                "contador_divulgado": len(entries), "total": len(entries), "registros": [asdict(entry) for entry in entries]}
     _catalog_entries(catalog)
@@ -88,6 +92,13 @@ def _metrics(client) -> dict:
     stats = getattr(client, "stats", {})
     return {"requisicoes": sum(item["requests"] for item in stats.values()),
             "falhas_http": sum(item["failures"] for item in stats.values())}
+
+
+def _operational_event(args, stamp, event, **details):
+    target = Path(args.cache_dir).parent / "logs" / (stamp.replace(":", "-") + ".events.jsonl")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with target.open("a", encoding="utf-8", newline="\n") as stream:
+        stream.write(json.dumps({"event": event, "ts": stamp, **details}, ensure_ascii=False) + "\n")
 
 
 def _cached_bytes(cache_dir: Path, digest: str) -> bytes | None:
@@ -370,14 +381,36 @@ def _collect(args, client, stamp: str) -> dict:
             raise PublicationError("; ".join(checked["violacoes"]))
     elif any((root / "reguladores").rglob("*.md")):
         raise PublicationError("published files exist without coverage")
-    catalog = previous_catalog if previous_catalog is not None else _enumerated_catalog(client, stamp)
-    entries = entries if entries is not None else _catalog_entries(catalog)
+    first_page_urls, feed_items = [], []
+    if args.incremental:
+        for url in FEED_URLS:
+            artifact = client.fetch(url)
+            items = parse_feed(artifact.bytes)
+            feed_items.extend(items)
+            _operational_event(args, stamp, "rss-signals", source=artifact.url, sha256=artifact.sha256,
+                               items=[{"url": item.url, "title": item.title, "pub_date": item.pub_date} for item in items])
+    if previous_catalog is None or args.incremental:
+        catalog = _enumerated_catalog(client, stamp, first_page_urls)
+        if previous_catalog is not None and {key: value for key, value in catalog.items() if key != "gerado_em"} == {key: value for key, value in previous_catalog.items() if key != "gerado_em"}:
+            catalog = previous_catalog
+        entries = _catalog_entries(catalog)
+    else:
+        catalog = previous_catalog
     old_records = {url: record for record in previous["documentos"] for url in (record["fonte_cvm"], *(record["urls_alternativas"] if record["id"] is not None else []))} if previous else {}
     catalog_urls = {entry.url for entry in entries}
     if previous and any(not catalog_urls.intersection((record["fonte_cvm"], *record["urls_alternativas"])) for record in previous["documentos"]):
+        if args.incremental:
+            _operational_event(args, stamp, "catalog-removal-needs-review", removed=sorted(set(old_records) - catalog_urls))
         raise PublicationError("catalog removal or alias needs manual reconciliation; old coverage preserved")
     records = {entry.url: copy.deepcopy(old_records.get(entry.url, pending_entry(entry))) for entry in entries}
-    if args.document:
+    if args.incremental:
+        urls = incremental_urls(entries, known_urls={row["url"] for row in previous_catalog["registros"]} if previous_catalog else set(),
+                                signal_urls=match_catalog(feed_items, entries), first_page_urls=first_page_urls,
+                                today=datetime.fromisoformat(stamp.replace("Z", "+00:00")).date())
+        by_url = {entry.url: entry for entry in entries}
+        selected = [by_url[url] for url in urls]
+        _operational_event(args, stamp, "incremental-selection", urls=urls, complete_catalog_total=len(entries))
+    elif args.document:
         selected = [entry for entry in entries if entry.url == args.document]
         if len(selected) != 1:
             raise ValueError("document URL must exist in the complete local catalog")
@@ -453,13 +486,13 @@ def _collect(args, client, stamp: str) -> dict:
     updates.update(alias_updates)
     findings.extend(finding for finding in alias_findings if finding not in findings)
     report = build_coverage(grouped, len(grouped), stamp,
-                            {"modo": "documento" if args.document else "completa", **_metrics(client)}, existing=previous,
+                            {"modo": "incremental" if args.incremental else "documento" if args.document else "completa", **_metrics(client)}, existing=previous,
                             divergences=sorted(findings, key=lambda item: (item["id"] or "", item["evidencias"], item["descricao"])))
     reports = coverage_files(report)
     if previous is not None and report == previous:
         reports = {name: safe_target(root, name).read_bytes() for name in reports}
     updates.update(reports)
-    if previous_catalog is None:
+    if previous_catalog is None or catalog != previous_catalog:
         updates[CATALOG_PATH] = _json_bytes(catalog)
     checked = verify_tree(root, cache_dir=Path(args.cache_dir), updates=updates)
     if checked["violacoes"]:
@@ -498,6 +531,7 @@ def main(argv=None, *, client=None, now=None) -> int:
         if name == "collect":
             command.add_argument("--cache-dir", default=".scratch/cache")
             command.add_argument("--document")
+            command.add_argument("--incremental", action="store_true")
             command.add_argument("--batch", type=_nonnegative, default=0)
             command.add_argument("--limit", type=_positive)
     verify = commands.add_parser("verify")
@@ -508,6 +542,8 @@ def main(argv=None, *, client=None, now=None) -> int:
             result = verify_tree(Path(args.root), cache_dir=Path(".scratch/cache"))
             print(json.dumps(result, ensure_ascii=False))
             return 2 if result["violacoes"] else 0
+        if args.command == "collect" and args.incremental and args.document:
+            raise ValueError("--incremental and --document are mutually exclusive")
         if args.min_interval < 5 or not math.isfinite(args.min_interval):
             raise ValueError("minimum interval must be finite and at least five seconds")
         if "https://github.com/StaffeToxic/normas-cvm" not in args.user_agent:
