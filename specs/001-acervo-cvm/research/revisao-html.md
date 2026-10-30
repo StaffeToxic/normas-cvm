@@ -83,3 +83,29 @@ Correções necessárias antes do aceite:
 - Fidelidade de tabelas oficiais complexas e equivalência com PDF/DOCX da mesma edição.
 - Segurança de todos os protocolos, atributos e construções HTML possíveis além dos casos
   reproduzidos. Nenhuma conformidade geral foi certificada.
+
+## Correção e integração posteriores
+
+O commit `8bbc7aa` corrige os oito casos acima. Foram acrescentados 14 métodos de regressão,
+sem retirar os testes existentes: 57 testes passaram na branch do ticket, em commit exato e
+árvore limpa; a suíte integrada executou 88 testes. As oito regressões originais foram
+executadas antes da correção e falharam, demonstrando que detectam as perdas examinadas.
+
+| Caso | Comportamento corrigido |
+|---|---|
+| H1 | Conteúdo fora do corpo selecionado gera pendência; anexos irmãos ainda não são convertidos automaticamente. |
+| H2 | Imagem desconhecida, com descrição ausente ou curta, gera pendência. |
+| H3 | Protocolos diferentes de HTTP, HTTPS e mailto geram pendência. |
+| H4 | Texto e atributos da tabela HTML são escapados. |
+| H5 | Tachado e links são preservados nas células. |
+| H6 | Sobreposição de mesclagens gera pendência. |
+| H7 | Parágrafos mantêm separação; tabelas com blocos internos usam HTML. |
+| H8 | Estrutura de tabela desconhecida com conteúdo gera pendência. |
+
+As regressões adicionais cobrem imagem escondida em estrutura não suportada, tachado por
+estilo inline, parênteses em links, títulos sem acento, folha de estilo não resolvida e
+conteúdo oculto. Estilos externos e conteúdo oculto não são interpretados como prova de
+ausência: produzem pendência conservadora.
+
+T004 está apto à integração com essas limitações explícitas. Isto não certifica os 50 HTMLs
+de SC-002 nem substitui os gates independentes de T005. Os itens UNVERIFIED acima permanecem.

@@ -1,0 +1,51 @@
+{
+  "schema": "1.0",
+  "descricao": "Fixtures do conversor HTML (T004). sha256 identifica os bytes versionados; sha256_origem identifica os bytes capturados na fonte. Nenhum caminho local e registrado.",
+  "fixtures": [
+    {
+      "arquivo": "estrutura-completa.html",
+      "origem": "sintetica",
+      "url": null,
+      "sha256": "23842122039951c17f92944d11a6133fe6544e5ea859f041332d6b4b804871b3",
+      "sha256_origem": null,
+      "capturado_em": "2026-10-22",
+      "notas": "Fixture estrutural sintetica criada no ticket T004 para exercitar tabelas, imagens, links e marcadores. Nao e documento oficial da CVM."
+    },
+    {
+      "arquivo": "estrutura-imagem-texto.html",
+      "origem": "sintetica",
+      "url": null,
+      "sha256": "3082387233b98709095bd22dc7cf097d47a9c0e016355769142b3f40694f8494",
+      "sha256_origem": null,
+      "capturado_em": "2026-10-22",
+      "notas": "Fixture estrutural sintetica criada no ticket T004 para exercitar tabelas, imagens, links e marcadores. Nao e documento oficial da CVM."
+    },
+    {
+      "arquivo": "estrutura-tabela-inconsistente.html",
+      "origem": "sintetica",
+      "url": null,
+      "sha256": "a3e037079c50c0c9387a2e5eeba3f6f5702210e04acd22c339d8bf85acd53414",
+      "sha256_origem": null,
+      "capturado_em": "2026-10-22",
+      "notas": "Fixture estrutural sintetica criada no ticket T004 para exercitar tabelas, imagens, links e marcadores. Nao e documento oficial da CVM."
+    },
+    {
+      "arquivo": "pagina-cvm-resol249.html",
+      "origem": "cvm-oficial",
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol249.html",
+      "sha256": "12791dec7e5583037c13cdb71391d693fb35dd23a4cbe2f84a06b03e95214511",
+      "sha256_origem": "e589802d37632e78628ddd9884f3d0cdf7fd27efd053bfe731f13537c2979284",
+      "capturado_em": "2026-10-21",
+      "notas": "Pagina oficial do ato no portal da CVM, com navegacao do site e links para os artefatos. Bytes reaproveitados da captura de pesquisa; line endings normalizados para LF pelo tratamento de texto do repositorio, sem alteracao de conteudo."
+    },
+    {
+      "arquivo": "resol249.htm",
+      "origem": "cvm-oficial",
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/anexos/200/resol249.htm",
+      "sha256": "b76d0b32a6b5cf7658a12c36f58aba57cb6321cac0d558e6672452ba373b7f63",
+      "sha256_origem": "4ecd56d72acffb325d882fbca55ae720f9e1b22ac059385006eb35ecaa20d78b",
+      "capturado_em": "2026-10-21",
+      "notas": "Integral HTML oficial da Resolucao CVM 249. Bytes reaproveitados da captura de pesquisa; line endings normalizados para LF pelo tratamento de texto do repositorio, sem alteracao de conteudo."
+    }
+  ]
+}
