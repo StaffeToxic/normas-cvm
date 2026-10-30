@@ -21,7 +21,7 @@ from cvm_archive.gates.fidelity import check_html_structure, read_html_text
 from cvm_archive.gates.metadata import TYPES, confirmed_id, valid_date, valid_url, validate_metadata
 from cvm_archive.models import Artifact, CatalogEntry
 from cvm_archive.publish.coverage import build_coverage, coverage_files, pending_entry, validate_coverage
-from cvm_archive.publish.markdown import PublicationError, check_identity, decode_html, decode_html_bytes, document_path, parse_document, render_document
+from cvm_archive.publish.markdown import PublicationError, check_embedded_annexes, check_identity, decode_html, decode_html_bytes, document_path, embedded_annexes, parse_document, render_document
 from cvm_archive.publish.transaction import promote, safe_target
 from cvm_archive.sources import DocumentParseError, enumerate_catalog, parse_document_page
 
@@ -142,6 +142,9 @@ def verify_tree(root: Path, *, cache_dir: Path | None = None, updates: dict[str,
                     errors.append(f"{name}: source page mismatch")
                 if record["sha256_fontes"].get(fields["fonte"]) != fields["sha256_fonte"]:
                     errors.append(f"{name}: source digest missing from coverage index")
+                for annex in fields["anexos"]:
+                    if record["sha256_fontes"].get(annex["url"]) != annex["sha256"]:
+                        errors.append(f"{name}: annex digest missing from coverage index")
                 raw = _cached_bytes(cache_dir, fields["sha256_fonte"]) if cache_dir else None
                 if raw is None:
                     unverified.append(f"source bytes: {fields['fonte']}")
@@ -149,6 +152,7 @@ def verify_tree(root: Path, *, cache_dir: Path | None = None, updates: dict[str,
                     source = decode_html_bytes(raw)
                     errors.extend(f"{name}: {error}" for error in check_html_structure(source, body, fields["fonte"]))
                     errors.extend(f"{name}: {error}" for error in check_identity(read_html_text(source), fields))
+                    errors.extend(f"{name}: {error}" for error in check_embedded_annexes(read_html_text(source), fields))
                 if fields["revogada"] is not None:
                     unverified.append(f"current revocation evidence (offline): {record['fonte_cvm']}")
             except (OSError, ValueError, TypeError, KeyError) as exc:
@@ -309,8 +313,9 @@ def _process(entry: CatalogEntry, client, stamp: str, fetched: dict[str, Artifac
             pending.append((version, conversion.pending_reason))
             continue
         fields = _metadata(page, artifact, page_artifact.url, version)
+        fields["anexos"] = embedded_annexes(read_html_text(source), artifact.url, artifact.sha256, "html")
         try:
-            data = render_document(fields, artifact, conversion, discovered_annex_urls=(),
+            data = render_document(fields, artifact, conversion, discovered_annex_urls=tuple(annex["url"] for annex in fields["anexos"]),
                                    revocation_evidence=page["revocation_evidence"])
         except PublicationError as exc:
             pending.append((version, "portao-fidelidade: " + str(exc)))
